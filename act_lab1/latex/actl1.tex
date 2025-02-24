@@ -627,6 +627,274 @@
     в точку $x_1$, принадлежащую управляемому подпространству системы, за конечное время $t_1$ и, продемонстрировали это, промоделировав систему.
 
 
+    \section{Задание 3. Исследование наблюдаемости}
+    Рассмотрим систему
+    $$
+    \begin{cases}
+        \dot{x}=Ax,\\
+        y=Cx,
+    \end{cases} A=\begin{bmatrix}
+        -16 &-27 &7\\
+        6 &9 &-4\\
+        -5 &-11 &0
+    \end{bmatrix},\ C=\begin{bmatrix}
+        2 &7 &1
+    \end{bmatrix},\ f(t)=-9e^{-4t}\cos{(t)}+9e^{-4t}\sin{(t)}
+    $$
+
+
+    \subsection{Матрица наблюдаемости}
+    Составим матрицу наблюдаемости системы и определим ее ранг. Порядок системы равен трем
+    $$
+    V=\begin{bmatrix}
+        C\\
+        CA\\
+        CA^2
+    \end{bmatrix}
+    $$
+    Найдем неизвестные
+    $$
+    CA=\begin{bmatrix}
+        2 &7 &1
+    \end{bmatrix}\begin{bmatrix}
+        -16 &-27 &7\\
+        6 &9 &-4\\
+        -5 &-11 &0
+    \end{bmatrix}=\begin{bmatrix}
+    5 &-2 &-14
+    \end{bmatrix}
+    $$
+    $$
+    CA^2=\begin{bmatrix}
+        2 &7 &1
+    \end{bmatrix}\begin{bmatrix}
+        -16 &-27 &7\\
+        6 &9 &-4\\
+        -5 &-11 &0
+    \end{bmatrix}^2=\begin{bmatrix}
+        2 &7 &1
+    \end{bmatrix}
+    \begin{bmatrix}
+    59   &112    &-4\\
+   -22   &-37     &6\\
+    14    &36     &9
+    \end{bmatrix}=\begin{bmatrix}
+        -22     &1    &43
+    \end{bmatrix}
+    $$
+    Таким образом, получаем матрицу наблюдаемости
+    $$
+    V=\begin{bmatrix}
+    2     &7     &1\\
+    5    &-2   &-14\\
+   -22     &1    &43
+    \end{bmatrix}
+    $$
+    Определим ее ранг
+    $$
+    \text{rank}\left[V\right]=\text{rank}\begin{bmatrix}
+        2     &7     &1\\
+        5    &-2   &-14\\
+       -22     &1    &43
+    \end{bmatrix}=3
+    $$
+    Ранг матрицы наблюдаемости равен порядку системы $n=3$, следовательно, система полностью наблюдаема.
+    Так как выход один и матрица $V$ квадратная, достаточно было сравнить ее определитель с нулем.
+
+
+    \subsection{Собственные числа и матрицы Хаутуса}
+    Собственные числа находим аналогично первому заданию. Предоставим вычисления \texttt{MATLAB}. Программа
+    находится на листинге \ref{task3} в приложении 3
+    $$
+    \det{\left[\lambda I-A\right]}=0
+    $$
+    Получаем
+    \begin{align*}
+    &\lambda_1=1\\
+    &\lambda_{2,3}=-4\pm i
+    \end{align*}
+    Видим, что $\lambda_1>0$ -- неустойчивое, нужна наблюдаемость. Действительная часть
+    $\lambda_{2,3}$ меньше нуля, следовательно, они асимптотически устойчивые, но могут быть ненаблюдаемыми.
+    Для проверки найдем матрицы Хаутуса для наблюдаемости
+    $$
+    \mathcal{H}=\begin{bmatrix}
+        A-\lambda I\\
+        C
+    \end{bmatrix}
+    $$
+    Если ранг этой матрицы для конкретного $\lambda_i$ равен порядку системы $n$, то это собственное число наблюдаемо.
+    Определим матрицы и их ранги
+    $$
+    \text{rank}\begin{bmatrix}
+        A-\lambda_1 I\\
+        C
+    \end{bmatrix}=\text{rank}\begin{bmatrix}
+    -17  &-27    &7\\
+    6    &8   &-4\\
+   -5  &-11   &-1\\
+    2    &7    &1
+    \end{bmatrix}=3
+    $$
+    $$
+    \text{rank}\begin{bmatrix}
+        A-\lambda_{2,3} I\\
+        C
+    \end{bmatrix}=\text{rank}\begin{bmatrix}
+    -12\pm i &-27   &7\\
+    6  &13\pm i  &-4\\
+    -5 &-11   &4\pm i\\
+    2   &7   &1
+    \end{bmatrix}=3
+    $$
+    Ранги матриц Хаутуса для каждого собственного числа матрицы $A$ равны порядку
+    системы, следовательно, все собственные числа являются наблюдаемыми. Из этого
+    же следует, что система полностью наблюдаема.
+
+
+    \subsection{Жорданова форма системы}
+    Найдем жорданово разложение матрицы в \texttt{MATLAB} и приведем к вещественному виду
+    $$
+    A=PJP^{-1}=\begin{bmatrix} 
+    2	&3-2i	&3+2i\\
+    -1	&-1+i	&-1-i\\
+    1	   &1	   &1 
+    \end{bmatrix}\begin{bmatrix}
+    1	   &0	   &0\\
+    0	&-4-i	   &0\\
+    0	   &0	&-4+i
+    \end{bmatrix}\begin{bmatrix}
+    -1	     &-2	   &1\\
+    0.5	&1-0.5i	&-0.5i\\
+    0.5	&1+0.5i	 &0.5i
+    \end{bmatrix}
+    $$
+    $$
+    A=P_{re}J_{re}P_{re}^{-1}=\begin{bmatrix}
+    2    &-2     &3\\
+    -1     &1    &-1\\
+     1     &0     &1
+    \end{bmatrix}\begin{bmatrix}
+    1     &0     &0\\
+    0    &-4     &1\\
+    0    &-1    &-4
+    \end{bmatrix}\begin{bmatrix}
+    -1    &-2     &1\\
+    0     &1     &1\\
+    1     &2     &0
+    \end{bmatrix}
+    $$
+    Найдем матрицу выходов $C_{Jre}$ в базисе собственных векторов матрицы $A$
+    $$
+    C_{Jre}=CP_{re}=\begin{bmatrix}
+        2 &7 &1
+    \end{bmatrix}\begin{bmatrix}
+        2    &-2     &3\\
+        -1     &1    &-1\\
+         1     &0     &1
+    \end{bmatrix}=\begin{bmatrix}
+        -2     &3     &0
+    \end{bmatrix}
+    $$
+    Итого имеем
+    $$J_{re}=\begin{bmatrix}
+        1     &0     &0\\
+        0    &-4     &1\\
+        0    &-1    &-4
+    \end{bmatrix},\ C_{Jre}=\begin{bmatrix}
+        -2     &3     &0
+    \end{bmatrix}
+    $$
+    Все жордановы клетки относятся к различным собственным числам. Видим, что $\lambda_{1},\lambda_{2}$ наблюдаемы, а
+    $\lambda_3$ -- нет (см. элементы соответствующих столбцов $C_{Jre}$). Из наблюдаемости $\lambda_1,\lambda_2,\lambda_3$ нельзя сделать вывод, что система полностью наблюдаема. Достаточное условие полной наблюдаемости системы
+    в нашем случае -- не равенство нулю первого и [второго или третьего] элементов столбцов матрицы выходов $C_{Jre}$. Так как
+    оно выполняется, то система является полностью наблюдаемой.
+
+
+    \subsection{Грамиан наблюдаемости системы}
+    Найдем Грамиан наблюдаемости системы относительно времени $t_1=3$
+    $$Q(t_1)=\int\limits_{0}^{t_1}e^{A^Tt}C^TCe^{At}\,dt$$
+    Предоставим вычисления \texttt{MATLAB}. Получим следующий результат
+    $$
+    Q(t_1=3)=10^3\times\begin{bmatrix}
+    0.8061    &1.6141   &-0.8035\\
+    1.6141    &3.2332   &-1.6078\\
+   -0.8035   &-1.6078    &0.8023
+    \end{bmatrix}
+    $$
+    Найдем собственные числа Грамиана наблюдаемости
+    \begin{align*}
+    &\lambda_1=4.8393\cdot 10^3\\
+    &\lambda_2=0.0000\cdot 10^3\\
+    &\lambda_3=0.0023\cdot 10^3
+    \end{align*}
+    У Грамиана наблюдаемости присутствует нулевое собственное число -- он вырожденный, система не полностью наблюдаема.
+    При этом другие собственные числа достаточно велики -- в некоторых неправлениях система хорошо наблюдаема. Такой результат
+    может говорить о том, что на практике какое-то состояние системы не получится восстановить за конечное время $t_1$. При
+    этом теоретически система полностью наблюдаема.
+
+
+    \subsection{Определение начальных условий системы}
+    Пусть выход системы $y(t)$ подчиняется закону $y(t)=f(t)$ на временном интервале $t\in\left[0,t_1\right]$.
+    Определим начальные условия системы по формуле
+    $$
+    x(0)=\left[Q(t_1)\right]^+\int\limits_{0}^{t_1}e^{A^Tt}C^Ty(t)\,dt
+    $$
+    Вместо обратной матрицы Грамиана используем псевдообратную (определитель равен нулю).
+    Подставим матрицы, $t_1$ и $y(t)$
+    $$
+    x(0)=\begin{bmatrix}
+        806.1	&1614.1	&-803.5\\
+        1614.1	 &3233.2	&-1607.8\\
+        -803.5	 &-1607.8	&802.3 
+    \end{bmatrix}^+9\int\limits_{0}^{t_1}e^{\begin{bmatrix}
+        -16 &-27 &7\\
+        6 &9 &-4\\
+        -5 &-11 &0
+    \end{bmatrix}^Tt-4t}\begin{bmatrix}
+        2\\ 7\\ 1
+    \end{bmatrix}\left(\sin{(t)}-\cos{(t)}\right)
+    $$
+    Предоставим вычисления \texttt{MATLAB}. Получаем следующий результат
+    $$
+    x(0)=\begin{bmatrix}
+    15\\
+   -6\\
+    3
+    \end{bmatrix}
+    $$
+    Получили начальные условия системы, соответсвующие выходу $y(t)=f(t)$. Выполним моделирование системы аналогично первому заданию.
+    Программа для построения графиков находится в приложении 3. Графики представлены на рисунке \ref{fig:task_3_modeling}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{task_3_y_t_f_t.jpg}
+            \caption{График $y(t)$ и $f(t)$}
+            \label{fig:task_3_y_t_f_t}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{task_3_err.jpg}
+            \caption{График $e(t)=y(t)-f(t)$}
+            \label{fig:task_3_err}
+        \end{subfigure}
+        \caption{Графики для третьего задания}
+        \label{fig:task_3_modeling}
+    \end{figure}
+    \noindent Графики $y(t)$ и $f(t)$ почти совпадают. На графике ошибки видим очень маленькие значения ($\times10^{-10}$).
+    Логично, что наибольшая ошибка будет в момент наибольшего изменения состояния системы, а дальше будет уменьшаться, что видим на рис. \ref{fig:task_3_err},
+    сопоставляя $t$ с рис. \ref{fig:task_3_y_t_f_t}.
+
+
+    \subsection{Выводы}
+    Теоретически система полностью наблюдаема (критерий Калмана, матрицы Хаутуса, жорданова форма системы), но практически есть направления, в которых система ненаблюдаема (Грамиан наблюдаемости).
+    Начальные условия при заданной $f(t)$ были найдены, система была успешно промоделирована.
+
+
+    \section{Задание 4. Еще одно исследование наблюдаемости}
+
+
     \section{Приложения}
     \subsection{Приложение 1}
     \begin{lstlisting}[label=task1, caption={Программа для первого задания}]
@@ -829,6 +1097,99 @@
     ylabel('x(t)');
     legend('x_1', 'x_2', 'x_3');
     title('System state');
+    grid on;
+    \end{lstlisting}
+
+
+    \subsection{Приложение 3}
+    \begin{lstlisting}[label=task3, caption={Программа для третьего задания}]
+    % input data
+    A = [-16 -27 7; 6 9 -4; -5 -11 0];
+    C = [2 7 1];
+    f_t = @(t) -9 * exp(-4 * t) * cos(t) + 9 * exp(-4 * t) * sin(t);
+    t1 = 3;
+
+    % observability matrix
+    V = [C; C*A; C*A^2];
+    r = rank(V);
+    disp(A^2);
+    disp(V);
+    disp(r);
+
+    % A matrix eigenvalues
+    A_e = eig(A);
+    disp(A_e);
+
+    % Houtus matrices
+    H_1 = [A-A_e(1)*eye(3); C];
+    r_1 = rank(H_1);
+    disp(H_1);
+    disp(r_1);
+
+    H_2 = [A-A_e(2)*eye(3); C];
+    r_2 = rank(H_2);
+    disp(H_2);
+    disp(r_2);
+
+    H_3 = [A-A_e(3)*eye(3); C];
+    r_3 = rank(H_3);
+    disp(H_3);
+    disp(r_3);
+
+    % Jordan matrix
+    [P, J] = jordan(A);
+    P1(:,1) = real(P(:,1));
+    P1(:,2) = imag(P(:,2));
+    P1(:,3) = real(P(:,3));
+    P1_inv = P1^-1; 
+    J_re = P1_inv * A * P1;
+    C_jre = C * P1;
+    disp(P1);
+    disp(P1_inv);
+    disp(J_re);
+    disp(C_jre);
+
+    % gramian
+    integrand = @(t) expm(A' * t) * (C' * C) * expm(A * t);
+    Q_t1 = integral(@(t) integrand(t), 0, t1, 'ArrayValued', true);
+    disp(Q_t1);
+
+    % gramian eigenvalues
+    e = eig(Q_t1);
+    disp(e);
+
+    % initial conditions x(0)
+    integrand_x0 = @(t) expm(A' * t) * C' * f_t(t);
+    X_int = integral(@(t) integrand_x0(t), 0, t1, 'ArrayValued', true);
+    Q_t1_pinv = pinv(Q_t1);
+    x0 = Q_t1_pinv * X_int;
+    disp(Q_t1_pinv);
+    disp(x0);
+
+    % system modeling
+    x_t = @(t) expm(A * t) * x0; 
+    y_t = @(t) C * x_t(t);
+
+    time = linspace(0, t1, 1000);
+    y_arr = arrayfun(y_t, time);
+    f_arr = arrayfun(f_t, time);
+
+    figure;
+    plot(time, y_arr, 'b', 'LineWidth', 1.5); hold on;
+    plot(time, f_arr, 'r--', 'LineWidth', 1.5);
+    xlabel('t');
+    ylabel('y(t)');
+    legend('y(t)', 'f(t)');
+    title('y(t) and f(t) comparison');
+    grid on;
+
+    err = y_arr - f_arr;
+
+    figure;
+    plot(time, err, 'k', 'LineWidth', 1.5);
+    xlabel('t');
+    ylabel('e(t)');
+    title('Error');
     grid on;
     \end{lstlisting}
 \end{document}

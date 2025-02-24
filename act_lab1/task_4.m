@@ -88,3 +88,81 @@ xlabel('t');
 ylabel('e(t)');
 title('Error');
 grid on;
+
+% other initial conditions
+y_wanted = V * x0;
+disp(y_wanted);
+
+x0_1 = [-5.4; 1.8; 0]; % x_3 = 0
+x0_2 = [-3.4; 0.8; 1]; % x_3 = 1
+x0_3 = [-7.4; 2.8; -1]; % x_3 = -1
+
+[t, x00] = ode45(@(t, x) A * x, time, x0);
+[t, x1] = ode45(@(t, x) A * x, time, x0_1);
+[t, x2] = ode45(@(t, x) A * x, time, x0_2);
+[t, x3] = ode45(@(t, x) A * x, time, x0_3);
+
+y00 = C * x0;
+y1 = C * x1';
+y2 = C * x2';
+y3 = C * x3';
+
+% x_t
+figure;
+
+subplot(3, 1, 1);
+plot(t, x1(:,1), 'r', 'LineWidth', 1.5); hold on;
+plot(t, x2(:,1), 'g--', 'LineWidth', 1.5);
+plot(t, x3(:,1), 'b:', 'LineWidth', 1.5);
+plot(t, x00(:,1), 'k:', 'LineWidth', 1.5);
+scatter(0, x0_1(1), 'ro', 'filled');
+scatter(0, x0_2(1), 'go', 'filled');
+scatter(0, x0_3(1), 'bo', 'filled');
+scatter(0, x0(1), 'ko', 'filled');
+xlabel('t');
+ylabel('x_1(t)');
+title('x(t): x_1(t)');
+legend('x_1(0)', 'x_2(0)', 'x_3(0)', 'x_0(0)', 'Location', 'northwest');
+grid on;
+
+subplot(3, 1, 2);
+plot(t, x1(:,2), 'r', 'LineWidth', 1.5); hold on;
+plot(t, x2(:,2), 'g--', 'LineWidth', 1.5);
+plot(t, x3(:,2), 'b:', 'LineWidth', 1.5);
+plot(t, x00(:,2), 'k:', 'LineWidth', 1.5);
+scatter(0, x0_1(2), 'ro', 'filled');
+scatter(0, x0_2(2), 'go', 'filled');
+scatter(0, x0_3(2), 'bo', 'filled');
+scatter(0, x0(2), 'ko', 'filled');
+xlabel('t');
+ylabel('x_2(t)');
+title('x(t): x_2(t)');
+legend('x_1(0)', 'x_2(0)', 'x_3(0)', 'x_0(0)', 'Location', 'southwest');
+grid on;
+
+subplot(3, 1, 3);
+plot(t, x1(:,3), 'r', 'LineWidth', 1.5); hold on;
+plot(t, x2(:,3), 'g--', 'LineWidth', 1.5);
+plot(t, x3(:,3), 'b:', 'LineWidth', 1.5);
+plot(t, x00(:,3), 'k:', 'LineWidth', 1.5);
+scatter(0, x0_1(3), 'ro', 'filled');
+scatter(0, x0_2(3), 'go', 'filled');
+scatter(0, x0_3(3), 'bo', 'filled');
+scatter(0, x0(3), 'ko', 'filled');
+xlabel('t');
+ylabel('x_3(t)');
+title('x(t): x_3(t)');
+legend('x_1(0)', 'x_2(0)', 'x_3(0)', 'x_0(0)', 'Location', 'northwest');
+grid on;
+
+% y_t
+figure;
+plot(t, y1, 'r', 'LineWidth', 1.5); hold on;
+plot(t, y2, 'g--', 'LineWidth', 1.5);
+plot(t, y3, 'b:', 'LineWidth', 1.5);
+plot(t, y00, 'k:', 'LineWidth', 1.5);
+xlabel('t');
+ylabel('y(t)');
+title('y(t) for x_i(0)');
+legend('x_1(0)', 'x_2(0)', 'x_3(0)', 'x_0(0)', 'Location', 'southeast');
+grid on;

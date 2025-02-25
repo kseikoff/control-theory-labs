@@ -32,7 +32,7 @@ disp(r_3);
 
 % Jordan matrix
 [P, J] = jordan(A);
-P1(:,1) = real(P(:,1));
+P1(:,1) = P(:,1);
 P1(:,2) = imag(P(:,2));
 P1(:,3) = real(P(:,3));
 P1_inv = P1^-1; 
@@ -75,7 +75,12 @@ dxdt = @(t, x) A * x + B * u_t(t);
 [t, x] = ode45(dxdt, [0 t1], [0; 0; 0]);
 
 figure;
-plot(t, x, 'LineWidth', 1.5);
+plot(t, x(:,1), 'r', 'LineWidth', 1.5); hold on;
+plot(t, x(:,2), 'g', 'LineWidth', 1.5);
+plot(t, x(:,3), 'b', 'LineWidth', 1.5);
+scatter(t1, x1(1), 'ro', 'filled');
+scatter(t1, x1(2), 'go', 'filled');
+scatter(t1, x1(3), 'bo', 'filled');
 yline(x1(1), '--', 'Color', [0.5 0.5 0.5]); % x_1
 yline(x1(2), '--', 'Color', [0.5 0.5 0.5]); % x_2
 yline(x1(3), '--', 'Color', [0.5 0.5 0.5]); % x_3

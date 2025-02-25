@@ -35,7 +35,7 @@ disp(r_3);
 
 % Jordan matrix
 [P, J] = jordan(A);
-P1(:,1) = real(P(:,1));
+P1(:,1) = P(:,1);
 P1(:,2) = imag(P(:,2));
 P1(:,3) = real(P(:,3));
 P1_inv = P1^-1; 

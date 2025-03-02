@@ -1,0 +1,209 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[left=25mm, top=25mm, right=25mm, bottom=25mm]{geometry}
+\usepackage{cmap}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{etoolbox}
+\usepackage{titlesec}
+\pagestyle{plain}
+\patchcmd{\tableofcontents}{\contentsname}{\centering\contentsname}{}{}
+\titleformat{\section}[block]{\normalfont\large\bfseries\centering}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\normalsize\bfseries\centering}{}{0pt}{}
+\allowdisplaybreaks
+\graphicspath{{images/}}
+\usetikzlibrary{patterns}
+\definecolor{LightGray}{gray}{0.95}
+\definecolor{LightGray2}{gray}{0.7}
+\lstdefinestyle{code}{
+    language=MATLAB, % replace language here
+    basicstyle=\footnotesize\ttfamily,
+    % numbers=left,
+    % numberstyle=\scriptsize\color{gray},
+    % stepnumber=1,
+    % numbersep=5pt,
+    backgroundcolor=\color{LightGray},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    frame=single,
+    rulecolor=\color{LightGray2},
+    linewidth=\linewidth,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{purple},
+    escapeinside={\%*}{*)},
+    inputencoding=utf8x,
+    xleftmargin=0pt,
+    framexleftmargin=0pt,
+    framexrightmargin=0pt
+}
+\lstset{style=code}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={contents setup},
+    pdfpagemode=FullScreen,
+}
+
+
+\begin{document}
+    \begin{titlepage}
+
+        \begin{center}
+        Федеральное государственное автономное образовательное учреждение высшего образования
+        «Национальный Исследовательский Университет ИТМО»
+        \vfill
+        
+        \includegraphics[width=0.3\textwidth]{itmo.png} % requires /images/itmo.png
+
+        {\large\bf ЛАБОРАТОРНАЯ РАБОТА №2}\\
+        {\large\bf ПРЕДМЕТ «ТЕОРИЯ АВТОМАТИЧЕСКОГО УПРАВЛЕНИЯ»}\\
+        {\large\bf ТЕМА «МОДАЛЬНЫЕ РЕГУЛЯТОРЫ И НАБЛЮДАТЕЛИ»}\\
+        Вариант №2
+        \vfill
+
+        \begin{flushright}
+            \begin{minipage}{.45\textwidth}
+            {
+                \hbox{Преподаватель:}
+                \hbox{Пашенко А. В.}
+                \hbox{}
+                \hbox{Выполнил:}
+                \hbox{Румянцев А. А.}
+                \hbox{}
+                \hbox{Факультет: СУиР}
+                \hbox{Группа: R3341}
+                \hbox{Поток: ТАУ R22 бак 1.1.1}
+            }
+            \end{minipage}
+        \end{flushright}
+        \vfill
+  
+        Санкт-Петербург\\
+        2025
+        \end{center}
+    \end{titlepage}
+    
+    \tableofcontents
+
+    \newpage
+    \section{Задание 1. Модальный регулятор}
+    Рассмотрим систему
+    $$
+    \dot{x}=Ax+Bu,\ A=\begin{bmatrix}
+        5 &2 &7\\
+        2 &1 &2\\
+        -2 &-3 &-4
+    \end{bmatrix},\ B=\begin{bmatrix}
+        3\\
+        1\\
+        -1
+    \end{bmatrix},
+    $$
+    $$
+    \sigma\left(A+BK\right)= 
+    \left[ 
+      \begin{gathered} 
+        \left\{-2,-2,-2\right\}, \\ 
+        \left\{-3,-3,-3\right\}, \\
+        \left\{-2,-20,-200\right\},\\
+        \left\{-3,-30,-300\right\},\\
+        \left\{-2,-2\pm6i\right\},\\
+        \left\{-3,-3\pm9i\right\};
+      \end{gathered} 
+\right.
+    $$
+
+    
+    \subsection{Управляемость и стабилизируемость собственных чисел и системы}
+    Найдем собственные числа матрицы $A$ с помощью \texttt{MATLAB} (программу см. листинг \ref{task1} в приложении 1)
+    $$
+    \det{\left[\lambda I-A\right]}=\begin{vmatrix}
+        \lambda-5 &-2 &-7\\
+        -2 &\lambda-1 &-2\\
+        2 &3 &\lambda+4
+    \end{vmatrix}=0,
+    $$
+    $$
+    \sigma\left(A\right)=\left\{-2, 2\pm i\right\}
+    $$
+    $\lambda_1=-2<0$ асимптотически устойчивое, может быть неуправляемым. $\lambda_{2,3}=2\pm i$ имеют
+    положительные действительные части -- неустойчивые, нужна управляемость. Определим управляемость
+    собственных чисел через жорданово разложение (приведение комплексной формы к вещественной аналогично первой
+    лабораторной работе)
+    $$
+    A=P_{re}J_{re}P_{re}^{-1}=\begin{bmatrix}
+    -1    &0.5   &-1.5\\
+    0         &0   &-1\\
+    1         &0    &1
+    \end{bmatrix}\begin{bmatrix}
+    -2     &0     &0\\
+     0     &2     &1\\
+     0    &-1     &2
+    \end{bmatrix}\begin{bmatrix}
+    0     &1     &1\\
+     2    &-1     &2\\
+     0    &-1     &0
+    \end{bmatrix},
+    $$
+    $$
+    B_{Jre}=P_{re}^{-1}B=\begin{bmatrix}
+        0     &1     &1\\
+         2    &-1     &2\\
+         0    &-1     &0
+        \end{bmatrix}\begin{bmatrix}
+            3\\
+            1\\
+            -1
+        \end{bmatrix}=\begin{bmatrix}
+        0\\
+     3\\
+    -1
+    \end{bmatrix}
+    $$
+    Итого имеем
+    $$
+    J_{re}=\begin{bmatrix}
+        -2     &0     &0\\
+         0     &2     &1\\
+         0    &-1     &2
+        \end{bmatrix},\ B_{Jre}=\begin{bmatrix}
+            0\\
+         3\\
+        -1
+        \end{bmatrix}
+    $$
+    Все жордановы клетки относятся к различным собственным числам. Собственное число $\lambda_1=-2$ неуправляемое, так как первый элемент в матрице
+    входных воздействий $B_{Jre}$ равен нулю. Остальные собственные числа управляемые.
+    Следовательно, система не полностью управляема. Достаточное условие полной управляемости
+    системы в нашем случае -- не равенство нулю первого и $\left[\text{второго или третьего}\right]$
+    элементов матрицы $B_{Jre}$. Оно не выполняется. Так как все неустойчивые собственные числа
+    управляемы, то система стабилизируема.
+
+
+    \subsection{Схема моделирования системы, замкнутой регулятором}
+    Построим схему моделирования системы $\dot{x}=Ax+Bu$, замкнутой регулятором $u=Kx$, используя \texttt{SIMULINK}
+
+
+    \section{Приложения}
+    \subsection{Приложение 1}
+    \begin{lstlisting}[label=task1, caption={Программа для первого задания}]
+        to be done
+    \end{lstlisting}
+\end{document}

@@ -19,10 +19,24 @@ disp(P1_inv);
 disp(J_re);
 disp(B_jre);
 
-% regulator K matrix
+% Г matrices
 g_1 = [0 1 0; 0 0 1; -8 -12 -6];
 y_1 = [1 0 0];
 check_1 = [y_1; y_1*g_1; y_1*g_1^2];
 rank_check_1 = rank(check_1);
 disp(check_1);
 disp(rank_check_1);
+
+g_2 = [0 1 0; 0 0 1; -8000 -4440 -222];
+y_2 = [1 0 0];
+check_2 = [y_2; y_2*g_2; y_2*g_2^2];
+rank_check_2 = rank(check_2);
+disp(check_2);
+disp(rank_check_2);
+
+g_3 = [0 1 0; 0 0 1; -80 -48 -6];
+y_3 = [1 0 0];
+check_3 = [y_3; y_3*g_3; y_3*g_3^2];
+rank_check_3 = rank(check_3);
+disp(check_3);
+disp(rank_check_3);

@@ -18,3 +18,11 @@ disp(P1);
 disp(P1_inv);
 disp(J_re);
 disp(B_jre);
+
+% regulator K matrix
+g_1 = [0 1 0; 0 0 1; -8 -12 -6];
+y_1 = [1 0 0];
+check_1 = [y_1; y_1*g_1; y_1*g_1^2];
+rank_check_1 = rank(check_1);
+disp(check_1);
+disp(rank_check_1);

@@ -141,7 +141,7 @@
     \end{vmatrix}=0,
     $$
     $$
-    \sigma\left(A\right)=\left\{-2, 2\pm i\right\}
+    \sigma\left(A\right)=\left\{-2, 2\pm i\right\};
     $$
     $\lambda_1=-2<0$ асимптотически устойчивое, может быть неуправляемым. $\lambda_{2,3}=2\pm i$ имеют
     положительные действительные части -- неустойчивые, нужна управляемость. Определим управляемость
@@ -175,7 +175,7 @@
         0\\
      3\\
     -1
-    \end{bmatrix}
+    \end{bmatrix};
     $$
     Итого имеем
     $$
@@ -187,7 +187,7 @@
             0\\
          3\\
         -1
-        \end{bmatrix}
+        \end{bmatrix};
     $$
     Все жордановы клетки относятся к различным собственным числам. Собственное число $\lambda_1=-2$ неуправляемое, так как первый элемент в матрице
     входных воздействий $B_{Jre}$ равен нулю. Остальные собственные числа управляемые.
@@ -246,30 +246,30 @@
     $$
     \left(\lambda+2\right)^3=\lambda^3+6\lambda^2+12\lambda+8
     $$
-    Составим по коэффициентам матрицу $\text{Г}_1$
+    Составим матрицу $\Gamma_1$ в канонической наблюдаемой форме по коэффициентам найденного полинома
     $$
-\text{Г}_1=\begin{bmatrix}
+\Gamma_1=\begin{bmatrix}
     0 &1 &0\\
     0 &0 &1\\
     -8 &-12 &-6
 \end{bmatrix}
     $$
-    Подберем $Y_1$ такой, чтобы пара $\left(Y_1,\text{Г}_1\right)$ была наблюдаема. Проверим, вычислив ранг
+    Подберем $Y_1$ такой, чтобы пара $\left(Y_1,\Gamma_1\right)$ была наблюдаема. Проверим, вычислив ранг
     матрицы наблюдаемости
     $$
     Y_1=\begin{bmatrix}
         1 &0 &0
     \end{bmatrix},\ \text{rank}\begin{bmatrix}
-        Y_1\\ Y_1\text{Г}_1\\ Y_1\text{Г}_1^2
+        Y_1\\ Y_1\Gamma_1\\ Y_1\Gamma_1^2
     \end{bmatrix}=\text{rank}\begin{bmatrix}
     1     &0     &0\\
      0     &1     &0\\
      0     &0     &1
-    \end{bmatrix}=3
+    \end{bmatrix}=3;
     $$
     Теперь, используя пакет \texttt{cvx} в \texttt{MATLAB}, вычислим матрицу $P_1\in\mathbb{R}^{3\times3}$
     как решение уравнения Сильвестра
-    $$AP_1-P_1\text{Г}_1=BY_1$$
+    $$AP_1-P_1\Gamma_1=BY_1$$
     $$\begin{bmatrix}
         5 &2 &7\\
         2 &1 &2\\
@@ -292,33 +292,33 @@
         -1
     \end{bmatrix}\begin{bmatrix}
         1 &0 &0
-    \end{bmatrix}$$
+    \end{bmatrix},$$
     $$
     P_1=\begin{bmatrix}
     0.4455   &-0.0701   &-0.0288\\
    -0.0759   &-0.1036   &-0.0181\\
     0.1649    &0.1926    &0.0404
-    \end{bmatrix}
+    \end{bmatrix};
     $$
     Далее вычислим матрицу регулятора $K_1\in\mathbb{R}^{3\times3}$ по формуле
-    $$K_1=-Y_1P_1^{-1}$$
+    $$K_1=-Y_1P_1^{-1},$$
     $$K_1=\begin{bmatrix}
         -1.800   &-7.043   &-4.443
-    \end{bmatrix}$$
-    Повторим шаги для нахождения остальных $K_i$. Рассмотрим спектры $$\sigma\left(A+BK\right)=\left\{-2,-20,-200\right\},\ \sigma\left(A+BK\right)=\left\{-2,-2\pm6i\right\}$$
+    \end{bmatrix};$$
+    Повторим шаги для нахождения остальных $K_i$. Рассмотрим спектры $$\sigma\left(A+BK\right)=\left\{-2,-20,-200\right\},\ \sigma\left(A+BK\right)=\left\{-2,-2\pm6i\right\};$$
     Найдем их полиномы
-    $$\left(\lambda+2\right)\left(\lambda+20\right)\left(\lambda+200\right)=\lambda^3+222\lambda^2+4440\lambda+8000$$
-    $$\left(\lambda+2\right)\left(\lambda+2-6i\right)\left(\lambda+2+6i\right)=\lambda^3+6\lambda^2+48\lambda+80$$
-    Аналогично запишем матрицы $\text{Г}_i$
-    $$\text{Г}_2=\begin{bmatrix}
+    $$\left(\lambda+2\right)\left(\lambda+20\right)\left(\lambda+200\right)=\lambda^3+222\lambda^2+4440\lambda+8000,$$
+    $$\left(\lambda+2\right)\left(\lambda+2-6i\right)\left(\lambda+2+6i\right)=\lambda^3+6\lambda^2+48\lambda+80;$$
+    Аналогично запишем матрицы $\Gamma_i$
+    $$\Gamma_2=\begin{bmatrix}
         0 &1 &0\\
         0 &0 &1\\
         -8000 &-4440 &-222
-    \end{bmatrix},\ \text{Г}_3=\begin{bmatrix}
+    \end{bmatrix},\ \Gamma_3=\begin{bmatrix}
         0 &1 &0\\
         0 &0 &1\\
         -80 &-48 &-6
-    \end{bmatrix}$$
+    \end{bmatrix};$$
     Подберем $Y_i$ и выполним проверку ранга
     $$
     Y_{2,3}=Y_1=\begin{bmatrix}
@@ -326,17 +326,17 @@
     \end{bmatrix}=Y,\
     \text{rank}\begin{bmatrix}
         Y\\
-        Y\text{Г}_2\\
-        Y\text{Г}_2^2
+        Y\Gamma_2\\
+        Y\Gamma_2^2
     \end{bmatrix}=\text{rank}\begin{bmatrix}
         Y\\
-        Y\text{Г}_3\\
-        Y\text{Г}_3^2
+        Y\Gamma_3\\
+        Y\Gamma_3^2
     \end{bmatrix}=\text{rank}\begin{bmatrix}
         1 &0 &0\\
         0 &1 &0\\
         0 &0 &1
-    \end{bmatrix}=3
+    \end{bmatrix}=3;
     $$
     Найдем $P_{2,3}$ и $K_{2,3}$ тем же способом
     $$
@@ -348,14 +348,14 @@
     0.2546    &0.0351   &-0.0026\\
     0.0744    &0.0055   &-0.0012\\
     0.2550    &0.0275    &0.0094
-    \end{bmatrix}
+    \end{bmatrix},
     $$
     $$
     K_2=\begin{bmatrix}
         754.2 &-2553.6 &-67.0
     \end{bmatrix},\ K_3=\begin{bmatrix}
         5.4000  &-25.9424   &-1.7424
-    \end{bmatrix}
+    \end{bmatrix};
     $$
 
 
@@ -381,7 +381,7 @@
     21.2000  &-75.8273    &1.7727\\
     7.4000  &-24.9424    &0.2576\\
    -7.4000   &22.9424   &-2.2576
-    \end{bmatrix}=\left\{-2,-2\pm6i\right\}
+    \end{bmatrix}=\left\{-2,-2\pm6i\right\};
     $$
     Видим, что спектры совпадают с желаемыми -- регулятор синтезирован корректно.
 
@@ -453,7 +453,7 @@
     оценим возможные сравнительные преимущества и недостатки каждого из них.
 
 
-    На каждом рисунке система $x(t)$ стабилизировалась -- все координаты пришли в ноль.
+    На каждом рисунке система $x(t)$ стабилизировалась -- все координаты пришли в ноль, выходя из 1.
     Управления $u(t)$ сошлись к нулю -- регуляторы выполнили свою задачу и больше не требуют
     активного управления.
     
@@ -524,7 +524,7 @@
     \end{vmatrix}=0,
     $$
     $$
-    \sigma\left(A\right)=\left\{\pm2i,\pm i\right\}
+    \sigma\left(A\right)=\left\{\pm2i,\pm i\right\};
     $$
     Все собственные числа комплексные и имеют нулевую действительную часть.
     Следовательно, они все устойчивые, но не асимптотически. То есть в системе будут незатухающие колебания.
@@ -546,7 +546,7 @@
     2   &-0   &-2    &1\\
     8    &2   &-6    &4\\
    12    &4  &-10    &6
-    \end{bmatrix}
+    \end{bmatrix},
     $$
     $$
     C_{Jre}=CP_{re}=\begin{bmatrix}
@@ -558,7 +558,7 @@
         1   &0    &1    &0
     \end{bmatrix}=\begin{bmatrix}
         -0.5   &-0.5   &-0.5         &0
-    \end{bmatrix}
+    \end{bmatrix};
     $$
     Итого имеем
     $$
@@ -569,7 +569,7 @@
        0   &0   &-1   &0
     \end{bmatrix},\ C_{Jre}=\begin{bmatrix}
         -0.5   &-0.5   &-0.5         &0
-    \end{bmatrix}
+    \end{bmatrix};
     $$
     Все жордановы клетки относятся к различным собственным числам. Все собственные числа, кроме
     $\lambda_4$, наблюдаемы, так как соответствующие им элементы матрицы выходов $C_{Jre}$
@@ -584,31 +584,250 @@
     $\dot{\hat{x}}=A\hat{x}+L\left(C\hat{x}-y\right)$
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{scheme_task2.png}
+        \includegraphics[scale=0.45]{scheme_task2.png}
         \captionsetup{skip=0pt}
         \caption{Схема моделирования системы с наблюдателем состояния}
         \label{fig:scheme_task2}
     \end{figure}
-
-
-    \subsection{Необходимость в наблюдателе состояния}
-    Может система и является полностью наблюдаемой, но устойчивой она является не асимптотически.
-    В системе будут незатухающие колебания, которые нам не нужны. Они может и не меняются со временем,
-    но при этом присутствуют. Если мы приведем наблюдателем состояния систему к спектру с числами,
-    имеющими отрицательную вещественную часть, то эта система будет асимптотически устойчивой.
-    В условии как раз даны именно такие спектры.
+    \noindent Через один \texttt{Scope} отслеживаем сигналы $x(t)\text{ и }\hat{x}(t)$ на одном графике,
+    через другой ошибку наблюдателя (невязку) $e(t)=x(t)-\hat{x}(t)$.
 
 
     \subsection{Матрица коррекции наблюдателя}
-    ...
+    Для каждого из предложенных спектров найдем матрицы коррекции наблюдателя $L$, обеспечивающих
+    соответствующий желаемый спектр. Аналогично первому заданию составим полиномы
+    \begin{align*}
+    &\left(\lambda+2\right)^4=\lambda^4+8\lambda^3+24\lambda^2+32\lambda+16,\\
+    &\left(\lambda+2\right)\left(\lambda+20\right)\left(\lambda+200\right)\left(\lambda+2000\right)=
+    \lambda^4+2222\lambda^3+448440\lambda^2+8888000\lambda+16000000,\\
+    &\left(\lambda+2-3i\right)\left(\lambda+2+3i\right)\left(\lambda+2-4i\right)\left(\lambda+2+4i\right)=
+    \lambda^4+8\lambda^3+49\lambda^2+132\lambda+260;
+    \end{align*}
+    Запишем матрицы $\Gamma_i$
+    $$
+    \Gamma_1=\begin{bmatrix}
+        0 &1 &0 &0\\
+        0 &0 &1 &0\\
+        0 &0 &0 &1\\
+        -16 &-32 &-24 &-8
+    \end{bmatrix},\ \Gamma_2=\begin{bmatrix}
+        0 &1 &0 &0\\
+        0 &0 &1 &0\\
+        0 &0 &0 &1\\
+        -16000000 &-8888000 &-448440 &-2222
+    \end{bmatrix},
+    $$
+    $$
+    \Gamma_3=\begin{bmatrix}
+        0 &1 &0 &0\\
+        0 &0 &1 &0\\
+        0 &0 &0 &1\\
+        -260 &-132 &-49 &-8
+    \end{bmatrix};
+    $$
+    Все матрицы $\Gamma_i$ составлены по одинаковому принципу, поэтому подберем единый $Y$ такой, чтобы
+    пары $\left(Y,\Gamma_i\right)$ были управляемы. Проверим, вычислив ранги матриц управляемости $U_i$
+    $$
+    Y=\begin{bmatrix}
+        1\\
+        0\\
+        0\\
+        0
+    \end{bmatrix},\ U_i=\begin{bmatrix}
+        Y &\Gamma_iY &\Gamma_i^2Y &\Gamma_i^3Y
+    \end{bmatrix},
+    $$
+    $$
+    \text{rank}\begin{bmatrix}Y &\Gamma_1Y &\Gamma_1^2Y &\Gamma_1^3Y\end{bmatrix}=\text{rank}\begin{bmatrix}
+    1     &0     &0     &0\\
+    0     &0     &0   &-16\\
+    0     &0   &-16   &128\\
+    0   &-16   &128  &-640
+    \end{bmatrix}=4,
+    $$
+    $$
+    \text{rank}\begin{bmatrix}Y &\Gamma_2Y &\Gamma_2^2Y &\Gamma_2^3Y\end{bmatrix}=\text{rank}\left[10^{13}\cdot\begin{bmatrix}
+        0.0000         &0.0000         &0.0000         &0.0000\\
+        0.0000         &0.0000         &0.0000   &0.0000\\
+        0.0000         &0.0000   &0.0000    &0.0036\\
+        0.0000   &0.0000    &0.0036   &-7.1822
+    \end{bmatrix}\right]=4,
+    $$
+    $$
+    \text{rank}\begin{bmatrix}Y &\Gamma_3Y &\Gamma_3^2Y &\Gamma_3^3Y\end{bmatrix}=\text{rank}\begin{bmatrix}
+        1           &0           &0           &0\\
+        0           &0           &0        &-260\\
+        0           &0        &-260        &2080\\
+        0        &-260        &2080       &-3900
+    \end{bmatrix}=4;
+    $$
+    Используя пакет \texttt{cvx} в \texttt{MATLAB}, вычилим матрицы $Q_i\in\mathbb{R}^{4\times4}$ как решения уравнения Сильвестра
+    $$
+    \Gamma_iQ_i-Q_iA=YC
+    $$
+    После чего вычислим $L_i\in\mathbb{R}^{4\times1}$ по формуле
+    $$
+    L_i=Q_i^{-1}Y
+    $$
+    Получаем следующие результаты
+    $$
+    Q_1=\begin{bmatrix}
+    -7.7426   &-2.3690    &6.5528   &-3.5588\\
+    3.6532    &1.1580   &-3.1096    &1.9516\\
+    1.1176    &0.2440   &-1.0528    &0.3088\\
+   -1.4032   &-0.4080    &1.6096   &-1.2016
+    \end{bmatrix},\ L_1=\begin{bmatrix}
+    10.3333\\
+  -21.0000\\
+    7.6667\\
+    5.3333
+    \end{bmatrix},
+    $$
+    $$
+    Q_2=\begin{bmatrix}
+    -1.7989   &-0.5605    &1.4628   &-0.6220\\
+    3.6220    &1.0996   &-2.9656    &1.3166\\
+   -7.5251   &-1.7746    &6.5261   &-3.8724\\
+  -15.8185   &-4.0663   &12.1953   &-5.9314
+    \end{bmatrix},\ L_2=10^6\cdot\begin{bmatrix}
+        0.7378\\
+    7.5493\\
+    6.0674\\
+    5.3319
+    \end{bmatrix},
+    $$
+    $$
+    Q_3=\begin{bmatrix}
+    -1.4397   &-0.4741    &1.0517   &-0.3017\\
+    6.5000    &1.7241   &-5.3103    &2.4655\\
+   -5.3793   &-1.0172    &5.2759   &-3.3621\\
+  -27.3448   &-6.4310   &21.4483  &-10.5345
+    \end{bmatrix},\ L_3=\begin{bmatrix}
+        4.0000\\
+   76.0000\\
+   58.6667\\
+   62.6667
+    \end{bmatrix};
+    $$
 
 
     \subsection{Корректность синтеза регулятора}
-    ...
+    Определим собственные числа матриц наблюдателя $\left(A+L_iC\right)$
+    и сравним с соответствующими желаемыми спектрами
+    $$
+    \sigma\left(A+L_1C\right)=\sigma\begin{bmatrix}
+    -10.3333    &1.0000   &10.3333   &-9.3333\\
+   -5.0000   &-7.0000   &-1.0000   &10.0000\\
+   -7.6667    &1.0000    &6.6667   &-5.6667\\
+   10.6667    &4.0000   &-8.6667    &2.6667
+    \end{bmatrix}=
+    \left\{
+    \begin{matrix}
+        -2.0017\\
+    -2.0000 + 0.0017i\\
+    -2.0000 - 0.0017i\\
+    -1.9983
+    \end{matrix}\right\},
+    $$
+    $$
+    \sigma\left(A+L_2C\right)=\sigma\left[10^6\cdot\begin{bmatrix}
+    -0.7378    &0.0000    &0.7378   &-0.7378\\
+   -7.5494   &0.0000    &7.5494   &-7.5494\\
+   -6.0674    &0.0000    &6.0674   &-6.0674\\
+   -5.3318    &0.0000    &5.3318   &-5.3318
+    \end{bmatrix}\right]=\left\{\begin{matrix}
+    -2000\\
+   -200\\
+   -2\\
+   -20
+    \end{matrix}\right\},
+    $$
+    $$
+    \sigma\left(A+L_3C\right)=\sigma\begin{bmatrix}
+        -4.0000    &1.0000    &4.0000   &-3.0000\\
+ -102.0000   &-7.0000   &96.0000  &-87.0000\\
+  -58.6667    &1.0000   &57.6667  &-56.6667\\
+  -46.6667    &4.0000   &48.6667  &-54.6667
+    \end{bmatrix}=\left\{\begin{matrix}
+        -2\pm4i\\
+        -2\pm3i
+    \end{matrix}\right\};
+    $$
+    Отклонение в $0.085\%$ для $L_1$ будем считать погрешностью вычислений в \texttt{MATLAB}.
+    Остальные спектры совпали с желаемыми. Регулятор синтезирован корректно.
 
 
     \subsection{Компьютерное моделирование}
-    ...
+    Для компьютерного моделирования воспользуемся схемой \texttt{SIMULINK},
+    представленной на рис. \ref{fig:scheme_task2}. Зададим в интеграторы
+    такие начальные условия:
+    для системы $x(0)=\begin{bmatrix}
+        1 &1 &1 &1
+    \end{bmatrix}^T$, для наблюдателя $\hat{x}(0)=\begin{bmatrix}
+        2 &0 &0 &-1
+    \end{bmatrix}^T$. Также для одного из случаев приблизим график к началу времени $t$,
+    чтобы убедиться в том, что каждая координата выходит из своего начального условия
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{x_t_x_est_t_l1_task2.png}
+            \caption{Графики $x(t),\hat{x}(t)$}
+            \label{fig:task_1_x_t_l1}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{e_l1_task2.png}
+            \caption{График $e(t)$}
+            \label{fig:task_1_e_l1}
+        \end{subfigure}
+        \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_1$}
+        \label{fig:task_2_modeling_1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{x_t_x_est_t_l2_task2.png}
+            \caption{Графики $x(t),\hat{x}(t)$}
+            \label{fig:task_1_x_t_l2}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{e_l2_task2.png}
+            \caption{График $e(t)$}
+            \label{fig:task_1_e_l2}
+        \end{subfigure}
+        \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_2$}
+        \label{fig:task_2_modeling_2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{x_t_x_est_t_l3_task2.png}
+            \caption{Графики $x(t),\hat{x}(t)$}
+            \label{fig:task_1_x_t_l3}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{e_l3_task2.png}
+            \caption{График $e(t)$}
+            \label{fig:task_1_e_l3}
+        \end{subfigure}
+        \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_3$}
+        \label{fig:task_2_modeling_3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{x_0_x_est_0_l3_task2.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка начальных условий (случай для $L_3$)}
+        \label{fig:x_0_check}
+    \end{figure}
 
 
     \subsection{Сравнение результатов}
@@ -709,6 +928,90 @@
 
     \subsection{Приложение 2}
     \begin{lstlisting}[label=task2, caption={Программа для второго задания}]
-        to be done
+    % input data
+    A = [0 1 0 1;
+        -26 -7 20 -11;
+        0 1 -1 2;
+        16 4 -14 8];
+    C = [-1 0 1 -1];
+
+    % A matrix eigenvalues
+    A_e = eig(A);
+    disp(A_e);
+
+    % Jordan matrix
+    [P, J] = jordan(A);
+    P_re(:,1) = real(P(:,1));
+    P_re(:,2) = imag(P(:,2));
+    P_re(:,3) = real(P(:,3));
+    P_re(:,4) = imag(P(:,4));
+    P_re_inv = P_re^-1; 
+    J_re = P_re_inv * A * P_re;
+    C_jre = C * P_re;
+    disp(P_re);
+    disp(P_re_inv);
+    disp(J_re);
+    disp(C_jre);
+
+    % G matrices
+    Y = [1; 0; 0; 0];
+
+    G1 = [0 1 0 0; 0 0 1 0; 0 0 0 1; -16 -32 -24 -8];
+    U1 = [Y G1*Y G1^2*Y G1^3*Y];
+    disp(U1);
+    disp(rank(U1));
+    disp(eig(G1));
+
+    G2 = [0 1 0 0; 0 0 1 0; 0 0 0 1; -16000000 -8888000 -448440 -2222];
+    U2 = [Y G2*Y G2^2*Y G2^3*Y];
+    disp(U2);
+    disp(rank(U2));
+    disp(eig(G2));
+
+    G3 = [0 1 0 0; 0 0 1 0; 0 0 0 1; -260 -132 -49 -8];
+    U3 = [Y G3*Y G3^2*Y G3^3*Y];
+    disp(U3);
+    disp(rank(U3));
+    disp(eig(G3));
+
+    % regulator synthesis
+    cvx_begin sdp
+    variable Q1(4,4)
+    variable Q2(4,4)
+    variable Q3(4,4)
+    G1*Q1-Q1*A == Y*C;
+    G2*Q2-Q2*A == Y*C;
+    G3*Q3-Q3*A == Y*C;
+    cvx_end
+
+    L1 = inv(Q1)*Y;
+    disp(Q1);
+    disp(L1);
+
+    L2 = inv(Q2)*Y;
+    disp(Q2);
+    disp(L2);
+
+    L3 = inv(Q3)*Y;
+    disp(Q3);
+    disp(L3);
+
+    % A+LC eigenvalues
+    ALC1 = A+L1*C;
+    ALC2 = A+L2*C;
+    ALC3 = A+L3*C;
+
+    ALC1_eig = eig(ALC1);
+    ALC2_eig = eig(ALC2);
+    ALC3_eig = eig(ALC3);
+
+    disp(ALC1);
+    disp(ALC1_eig);
+
+    disp(ALC2);
+    disp(ALC2_eig);
+
+    disp(ALC3);
+    disp(ALC3_eig);
     \end{lstlisting}
 \end{document}

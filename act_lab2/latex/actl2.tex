@@ -387,22 +387,11 @@
 
 
     \subsection{Компьютерное моделирование}
-    Добавим в схему на рис. \ref{fig:scheme_task1} \texttt{Scope} для отслеживания
-    $u(t)$ и зададим в интегратор начальное условие $$x(0)=\begin{bmatrix}
+    Для компьютерного моделирования воспользуемся схемой \texttt{SIMULINK},
+    представленной на рис. \ref{fig:scheme_task1}.
+    Зададим в интегратор начальное условие $x(0)=\begin{bmatrix}
         1 &1 &1
-    \end{bmatrix}^T$$
-    В \texttt{Gain} для $K$ будем записывать коэффициенты $K_i\,$-х матриц регулятора.
-    Получаем следующую схему компьютерного моделирования $u(t)$ и $x(t)$
-    \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.5]{scheme_task1_2.png}
-        \captionsetup{skip=0pt}
-        \caption{Компьютерное моделирование $u(t),x(t)$}
-        \label{fig:scheme_task1_2}
-    \end{figure}
-
-
-    Далее предложены графики $u(t),x(t)$ для каждой матрицы $K_i$
+    \end{bmatrix}^T$
     \begin{figure}[H]
         \centering
         \begin{subfigure}{0.45\textwidth}
@@ -593,9 +582,16 @@
     \subsection{Схема моделирования системы с наблюдателем состояния}
     Построим в \texttt{SIMULINK} схему моделирования системы с наблюдателем состояния
     $\dot{\hat{x}}=A\hat{x}+L\left(C\hat{x}-y\right)$
-
-
-    ...
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{scheme_task2.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы с наблюдателем состояния}
+        \label{fig:scheme_task2}
+    \end{figure}
+    \noindent Слева до блока \texttt{Scope} с подписью <<y>> находится система, данная в условии задания.
+    Правее этого блока располагается схема системы с наблюдателем состояния. Также вычисляем ошибку наблюдателя
+    $e(t)=x-\hat{x}$.
 
 
     \subsection{Необходимость в наблюдателе состояния}

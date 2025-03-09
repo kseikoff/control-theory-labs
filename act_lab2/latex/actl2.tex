@@ -773,14 +773,14 @@
             \centering
             \includegraphics[width=\linewidth]{x_t_x_est_t_l1_task2.png}
             \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_1_x_t_l1}
+            \label{fig:task_2_x_t_l1}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.45\textwidth}
             \centering
             \includegraphics[width=\linewidth]{e_l1_task2.png}
             \caption{График $e(t)$}
-            \label{fig:task_1_e_l1}
+            \label{fig:task_2_e_l1}
         \end{subfigure}
         \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_1$}
         \label{fig:task_2_modeling_1}
@@ -791,14 +791,14 @@
             \centering
             \includegraphics[width=\linewidth]{x_t_x_est_t_l2_task2.png}
             \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_1_x_t_l2}
+            \label{fig:task_2_x_t_l2}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.45\textwidth}
             \centering
             \includegraphics[width=\linewidth]{e_l2_task2.png}
             \caption{График $e(t)$}
-            \label{fig:task_1_e_l2}
+            \label{fig:task_2_e_l2}
         \end{subfigure}
         \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_2$}
         \label{fig:task_2_modeling_2}
@@ -809,14 +809,14 @@
             \centering
             \includegraphics[width=\linewidth]{x_t_x_est_t_l3_task2.png}
             \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_1_x_t_l3}
+            \label{fig:task_2_x_t_l3}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.45\textwidth}
             \centering
             \includegraphics[width=\linewidth]{e_l3_task2.png}
             \caption{График $e(t)$}
-            \label{fig:task_1_e_l3}
+            \label{fig:task_2_e_l3}
         \end{subfigure}
         \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_3$}
         \label{fig:task_2_modeling_3}
@@ -831,11 +831,34 @@
 
 
     \subsection{Сравнение результатов}
-    ...
+    Видим, как на каждом графике $x(t),\hat{x}(t)$ оценки координат сходятся к настоящим координатам -- наблюдатель
+    выполняет свою работу верно. Например, на рис. \ref{fig:task_2_x_t_l1} \textbf{голубая} оценка координаты $\hat{x}_2$ сходится
+    к \textbf{синей} истинной координате $x_2$ примерно за $t=3.5$. Ошибки ожидаемо стремятся к нулю. На рис. \ref{fig:x_0_check}
+    видим, что все координаты выходят из своих начальных условий.
+
+
+    На рис. \ref{fig:task_2_x_t_l1} видим, что примерно к $t=5$ каждая координата наблюдателя сошлась с исходными координатами.
+    Ошибка на рис. \ref{fig:task_2_e_l1} сравнительно небольшая, ожидаемо наибольшая в начале, далее плавно и медленно стремится к нулю.
+    Итого: плавное поведение наблюдателя с небольшой ошибкой, но медленное схождение к истинным координатам.
+
+
+    На рис. \ref{fig:task_2_x_t_l2} ситуация обратная -- наблюдатель быстро сводит координаты с координатами
+    исходной системы (примерно за $t=2$), однако ошибка на рис. \ref{fig:task_2_e_l2} ожидаемо сравнительно большая. На практике лучше всего
+    соблюдать баланс между величиной ошибки и скоростью сходимости.
+
+
+    На рис. \ref{fig:task_2_x_t_l3} результат в целом схож с результатом для $L_1$ на рис. \ref{fig:task_2_x_t_l1}.
+    Разница в том, что координаты сходятся немного быстрее, однако, что видно на рис. \ref{fig:task_2_e_l3}, появляются
+    лишние осцилляции, то есть система становится менее предсказуемой (есть более значимый второй скачок ошибки выше нуля
+    в сравнении со случаем для $L_1$ -- там почти все ошибки сразу сходятся к нулю снизу).
 
     
     \subsection{Вывод}
-    ...
+    Мы выяснили, что система является полностью наблюдаемой, а следовательно, и стабилизируемой.
+    Мы вычислили матрицы коррекции наблюдателя и убедились в том, что регулятор синтезирован верно.
+    Мы промоделировали систему с наблюдателем состояния и сравнили полученные результаты. В целом
+    выводы аналогичны первому заданию. Лучше всего брать небольшие по модулю рациональные или комплексные числа.
+    Выбор зависит от того, что нам важнее. Если важнее скорость -- комплексные. Если точность -- рациональные.
 
 
     \section{Приложения}

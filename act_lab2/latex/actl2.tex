@@ -984,7 +984,7 @@
     $\dot{\hat{x}}=A\hat{x}+\left(B+LD\right)u+L\left(C\hat{x}-y\right)$ и закона управления $u=K\hat{x}$
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{scheme_task3.png}
+        \includegraphics[scale=0.55]{scheme_task3.png}
         \captionsetup{skip=0pt}
         \caption{Схема моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния и закона управления}
         \label{fig:scheme_task3}
@@ -1142,13 +1142,64 @@
     \end{bmatrix}^T$, для наблюдателя $\hat{x}(0)=\begin{bmatrix}
         0 &0 &0 &0
     \end{bmatrix}^T$
-
-    
-    ...
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{x_t_x_est_t_task3.png}
+            \caption{Графики $x(t),\hat{x}(t)$}
+            \label{fig:task_3_x_t}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{e_task3.png}
+            \caption{График $e(t)$}
+            \label{fig:task_3_e}
+        \end{subfigure}
+        \caption{Графики $x(t),\hat{x}(t),e(t)$}
+        \label{fig:task_3_modeling}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{u_t_task3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$}
+        \label{fig:u_t_task3}
+    \end{figure}
+    \noindent Проведем небольшие уточнения. Проверим начальные условия $x(0),\hat{x}(0)$, а также уберем
+    один из графиков ошибки
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{x_0_x_est_0_task3.png}
+            \caption{Проверка нач. усл. $x(0),\hat{x}(0)$}
+            \label{fig:x_0_check_2}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{e_less_task3.png}
+            \caption{График $e(t)$ без одной из ошибок}
+            \label{fig:task_3_e_less}
+        \end{subfigure}
+        \caption{Графики $x(t),\hat{x}(t),e(t)$}
+        \label{fig:task_3_modeling_2}
+    \end{figure}
+    \noindent Регулятор и наблюдатель выполнили свою задачу.
+    Оценки координат сходятся к истинным со временем, что видно на рис. \ref{fig:task_3_x_t}. Ошибка
+    уходит в ноль. Система сходится к нулю, управления со временем нужно все меньше (см. рис. \ref{fig:u_t_task3}), пока
+    оно уже будет совсем не нужно. Система исходит из заданных начальных условий -- траектории накладываются друг на друга,
+    поэтому видны не все координаты (см. рис. \ref{fig:x_0_check_2}). Три ошибки идентичны, четвертая зеркальная (см. рис. \ref{fig:task_3_e}, \ref{fig:task_3_e_less}).
 
 
     \subsection{Вывод}
-    ...
+    Система полностью управляема, стабилизируема, не полностью наблюдаема, но обнаруживаема.
+    Были взяты достижимые спектры, далее получены матрицы регулятора и коррекции наблюдателя,
+    которые приводят спектры к желаемым. В ходе компьютерного моделирования по построенной схеме
+    было выяснено, что регулятор и наблюдатель выполняют свою задачу. Система стабилизируется к 0,
+    наблюдатель повторяет траектории за системой. Ошибка сходитя к нулю. Начальные условия соблюдены.
 
 
     \section{Приложения}

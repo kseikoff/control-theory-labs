@@ -44,7 +44,7 @@ disp(U3);
 disp(rank(U3));
 disp(eig(G3));
 
-% regulator synthesis
+% observer synthesis
 cvx_begin sdp
 variable Q1(4,4)
 variable Q2(4,4)

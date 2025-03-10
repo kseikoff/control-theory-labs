@@ -7,4 +7,4 @@
 **/latex/*.fdb_latexmk
 **/latex/*.synctex.gz
 **/latex/*.synctex(busy)
-/*.asv
+*.asv

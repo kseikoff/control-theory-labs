@@ -19,3 +19,17 @@ B_new = P_inv*B;
 C_new = C*P;
 disp(B_new);
 disp(C_new);
+
+% G 2x2, Q 2x4, Y 2x2
+G = [-2 1; 0 -2];
+Y = [1 0; 0 1];
+U = [Y G*Y];
+disp(U);
+disp(rank(U));
+
+% observer synthesis
+cvx_begin sdp
+variable Q(2,4)
+G*Q-Q*A == Y*C;
+cvx_end
+disp(Q);

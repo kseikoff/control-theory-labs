@@ -33,3 +33,9 @@ variable Q(2,4)
 G*Q-Q*A == Y*C;
 cvx_end
 disp(Q);
+
+N = [C; Q];
+disp(N);
+
+N_inv = inv(N);
+disp(N_inv);

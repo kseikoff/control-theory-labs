@@ -1264,23 +1264,159 @@
 
 
     \subsection{Схема моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния пониженного порядка и закона управления}
-    ...
+    Построим схему моделирования системы, замкнутой регулятором, состоящим из
+    наблюдателя состояния пониженного порядка $$\dot{\hat{z}}=\Gamma \hat{z}-Yy+\left(QB+YD\right)u,\ \hat{x}=
+    \begin{bmatrix}C\\Q\end{bmatrix}^{-1}\begin{bmatrix}y-Du\\ \hat{z}\end{bmatrix}$$ и закона управления $u=K\hat{x}$.
+    Модальный регулятор $K$ берем из задания 3. Схема расположена на следующей странице на рис. \ref{fig:scheme_task4}.
+    Параметры блока \texttt{MATLAB Function} расположены в приложении 5 на листинге \ref{task42}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{scheme_task4.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния пониженного порядка и закона управления}
+        \label{fig:scheme_task4}
+    \end{figure}
 
 
-    \subsection{Желаемый спектр}
-    ...
+    \subsection{Желаемый спектр матрицы наблюдателя пониженного порядка}
+    Для начала определим размерности матриц $\Gamma,Q,Y$. Размерность выхода $k=2$
+    -- это измеряемая часть. Порядок системы $n=4$. Тогда
+    $$Q_{\left(n-k\right)\times n}\Rightarrow Q_{2\times4},$$
+    $$\Gamma_{\left(n-k\right)\times\left(n-k\right)}\Rightarrow\Gamma_{2\times2},$$
+    $$Y_{\left(n-k\right)\times k}\Rightarrow Y_{2\times2};$$
+    Так как система полностью наблюдаема, то можем задать любой спектр матрицы
+    наблюдателя пониженного порядка $\Gamma$. Ограничение -- асимптотическая устойчивость,
+    то есть действительные части всех собственных чисел должны быть отрицательными. Пусть
+    $$\sigma\left(\Gamma\right)=\left\{-2,-2\right\}\Rightarrow\Gamma=\begin{bmatrix}
+        -2 &1\\
+        0 &-2
+    \end{bmatrix},$$
+    $$
+    Y=\begin{bmatrix}
+        1 &0\\
+        0 &1
+    \end{bmatrix},\ \text{rank}\begin{bmatrix}
+        Y &\Gamma Y
+    \end{bmatrix}=\text{rank}\begin{bmatrix}
+        1     &0    &-2     &1\\
+     0     &1     &0    &-2
+    \end{bmatrix}=2;
+    $$
 
 
     \subsection{Синтез матрицы преобразования}
-    ...
+    Для синтеза матрицы преобразования нужно решить уравнение типа Сильвестра
+    $$
+    \Gamma Q-QA=YC
+    $$
+    Предоставим вычисления \texttt{MATLAB}. Получаем
+    $$
+    Q=\begin{bmatrix}
+    -0.0678    &0.2378   &-0.1822   &-0.2622\\
+   -0.0667    &0.2667    &0.0667   &-0.2333
+    \end{bmatrix}
+    $$
+
+
+    Также найдем матрицу
+    $$
+    N=\begin{bmatrix}
+        C\\Q
+    \end{bmatrix},
+    $$
+    обратная от которой необходима для вычисления $\hat{x}$
+    $$
+    N=\begin{bmatrix}
+    0         &0    &1         &0\\
+    1         &0         &0         &0\\
+   -0.0678    &0.2378   &-0.1822   &-0.2622\\
+   -0.0667    &0.2667    &0.0667   &-0.2333
+    \end{bmatrix},
+    $$
+    $$N^{-1}=\begin{bmatrix}
+    0    &1         &0         &0\\
+   -4.1538    &0.1154  &-16.1538   &18.1538\\
+    1         &0         &0         &0\\
+   -4.4615   &-0.1538  &-18.4615   &16.4615
+    \end{bmatrix};
+    $$
 
 
     \subsection{Компьютерное моделирование}
-    ...
+    Выполним компьютерное моделирование, соответствующее схеме \ref{fig:scheme_task4}, с начальными условиями системы
+    $x(0)=\begin{bmatrix}
+        1 &1 &1 &1
+    \end{bmatrix}^T$ и наблюдателя $\hat{z}(0)=\begin{bmatrix}
+        0 &0
+    \end{bmatrix}^T$. Зададим $K=\begin{bmatrix}-2.3888   &-1.7772    &2.4930   &-1.8840\end{bmatrix}$. Построим графики $u(t),\hat{z}(t),x(t),\hat{x}(t),e(t)$
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{x_t_x_est_t_task4.png}
+            \caption{Графики $x(t),\hat{x}(t)$}
+            \label{fig:task_4_x_t}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{z_est_t_task4.png}
+            \caption{График $\hat{z}(t)$}
+            \label{fig:task_4_z}
+        \end{subfigure}
+        \caption{Графики $x(t),\hat{x}(t),\hat{z}(t)$}
+        \label{fig:task_4_modeling}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{u_t_task4.png}
+            \caption{График $u(t)$}
+            \label{fig:u_task_4}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{e_task4.png}
+            \caption{График $e(t)$}
+            \label{fig:task_4_e}
+        \end{subfigure}
+        \caption{Графики $u(t),e(t)$}
+        \label{fig:task_4_modeling_2}
+    \end{figure}
+    \noindent Проверим начальные условия
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{x_0_x_est_0_task4.png}
+            \caption{Графики $x(t),\hat{x}(t)$}
+            \label{fig:task_4_x_0_chek}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{z_est_0_task4.png}
+            \caption{График $\hat{z}(t)$}
+            \label{fig:task_4_z_0_check}
+        \end{subfigure}
+        \caption{Проверка начальных условий $x(t),\hat{x}(t),\hat{z}(t)$}
+        \label{fig:task_4_modeling_3}
+    \end{figure}
 
 
     \subsection{Вывод}
-    ...
+    Система полностью управляема, стабилизируема. Система полностью наблюдаема,
+    обнаруживаема. Была найдена матрица преобразования на основании желаемого спектра
+    матрицы наблюдателя пониженного порядка. Было выполнено компьютерное моделирование
+    с начальными условиями и получены графики формируемого регулятором управления $u(t)$,
+    вектора состояния наблюдателя пониженной размерности $\hat{z}(t)$, сравнения $x(t),\hat{x}(t)$,
+    а также график ошибки наблюдателя $e(t)$. Начальные условия соблюдены. Ошибка получилась наибольшей в начале, далее
+    она плавно стремится к нулю. Графики $x(t),\hat{x}(t)$ сошлись и со временем с некоторого
+    момента $t$ стремятся к нулю. Управления также со временем нужно меньше.
+    График $\hat{z}(t)$ со временем сходится к нулю.
+    \vfill
 
 
     \section{Приложения}
@@ -1594,5 +1730,13 @@
 
     N_inv = inv(N);
     disp(N_inv);
+    \end{lstlisting}
+
+
+    \subsection{Приложение 5}
+    \begin{lstlisting}[label=task42, caption={Параметры блока \texttt{MATLAB Function} (задание 4)}]
+    function livematrix = x_est_part(z_est, y, D, u)
+    livematrix = [y - D * u; z_est];
+    end
     \end{lstlisting}
 \end{document}

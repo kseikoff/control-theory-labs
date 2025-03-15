@@ -479,9 +479,9 @@
     Рассмотрим систему
     $$
     \begin{cases}
-        \dot{x}=Ax\\
-        y=Cx
-    \end{cases},\ A=\begin{bmatrix}
+        \dot{x}=Ax,\\
+        y=Cx,
+    \end{cases}\ A=\begin{bmatrix}
         0 &1 &0 &1\\
         -26 &-7 &20 &-11\\
         0 &1 &-1 &2\\
@@ -758,90 +758,222 @@
         2 &0 &0 &-1
     \end{bmatrix}^T$. Также для одного из случаев приблизим график к началу времени $t$,
     чтобы убедиться в том, что каждая координата выходит из своего начального условия
+    % L1
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_x_est_t_l1_task2.png}
-            \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_2_x_t_l1}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{e_l1_task2.png}
-            \caption{График $e(t)$}
-            \label{fig:task_2_e_l1}
-        \end{subfigure}
-        \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_1$}
-        \label{fig:task_2_modeling_1}
-    \end{figure}
-    \begin{figure}[H]
-        \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_x_est_t_l2_task2.png}
-            \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_2_x_t_l2}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{e_l2_task2.png}
-            \caption{График $e(t)$}
-            \label{fig:task_2_e_l2}
-        \end{subfigure}
-        \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_2$}
-        \label{fig:task_2_modeling_2}
-    \end{figure}
-    \begin{figure}[H]
-        \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_x_est_t_l3_task2.png}
-            \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_2_x_t_l3}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{e_l3_task2.png}
-            \caption{График $e(t)$}
-            \label{fig:task_2_e_l3}
-        \end{subfigure}
-        \caption{Графики $x(t),\hat{x}(t),e(t)$ для $L_3$}
-        \label{fig:task_2_modeling_3}
-    \end{figure}
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{x_0_x_est_0_l3_task2.png}
+        \includegraphics[scale=0.7]{2task_x1comp_L1.png}
         \captionsetup{skip=0pt}
-        \caption{Проверка начальных условий (случай для $L_3$)}
-        \label{fig:x_0_check}
+        \caption{Графики $x_1(t),\hat{x}_1(t)$ для $L_1$}
+        \label{fig:2task_x1comp_L1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e1_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_1(t)$ для $L_1$}
+        \label{fig:2task_e1_L1}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x2comp_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_2(t),\hat{x}_2(t)$ для $L_1$}
+        \label{fig:2task_x2comp_L1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e2_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_2(t)$ для $L_1$}
+        \label{fig:2task_e2_L1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x3comp_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_3(t),\hat{x}_3(t)$ для $L_1$}
+        \label{fig:2task_x3comp_L1}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e3_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_3(t)$ для $L_1$}
+        \label{fig:2task_e3_L1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x4comp_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_4(t),\hat{x}_4(t)$ для $L_1$}
+        \label{fig:2task_x4comp_L1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e4_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_4(t)$ для $L_1$}
+        \label{fig:2task_e4_L1}
+    \end{figure}
+    % L2
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x1comp_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_1(t),\hat{x}_1(t)$ для $L_2$}
+        \label{fig:2task_x1comp_L2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e1_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_1(t)$ для $L_2$}
+        \label{fig:2task_e1_L2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x2comp_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_2(t),\hat{x}_2(t)$ для $L_2$}
+        \label{fig:2task_x2comp_L2}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e2_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_2(t)$ для $L_2$}
+        \label{fig:2task_e2_L2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x3comp_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_3(t),\hat{x}_3(t)$ для $L_2$}
+        \label{fig:2task_x3comp_L2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e3_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_3(t)$ для $L_2$}
+        \label{fig:2task_e3_L2}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x4comp_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_4(t),\hat{x}_4(t)$ для $L_2$}
+        \label{fig:2task_x4comp_L2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e4_L2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_4(t)$ для $L_2$}
+        \label{fig:2task_e4_L2}
+    \end{figure}
+    % L3
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x1comp_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_1(t),\hat{x}_1(t)$ для $L_3$}
+        \label{fig:2task_x1comp_L3}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e1_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_1(t)$ для $L_3$}
+        \label{fig:2task_e1_L3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x2comp_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_2(t),\hat{x}_2(t)$ для $L_3$}
+        \label{fig:2task_x2comp_L3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e2_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_2(t)$ для $L_3$}
+        \label{fig:2task_e2_L3}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x3comp_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_3(t),\hat{x}_3(t)$ для $L_3$}
+        \label{fig:2task_x3comp_L3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e3_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_3(t)$ для $L_3$}
+        \label{fig:2task_e3_L3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x4comp_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_4(t),\hat{x}_4(t)$ для $L_3$}
+        \label{fig:2task_x4comp_L3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_e4_L3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_4(t)$ для $L_3$}
+        \label{fig:2task_e4_L3}
+    \end{figure}
+    % L1 x0 check
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{2task_x0_L1.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка начальных условий (случай для $L_1$)}
+        \label{fig:2task_x0_L1}
     \end{figure}
 
 
     \subsection{Сравнение результатов}
     Видим, как на каждом графике $x(t),\hat{x}(t)$ оценки координат сходятся к настоящим координатам -- наблюдатель
-    выполняет свою работу верно. Например, на рис. \ref{fig:task_2_x_t_l1} \textbf{голубая} оценка координаты $\hat{x}_2$ сходится
-    к \textbf{синей} истинной координате $x_2$ примерно за $t=3.5$. Ошибки ожидаемо стремятся к нулю. На рис. \ref{fig:x_0_check}
+    выполняет свою работу верно. Например, на рис. \ref{fig:2task_x1comp_L1} \textbf{зеленая} оценка координаты $\hat{x}_1$ сходится
+    к \textbf{желтой} истинной координате $x_1$ примерно за $t=7$. Ошибки ожидаемо стремятся к нулю. На рис. \ref{fig:2task_x0_L1}
     видим, что все координаты выходят из своих начальных условий.
 
 
-    На рис. \ref{fig:task_2_x_t_l1} видим, что примерно к $t=5$ каждая координата наблюдателя сошлась с исходными координатами.
-    Ошибка на рис. \ref{fig:task_2_e_l1} сравнительно небольшая, ожидаемо наибольшая в начале, далее плавно и медленно стремится к нулю.
+    На рис. \ref{fig:2task_x1comp_L1}, \ref{fig:2task_x2comp_L1}, \ref{fig:2task_x3comp_L1}, \ref{fig:2task_x4comp_L1} видим, что примерно к $t=7$ каждая координата наблюдателя сошлась с исходными координатами.
+    Ошибки на рис. \ref{fig:2task_e1_L1}, \ref{fig:2task_e2_L1}, \ref{fig:2task_e3_L1}, \ref{fig:2task_e4_L1} сравнительно небольшие, ожидаемо наибольшие в начале, далее плавно и медленно стремятся к нулю.
     Итого: плавное поведение наблюдателя с небольшой ошибкой, но медленное схождение к истинным координатам.
 
 
-    На рис. \ref{fig:task_2_x_t_l2} ситуация обратная -- наблюдатель быстро сводит координаты с координатами
-    исходной системы (примерно за $t=2$), однако ошибка на рис. \ref{fig:task_2_e_l2} ожидаемо сравнительно большая. На практике лучше всего
+    На рис. \ref{fig:2task_x1comp_L2}, \ref{fig:2task_x2comp_L2}, \ref{fig:2task_x3comp_L2}, \ref{fig:2task_x4comp_L2} ситуация обратная -- наблюдатель быстро сводит координаты с координатами
+    исходной системы (примерно за $t=3$), однако ошибки на рис. \ref{fig:2task_e1_L2}, \ref{fig:2task_e2_L2}, \ref{fig:2task_e3_L2}, \ref{fig:2task_e4_L2} ожидаемо сравнительно большие. На практике лучше всего
     соблюдать баланс между величиной ошибки и скоростью сходимости.
 
 
-    На рис. \ref{fig:task_2_x_t_l3} результат в целом схож с результатом для $L_1$ на рис. \ref{fig:task_2_x_t_l1}.
-    Разница в том, что координаты сходятся немного быстрее, однако, что видно на рис. \ref{fig:task_2_e_l3}, появляются
-    лишние осцилляции, то есть система становится менее предсказуемой (есть более значимый второй скачок ошибки выше нуля
-    в сравнении со случаем для $L_1$ -- там почти все ошибки сразу сходятся к нулю снизу).
+    На рис. \ref{fig:2task_x1comp_L3}, \ref{fig:2task_x2comp_L3}, \ref{fig:2task_x3comp_L3}, \ref{fig:2task_x4comp_L3} результат в целом схож с результатом для $L_1$ (см. рис. \ref{fig:2task_x1comp_L1}, \ref{fig:2task_x2comp_L1}, \ref{fig:2task_x3comp_L1}, \ref{fig:2task_x4comp_L1}).
+    Разница в том, что координаты сходятся немного быстрее, однако, что видно на рис. \ref{fig:2task_e1_L3}, \ref{fig:2task_e2_L3}, \ref{fig:2task_e3_L3}, \ref{fig:2task_e4_L3}, появляются
+    лишние осцилляции, то есть система становится менее предсказуемой (больше скачков ошибки до ее полного схождения к нулю
+    в сравнении со случаем для $L_1$ -- там почти все ошибки сразу сходятся к нулю).
 
     
     \subsection{Вывод}
@@ -1197,9 +1329,9 @@
     Рассмотрим систему
     $$
     \begin{cases}
-        \dot{x}=Ax+Bu\\
-        y=Cx+Du
-    \end{cases},\ A=\begin{bmatrix}
+        \dot{x}=Ax+Bu,\\
+        y=Cx+Du,
+    \end{cases}\ A=\begin{bmatrix}
         2 &0 &-4 &2\\
         0 &2 &-2 &4\\
         -4 &-2 &2 &0\\

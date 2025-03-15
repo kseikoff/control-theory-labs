@@ -1267,54 +1267,48 @@
     \end{bmatrix}^T$
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_x_est_t_task3.png}
-            \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_3_x_t}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{e_task3.png}
-            \caption{График $e(t)$}
-            \label{fig:task_3_e}
-        \end{subfigure}
-        \caption{Графики $x(t),\hat{x}(t),e(t)$}
-        \label{fig:task_3_modeling}
+        \includegraphics[scale=0.7]{3task_xt.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x(t),\hat{x}(t)$}
+        \label{fig:3task_xt}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{3task_e.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e(t)$}
+        \label{fig:3task_e}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.45\textwidth]{u_t_task3.png}
+        \includegraphics[scale=0.7]{3task_u.png}
         \captionsetup{skip=0pt}
         \caption{График $u(t)$}
-        \label{fig:u_t_task3}
+        \label{fig:3task_u}
     \end{figure}
     \noindent Проведем небольшие уточнения. Проверим начальные условия $x(0),\hat{x}(0)$, а также уберем
     один из графиков ошибки
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_0_x_est_0_task3.png}
-            \caption{Проверка нач. усл. $x(0),\hat{x}(0)$}
-            \label{fig:x_0_check_2}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{e_less_task3.png}
-            \caption{График $e(t)$ без одной из ошибок}
-            \label{fig:task_3_e_less}
-        \end{subfigure}
-        \caption{Графики $x(t),\hat{x}(t),e(t)$}
-        \label{fig:task_3_modeling_2}
+        \includegraphics[scale=0.7]{3task_x0.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка начальных условий $x(0),\hat{x}(0)$}
+        \label{fig:3task_x0}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{3task_e_less.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e(t)$ без $e_4(t)$}
+        \label{fig:3task_e_less}
     \end{figure}
     \noindent Регулятор и наблюдатель выполнили свою задачу.
-    Оценки координат сходятся к истинным со временем, что видно на рис. \ref{fig:task_3_x_t}. Ошибка
-    уходит в ноль. Система сходится к нулю, управления со временем нужно все меньше (см. рис. \ref{fig:u_t_task3}), пока
+    Оценки координат сходятся к истинным со временем, что видно на рис. \ref{fig:3task_xt} (со временем остаются только 4 траектории из 8). Ошибка
+    уходит в ноль. Система сходится к нулю, управления со временем нужно все меньше (см. рис. \ref{fig:3task_u}), пока
     оно уже будет совсем не нужно. Система исходит из заданных начальных условий -- траектории накладываются друг на друга,
-    поэтому видны не все координаты (см. рис. \ref{fig:x_0_check_2}). Три ошибки идентичны, четвертая зеркальная (см. рис. \ref{fig:task_3_e}, \ref{fig:task_3_e_less}).
+    поэтому видны не все координаты (см. рис. \ref{fig:3task_x0}). Три ошибки идентичны, четвертая зеркальная (см. рис. \ref{fig:3task_e}, \ref{fig:3task_e_less}).
 
 
     \subsection{Вывод}
@@ -1390,11 +1384,11 @@
     Построим схему моделирования системы, замкнутой регулятором, состоящим из
     наблюдателя состояния пониженного порядка $$\dot{\hat{z}}=\Gamma \hat{z}-Yy+\left(QB+YD\right)u,\ \hat{x}=
     \begin{bmatrix}C\\Q\end{bmatrix}^{-1}\begin{bmatrix}y-Du\\ \hat{z}\end{bmatrix}$$ и закона управления $u=K\hat{x}$.
-    Модальный регулятор $K$ берем из задания 3. Схема расположена на следующей странице на рис. \ref{fig:scheme_task4}.
+    Модальный регулятор $K$ берем из задания 3.
     Параметры блока \texttt{MATLAB Function} расположены в приложении 5 на листинге \ref{task42}
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.8]{scheme_task4.png}
+        \includegraphics[scale=0.75]{scheme_task4.png}
         \captionsetup{skip=0pt}
         \caption{Схема моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния пониженного порядка и закона управления}
         \label{fig:scheme_task4}
@@ -1466,66 +1460,54 @@
 
 
     \subsection{Компьютерное моделирование}
-    Выполним компьютерное моделирование, соответствующее схеме \ref{fig:scheme_task4}, с начальными условиями системы
+    Выполним компьютерное моделирование, соответствующее схеме на рис. \ref{fig:scheme_task4}, с начальными условиями системы
     $x(0)=\begin{bmatrix}
         1 &1 &1 &1
     \end{bmatrix}^T$ и наблюдателя $\hat{z}(0)=\begin{bmatrix}
         0 &0
-    \end{bmatrix}^T$. Зададим $K=\begin{bmatrix}-2.3888   &-1.7772    &2.4930   &-1.8840\end{bmatrix}$. Построим графики $u(t),\hat{z}(t),x(t),\hat{x}(t),e(t)$
+    \end{bmatrix}^T$. Зададим $K=\begin{bmatrix}-2.3888   &-1.7772    &2.4930   &-1.8840\end{bmatrix}$
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_x_est_t_task4.png}
-            \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_4_x_t}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{z_est_t_task4.png}
-            \caption{График $\hat{z}(t)$}
-            \label{fig:task_4_z}
-        \end{subfigure}
-        \caption{Графики $x(t),\hat{x}(t),\hat{z}(t)$}
-        \label{fig:task_4_modeling}
+        \includegraphics[scale=0.7]{4task_xt.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x(t),\hat{x}(t)$}
+        \label{fig:4task_xt}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{u_t_task4.png}
-            \caption{График $u(t)$}
-            \label{fig:u_task_4}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{e_task4.png}
-            \caption{График $e(t)$}
-            \label{fig:task_4_e}
-        \end{subfigure}
-        \caption{Графики $u(t),e(t)$}
-        \label{fig:task_4_modeling_2}
+        \includegraphics[scale=0.7]{4task_zt.png}
+        \captionsetup{skip=0pt}
+        \caption{График $\hat{z}(t)$}
+        \label{fig:4task_zt}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{4task_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$}
+        \label{fig:4task_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{4task_e.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e(t)$}
+        \label{fig:4task_e}
     \end{figure}
     \noindent Проверим начальные условия
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_0_x_est_0_task4.png}
-            \caption{Графики $x(t),\hat{x}(t)$}
-            \label{fig:task_4_x_0_chek}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{z_est_0_task4.png}
-            \caption{График $\hat{z}(t)$}
-            \label{fig:task_4_z_0_check}
-        \end{subfigure}
-        \caption{Проверка начальных условий $x(t),\hat{x}(t),\hat{z}(t)$}
-        \label{fig:task_4_modeling_3}
+        \includegraphics[scale=0.7]{4task_x0.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка начальных условий $x(0),\hat{x}(0)$}
+        \label{fig:4task_x0}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{4task_z0.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка начальных условий $\hat{z}(0)$}
+        \label{fig:4task_z0}
     \end{figure}
 
 

@@ -8,4 +8,5 @@
 **/latex/*.synctex.gz
 **/latex/*.synctex(busy)
 *.asv
+*.slx.autosave
 slprj

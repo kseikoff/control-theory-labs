@@ -385,7 +385,7 @@
     $$
     Видим, что спектры совпадают с желаемыми -- регулятор синтезирован корректно.
 
-
+    % pos 1636,387,726,312
     \subsection{Компьютерное моделирование}
     Для компьютерного моделирования воспользуемся схемой \texttt{SIMULINK},
     представленной на рис. \ref{fig:scheme_task1}.
@@ -394,57 +394,47 @@
     \end{bmatrix}^T$
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{u_t_k1_task1.png}
-            \caption{График $u(t)$}
-            \label{fig:task_1_u_t_k1}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_k1_task1.png}
-            \caption{График $x(t)$}
-            \label{fig:task_1_x_t_k1}
-        \end{subfigure}
-        \caption{Графики $u(t),x(t)$ для $K_1$}
-        \label{fig:task_1_modeling_1}
+        \includegraphics[scale=0.7]{1task_xt_k1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $K_1$}
+        \label{fig:1task_xt_k1}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{u_t_k2_task1.png}
-            \caption{График $u(t)$}
-            \label{fig:task_1_u_t_k2}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_k2_task1.png}
-            \caption{График $x(t)$}
-            \label{fig:task_1_x_t_k2}
-        \end{subfigure}
-        \caption{Графики $u(t),x(t)$ для $K_2$}
-        \label{fig:task_1_modeling_2}
+        \includegraphics[scale=0.7]{1task_ut_k1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $K_1$}
+        \label{fig:1task_ut_k1}
+    \end{figure}
+    \newpage
+    \vspace*{5mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{1task_xt_k2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $K_2$}
+        \label{fig:1task_xt_k2}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{u_t_k3_task1.png}
-            \caption{График $u(t)$}
-            \label{fig:task_1_u_t_k3}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{x_t_k3_task1.png}
-            \caption{График $x(t)$}
-            \label{fig:task_1_x_t_k3}
-        \end{subfigure}
-        \caption{Графики $u(t),x(t)$ для $K_3$}
-        \label{fig:task_1_modeling_3}
+        \includegraphics[scale=0.7]{1task_ut_k2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $K_2$}
+        \label{fig:1task_ut_k2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{1task_xt_k3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $K_3$}
+        \label{fig:1task_xt_k3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{1task_ut_k3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $K_3$}
+        \label{fig:1task_ut_k3}
     \end{figure}
 
 
@@ -458,17 +448,18 @@
     активного управления.
     
 
-    На рис. \ref{fig:task_1_modeling_1} видим, что управление $u(t)$ достаточно плавное,
+    На рис. \ref{fig:1task_ut_k1} видим, что управление $u(t)$ достаточно плавное,
     имеет небольшое перерегулирование в сравнении с другими графиками.
-    На графике $x(t)$ система ожидаемо медленно и плавно затухает.
+    На рис. \ref{fig:1task_xt_k1} система $x(t)$ ожидаемо медленно и плавно затухает.
 
 
-    На рис. \ref{fig:task_1_modeling_2} наблюдаем быстрое стабилизирование системы, однако при
+    На рис. \ref{fig:1task_xt_k2} наблюдаем быстрое стабилизирование системы, однако при
     этом присутствуют большие начальные отклонения. В сравнении с другими графиками имеется
-    ожидаемо наибольшее перерегулирование. Получили достаточно агрессивный регулятор.
+    ожидаемо наибольшее перерегулирование (см. рис. \ref{fig:1task_ut_k2}).
+    Получили достаточно агрессивный регулятор.
 
 
-    На рис. \ref{fig:task_1_modeling_3} система, вследствие наличия комплексных собственных чисел,
+    На рис. \ref{fig:1task_xt_k3} система, вследствие наличия комплексных собственных чисел,
     приобрела сравнительно небольшие осцилляции. По скорости затухания колебаний результат получился средним
     (быстрее, чем $K_1$; медленнее, чем $K_2$). Система выглядит менее предсказуемо в сравнении с остальными результатами.
 
@@ -1416,7 +1407,16 @@
     она плавно стремится к нулю. Графики $x(t),\hat{x}(t)$ сошлись и со временем с некоторого
     момента $t$ стремятся к нулю. Управления также со временем нужно меньше.
     График $\hat{z}(t)$ со временем сходится к нулю.
-    \vfill
+    
+
+    \section{Общий вывод по работе}
+    В данной лабораторной работе мы исследовали модальный регулятор,
+    наблюдатель полного порядка, модальное управление по выходу и
+    наблюдатель пониженного порядка. Мы определяли управляемость,
+    стабилизируемость, наблюдаемость и обнаруживоемость систем.
+    На основе этих данных мы задавали желаемые спектры и синтезировали матрицы.
+    В конце каждого задания мы моделировали системы. Таким образом, мы убедеждались, что наши
+    вычисления и рассуждения верны.
 
 
     \section{Приложения}

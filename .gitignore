@@ -1,4 +1,3 @@
-**/__pycache__
 **/latex/*.aux
 **/latex/*.fls
 **/latex/*.log
@@ -8,5 +7,13 @@
 **/latex/*.synctex.gz
 **/latex/*.synctex(busy)
 *.asv
+*.aux
+*.fls
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
 *.slx.autosave
 slprj

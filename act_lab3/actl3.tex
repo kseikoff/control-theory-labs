@@ -206,7 +206,7 @@
     \end{align*}
 
 
-    \subsection{Синтез регулятора}
+    \subsection{Синтез регулятора через матричное неравенство типа Ляпунова}
     Для каждого из выбранных значений $\alpha$ синтезируем регулятор, обеспечивающий
     заданную степень устойчивости, при помощи матричного неравенства типа Ляпунова
     $$
@@ -302,7 +302,7 @@
         \centering
         \includegraphics{1task_K2a1_u.png}
         \captionsetup{skip=0pt}
-        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{2\,\alpha1}$}
+        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{2\,\alpha1},\ \mu_1=8.0090$}
         \label{fig:1task_K2a1_u}
     \end{figure}
     \begin{figure}[H]
@@ -332,7 +332,7 @@
         \centering
         \includegraphics{1task_K2a2_u.png}
         \captionsetup{skip=0pt}
-        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha2}$}
+        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha2},\ \mu_2=4.2015$}
         \label{fig:1task_K2a2_u}
     \end{figure}
     \begin{figure}[H]
@@ -344,7 +344,50 @@
     \end{figure}
 
 
-    \subsection{Сравнение результатов}
+    \subsection{Сопоставление результатов}
+    ...
+
+
+    \subsection{Синтез регулятора через матричное уравнение типа Риккати}
+    При $Q=I$
+    $$
+    K_{3\,\alpha1}=\begin{bmatrix}
+        2.1164  &-13.4942    &1.6777
+    \end{bmatrix}
+    $$
+    $$
+    K_{3\,\alpha2}=\begin{bmatrix}
+        -0.8455   &-3.3716   &-0.5697
+    \end{bmatrix}
+    $$
+    $$
+    \sigma\left( A+BK_{3\,\alpha1} \right)=\left\{ -2, -2.4114\pm4.3116i \right\}
+    $$
+    $$
+    \sigma\left( A+BK_{3\,\alpha2} \right)=\left\{ -2, -0.6692\pm2.3797i \right\}
+    $$
+
+
+    При $Q=0$
+    $$
+    K_{4\,\alpha1}=\begin{bmatrix}
+        1.6000  &-11.2000    &1.6000
+    \end{bmatrix}
+    $$
+    $$
+    K_{4\,\alpha2}=\begin{bmatrix}
+        -0.7560   &-2.6880   &-0.7560
+    \end{bmatrix}
+    $$
+    $$
+    \sigma\left( A+BK_{4\,\alpha1} \right)=\left\{ -2, -2.0000\pm4.1231i \right\}
+    $$
+    $$
+    \sigma\left( A+BK_{4\,\alpha2} \right)=\left\{ -2, -0.1000\pm2.3259i \right\}
+    $$
+
+
+    \subsection{Компьютерное моделирование для дополнительного пункта}
     ...
 
 
@@ -359,6 +402,123 @@
     \section{Приложения}
     \subsection{Приложение 1}
     \begin{lstlisting}[label=task1code, caption={Программа для задания 1}]
-        to be done
+    % plant parameters
+    A = [5 2 7; 2 1 2; -2 -3 -4];
+    B = [3; 1; -1];
+
+    % A matrix eigenvalues
+    A_e = eig(A)
+
+    % Jordan matrix
+    [P, J] = jordan(A);
+    Pre(:,1) = P(:,1);
+    Pre(:,2) = imag(P(:,2));
+    Pre(:,3) = real(P(:,3))
+    Pre_inv = Pre^-1
+    J_re = Pre_inv * A * Pre
+    B_jre = Pre_inv * B
+
+    % Desired decay rate
+    a1 = 2;
+    a2 = 0.1;
+
+    % solving LMI no restrictions on control
+    cvx_begin sdp
+    % a1
+    variable P1(3,3) symmetric
+    variable Y1(1,3)
+    P1 > 0.0001*eye(3);
+    P1*A' + A*P1 + 2*a1*P1 + Y1'*B'+ B*Y1 <= 0;
+    cvx_end
+
+    cvx_begin sdp
+    % a2
+    variable P2(3,3) symmetric
+    variable Y2(1,3)
+    P2 > 0.0001*eye(3);
+    P2*A' + A*P2 + 2*a2*P2 + Y2'*B'+ B*Y2 <= 0;
+    cvx_end
+
+    K1_a1 = Y1*inv(P1)
+    K1_a2 = Y2*inv(P2)
+
+    % A+BK1_ai eigenvalues
+    ABK1_a1 = A+B*K1_a1;
+    ABK1_a2 = A+B*K1_a2;
+    eig(ABK1_a1)
+    eig(ABK1_a2)
+
+    % solving LMI with control constraint
+    x0 = [1; 1; 1];
+
+    % a1
+    cvx_begin sdp
+    variable P12(3,3) symmetric
+    variable Y12(1,3)
+    variable mumu_a1
+    minimize mumu_a1
+    P12 > 0.0001*eye(3);
+    P12*A' + A*P12 + 2*a1*P12 + Y12'*B'+ B*Y12 <= 0;
+    [P12 x0;
+    x0' 1] > 0;
+    [P12 Y12';
+    Y12 mumu_a1] > 0;
+    cvx_end
+
+    cvx_begin sdp
+    % a2
+    variable P22(3,3) symmetric
+    variable Y22(1,3)
+    variable mumu_a2
+    minimize mumu_a2
+    P22 > 0.0001*eye(3);
+    P22*A' + A*P22 + 2*a2*P22 + Y22'*B'+ B*Y22 <= 0;
+    [P22 x0;
+    x0' 1] > 0;
+    [P22 Y22';
+    Y22 mumu_a2] > 0;
+    cvx_end
+
+    mu_a1 = sqrt(mumu_a1)
+    mu_a2 = sqrt(mumu_a2)
+
+    K2_a1 = Y12*inv(P12)
+    K2_a2 = Y22*inv(P22)
+
+    % A+BK2_ai eigenvalues
+    ABK2_a1 = A+B*K2_a1;
+    ABK2_a2 = A+B*K2_a2;
+    eig(ABK2_a1)
+    eig(ABK2_a2)
+
+    % solving Riccati
+    Q1 = eye(3);
+    v = 2;
+    R = 1;
+
+    % a1
+    Aa1 = A + eye(3) * (a1-0.0000000001);
+    [P,K,e]=icare(Aa1,sqrt(2)*B,Q1,R);
+    K3_a1=-inv(R)*B'*P
+    e=eig(A+B*K3_a1)
+
+    % a2
+    Aa2 = A + eye(3) * a2;
+    [P,K,e]=icare(Aa2,sqrt(2)*B,Q1,R);
+    K3_a2=-inv(R)*B'*P
+    e=eig(A+B*K3_a2)
+
+    Q2 = 0;
+    % a1
+    Aa12 = A + eye(3) * (a1-0.0000000001);
+    [P,K,e]=icare(Aa12,sqrt(2)*B,Q2,R);
+    K4_a1=-inv(R)*B'*P
+    e=eig(A+B*K4_a1)
+
+    % a2
+    Aa22 = A + eye(3) * a2;
+    [P,K,e]=icare(Aa22,sqrt(2)*B,Q2,R);
+    K4_a2=-inv(R)*B'*P
+    e=eig(A+B*K4_a2)
     \end{lstlisting}
 \end{document}

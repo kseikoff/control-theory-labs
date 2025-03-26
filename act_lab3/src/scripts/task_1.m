@@ -86,3 +86,33 @@ ABK2_a1 = A+B*K2_a1;
 ABK2_a2 = A+B*K2_a2;
 eig(ABK2_a1)
 eig(ABK2_a2)
+
+% solving Riccati
+Q1 = eye(3);
+v = 2;
+R = 1;
+
+% a1
+Aa1 = A + eye(3) * (a1-0.0000000001);
+[P,K,e]=icare(Aa1,sqrt(2)*B,Q1,R);
+K3_a1=-inv(R)*B'*P
+e=eig(A+B*K3_a1)
+
+% a2
+Aa2 = A + eye(3) * a2;
+[P,K,e]=icare(Aa2,sqrt(2)*B,Q1,R);
+K3_a2=-inv(R)*B'*P
+e=eig(A+B*K3_a2)
+
+Q2 = 0;
+% a1
+Aa12 = A + eye(3) * (a1-0.0000000001);
+[P,K,e]=icare(Aa12,sqrt(2)*B,Q2,R);
+K4_a1=-inv(R)*B'*P
+e=eig(A+B*K4_a1)
+
+% a2
+Aa22 = A + eye(3) * a2;
+[P,K,e]=icare(Aa22,sqrt(2)*B,Q2,R);
+K4_a2=-inv(R)*B'*P
+e=eig(A+B*K4_a2)

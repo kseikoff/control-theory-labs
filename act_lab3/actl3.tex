@@ -179,7 +179,9 @@
     находящееся в левой комплексной полуплоскости. Проверка на близость
     осуществляется через действительную часть собственного числа. Имеем
     $$
-    \text{Re}\left\{ \lambda_1=-2 \right\}=-2,\ \text{Re}\left\{ \lambda_{2,3}=2\pm i \right\}=2;
+    \text{Re}\left\{ \lambda_1=-2 \right\}=-2,
+    $$
+    $$\text{Re}\left\{ \lambda_{2,3}=2\pm i \right\}=2;
     $$
     Таким образом, степень устойчивости системы $\alpha=2$. Это максимум. Устойчивость в данном случае
     подразумевается экспоненциальная.
@@ -217,9 +219,12 @@
     $$
     K_{1\,\alpha1}=\begin{bmatrix}
         2.5267  &-18.8652    &1.7294
-    \end{bmatrix},\ K_{1\,\alpha2}=\begin{bmatrix}
+    \end{bmatrix},
+    $$
+    $$
+    K_{1\,\alpha2}=\begin{bmatrix}
         -2.0955   &-5.8106   &-2.6863
-    \end{bmatrix}
+    \end{bmatrix};
     $$
 
 
@@ -237,9 +242,9 @@
         Y &\gamma I
     \end{bmatrix};
     \end{align*}
-    Начальное условие зададим $x(0)=\begin{bmatrix}
-        1 &1 &1
-    \end{bmatrix}^T$.
+    Зададим начальные условия $$x(0)=\begin{bmatrix}
+        1 \\1 \\1
+    \end{bmatrix}$$
     Реализация представлена в \texttt{MATLAB}, для решения используется \texttt{cvx}. Получаем
     $$
     K_{2\,\alpha1}=\begin{bmatrix}
@@ -272,9 +277,83 @@
     \subsection{Компьютерное моделирование}
     Выполним компьютерное моделирование для всех замкнутых систем, используя схему \texttt{SIMULINK},
     представленную на рис. \ref{fig:scheme_task1}. Построим графики $u(t),x(t)$ при начальных условиях
-    $\begin{bmatrix}
-        1 &1 &1
-    \end{bmatrix}^T$
+    $$x(0)=\begin{bmatrix}
+        1 \\1 \\1
+    \end{bmatrix}$$
+    Результаты представлены на рис. \ref{fig:1task_K1a1_u}--\ref{fig:1task_K2a2_x} со следующей страницы
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K1a1_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{1\,\alpha1}$}
+        \label{fig:1task_K1a1_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K1a1_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $\alpha_1=2$ при $K_{1\,\alpha1}$}
+        \label{fig:1task_K1a1_x}
+    \end{figure}
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K2a1_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{2\,\alpha1}$}
+        \label{fig:1task_K2a1_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K2a1_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $\alpha_1=2$ при $K_{2\,\alpha1}$}
+        \label{fig:1task_K2a1_x}
+    \end{figure}
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K1a2_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{1\,\alpha2}$}
+        \label{fig:1task_K1a2_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K1a2_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $\alpha_2=0.1$ при $K_{1\,\alpha2}$}
+        \label{fig:1task_K1a2_x}
+    \end{figure}
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K2a2_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha2}$}
+        \label{fig:1task_K2a2_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K2a2_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha2}$}
+        \label{fig:1task_K2a2_x}
+    \end{figure}
+
+
+    \subsection{Сравнение результатов}
+    ...
+
+
+    \subsection{Вывод}
+    ...
+
+
+    \section{Общий вывод по работе}
+    ...
 
 
     \section{Приложения}

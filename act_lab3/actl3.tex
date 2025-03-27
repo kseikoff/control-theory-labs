@@ -201,8 +201,8 @@
     \subsection{Значения желаемой степени устойчивости}
     Возьмем достаточно отличающиеся достижимые степени устойчивости в диапазоне $0<\alpha\leq2$
     \begin{align*}
-        &\alpha_{1}=2\\
-        &\alpha_2=0.1
+        &\alpha_{1}=2,\\
+        &\alpha_2=0.1;
     \end{align*}
 
 
@@ -210,25 +210,25 @@
     Для каждого из выбранных значений $\alpha$ синтезируем регулятор, обеспечивающий
     заданную степень устойчивости, при помощи матричного неравенства типа Ляпунова
     $$
-    PA^T+AP+2\alpha P+Y^TB^T+BY\preceq0,\ K=YP^{-1}
+    PA^T+AP+2\alpha P+Y^TB^T+BY\preceq0,\ K=YP^{-1};
     $$
 
 
-    Найдем для $\alpha_{1,2}$ соответствующие матрицы регулятора $K_{1\,\alpha i}$ \textbf{без ограничений на управление}.
+    Найдем для $\alpha_{1,2}$ соответствующие матрицы регулятора $K_{1\,\alpha_i}$ \textbf{без ограничений на управление}.
     Пользуемся пакетом \texttt{cvx} для \texttt{MATLAB}. Получаем
     $$
-    K_{1\,\alpha1}=\begin{bmatrix}
+    K_{1\,\alpha_1}=\begin{bmatrix}
         2.5267  &-18.8652    &1.7294
     \end{bmatrix},
     $$
     $$
-    K_{1\,\alpha2}=\begin{bmatrix}
+    K_{1\,\alpha_2}=\begin{bmatrix}
         -2.0955   &-5.8106   &-2.6863
     \end{bmatrix};
     $$
 
 
-    Найдем для $\alpha_{1,2}$ соответствующие матрицы регулятора $K_{2\,\alpha i}$ \textbf{совместно с решением задачи минимизации управления}.
+    Найдем для $\alpha_{1,2}$ соответствующие матрицы регулятора $K_{2\,\alpha_i}$ \textbf{совместно с решением задачи минимизации управления}.
     Нам нужно найти минимальное $\mu$, для которого при начальных условиях $x(0)=x_0$
     выполняется $||u(t)||\leq\mu$. Для этого нужно решить задачу выпуклой минимизации:
     \begin{align*}
@@ -247,30 +247,30 @@
     \end{bmatrix}$$
     Реализация представлена в \texttt{MATLAB}, для решения используется \texttt{cvx}. Получаем
     $$
-    K_{2\,\alpha1}=\begin{bmatrix}
+    K_{2\,\alpha_1}=\begin{bmatrix}
         1.6000  &-11.2000    &1.6000
     \end{bmatrix},\ \mu_1=8.0090,
     $$
     $$
-    K_{2\,\alpha2}=\begin{bmatrix}
+    K_{2\,\alpha_2}=\begin{bmatrix}
         -0.7565   &-2.6884   &-0.7552
     \end{bmatrix},\ \mu_2=4.2015;
     $$
 
 
-    Определим собственные числа матриц замкнутых систем $\left( A+BK_{j\,\alpha i} \right)$
+    Определим собственные числа матриц замкнутых систем $\left( A+BK_{j\,\alpha_i} \right)$
     и сравним с желаемой степенью устойчивости
     \begin{align*}
-    &\sigma\left( A+BK_{1\,\alpha1} \right)=\left\{ -2, -4.5072\pm3.2145i \right\},\\
-    &\sigma\left( A+BK_{1\,\alpha2} \right)=\left\{ -2,-4.5455,-0.8653 \right\},\\
-    &\sigma\left( A+BK_{2\,\alpha1} \right)=\left\{ -2, -2.0000\pm4.1231i \right\},\\
-    &\sigma\left( A+BK_{2\,\alpha2} \right)=\left\{ -2,-0.1013\pm2.3259i \right\};
+    &\sigma\left( A+BK_{1\,\alpha_1} \right)=\left\{ -2, -4.5072\pm3.2145i \right\},\\
+    &\sigma\left( A+BK_{1\,\alpha_2} \right)=\left\{ -2,-4.5455,-0.8653 \right\},\\
+    &\sigma\left( A+BK_{2\,\alpha_1} \right)=\left\{ -2, -2.0000\pm4.1231i \right\},\\
+    &\sigma\left( A+BK_{2\,\alpha_2} \right)=\left\{ -2,-0.1013\pm2.3259i \right\};
     \end{align*}
-    Для $\alpha_1=2$ собственные числа при регуляторе $K_{2\,\alpha1}$ получились более точными,
-    чем при регуляторе $K_{1\,\alpha1}$. То есть управление будет именно таким, каким мы его хотели $\left( \text{Re}\left\{ \lambda_i \right\}=-\alpha_1 \right)$.
+    Для $\alpha_1=2$ собственные числа при регуляторе $K_{2\,\alpha_1}$ получились более точными,
+    чем при регуляторе $K_{1\,\alpha_1}$. То есть управление будет именно таким, каким мы его хотели $\left( \text{Re}\left\{ \lambda_i \right\}=-\alpha_1 \right)$.
     На графике увидим плавное поведение системы, стабилизирующееся к нулю. Для $\alpha_2=0.1$ ситуация аналогичная
-    -- при $K_{2\,\alpha2}$ действительная часть комплексной пары почти достигла желаемого ограничения на степень устойчивости.
-    При $K_{2\,\alpha2}$ результат более хаотичный. Также в каждом спектре наблюдаем неуправляемое число $-2$, что подтверждает
+    -- при $K_{2\,\alpha_2}$ действительная часть комплексной пары почти достигла желаемого ограничения на степень устойчивости.
+    При $K_{2\,\alpha_2}$ результат более хаотичный. Также в каждом спектре наблюдаем неуправляемое число $-2$, что подтверждает
     корректность расчетов.
 
 
@@ -287,112 +287,187 @@
         \centering
         \includegraphics{1task_K1a1_u.png}
         \captionsetup{skip=0pt}
-        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{1\,\alpha1}$}
+        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{1\,\alpha_1}$}
         \label{fig:1task_K1a1_u}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics{1task_K1a1_x.png}
         \captionsetup{skip=0pt}
-        \caption{График $x(t)$ для $\alpha_1=2$ при $K_{1\,\alpha1}$}
+        \caption{График $x(t)$ для $\alpha_1=2$ при $K_{1\,\alpha_1}$}
         \label{fig:1task_K1a1_x}
     \end{figure}
+    \newpage
     \vspace*{0.01mm}
     \begin{figure}[H]
         \centering
         \includegraphics{1task_K2a1_u.png}
         \captionsetup{skip=0pt}
-        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{2\,\alpha1},\ \mu_1=8.0090$}
+        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{2\,\alpha_1},\ \mu_1=8.0090$}
         \label{fig:1task_K2a1_u}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics{1task_K2a1_x.png}
         \captionsetup{skip=0pt}
-        \caption{График $x(t)$ для $\alpha_1=2$ при $K_{2\,\alpha1}$}
+        \caption{График $x(t)$ для $\alpha_1=2$ при $K_{2\,\alpha_1},\ \mu_1=8.0090$}
         \label{fig:1task_K2a1_x}
     \end{figure}
+    \newpage
     \vspace*{0.01mm}
     \begin{figure}[H]
         \centering
         \includegraphics{1task_K1a2_u.png}
         \captionsetup{skip=0pt}
-        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{1\,\alpha2}$}
+        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{1\,\alpha_2}$}
         \label{fig:1task_K1a2_u}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics{1task_K1a2_x.png}
         \captionsetup{skip=0pt}
-        \caption{График $x(t)$ для $\alpha_2=0.1$ при $K_{1\,\alpha2}$}
+        \caption{График $x(t)$ для $\alpha_2=0.1$ при $K_{1\,\alpha_2}$}
         \label{fig:1task_K1a2_x}
     \end{figure}
+    \newpage
     \vspace*{0.01mm}
     \begin{figure}[H]
         \centering
         \includegraphics{1task_K2a2_u.png}
         \captionsetup{skip=0pt}
-        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha2},\ \mu_2=4.2015$}
+        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha_2},\ \mu_2=4.2015$}
         \label{fig:1task_K2a2_u}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics{1task_K2a2_x.png}
         \captionsetup{skip=0pt}
-        \caption{График $x(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha2}$}
+        \caption{График $x(t)$ для $\alpha_2=0.1$ при $K_{2\,\alpha_2},\ \mu_2=4.2015$}
         \label{fig:1task_K2a2_x}
     \end{figure}
 
 
     \subsection{Сопоставление результатов}
-    ...
+    На рис. \ref{fig:1task_K2a1_u}, \ref{fig:1task_K2a2_u} видим, что систему удается стабилизировать при помощи минимального управления,
+    однако на это уходит больше времени, что наблюдается при сравнении поведения систем на рис. \ref{fig:1task_K2a2_x}, \ref{fig:1task_K1a2_x}.
+    В случае с рис. \ref{fig:1task_K2a1_x}, \ref{fig:1task_K1a1_x} это менее заметно. В общем результаты без ограничения на управление более гладкие
+    и спокойные, но требуют больше управления.
 
 
     \subsection{Синтез регулятора через матричное уравнение типа Риккати}
-    При $Q=I$
+    Для каждого $\alpha$ синтезируем регулятор при помощи матричного уравнения типа Риккати при $\nu=2\text{ и }R=1$
     $$
-    K_{3\,\alpha1}=\begin{bmatrix}
+    A^TP+PA+Q-\nu PBR^{-1}B^TP+2\alpha P=0,\,K=-R^{-1}B^TP;
+    $$
+    Пользуемся \texttt{MATLAB}. Найдем матрицы регулятора $K_{3\,\alpha_i}$ при $Q=I$
+    $$
+    K_{3\,\alpha_1}=\begin{bmatrix}
         2.1164  &-13.4942    &1.6777
-    \end{bmatrix}
+    \end{bmatrix},
     $$
     $$
-    K_{3\,\alpha2}=\begin{bmatrix}
+    K_{3\,\alpha_2}=\begin{bmatrix}
         -0.8455   &-3.3716   &-0.5697
-    \end{bmatrix}
+    \end{bmatrix};
     $$
+    Найдем матрицы регулятора $K_{4\,\alpha_i}$ при $Q=0$
     $$
-    \sigma\left( A+BK_{3\,\alpha1} \right)=\left\{ -2, -2.4114\pm4.3116i \right\}
-    $$
-    $$
-    \sigma\left( A+BK_{3\,\alpha2} \right)=\left\{ -2, -0.6692\pm2.3797i \right\}
-    $$
-
-
-    При $Q=0$
-    $$
-    K_{4\,\alpha1}=\begin{bmatrix}
+    K_{4\,\alpha_1}=\begin{bmatrix}
         1.6000  &-11.2000    &1.6000
-    \end{bmatrix}
+    \end{bmatrix},
     $$
     $$
-    K_{4\,\alpha2}=\begin{bmatrix}
+    K_{4\,\alpha_2}=\begin{bmatrix}
         -0.7560   &-2.6880   &-0.7560
-    \end{bmatrix}
+    \end{bmatrix};
     $$
-    $$
-    \sigma\left( A+BK_{4\,\alpha1} \right)=\left\{ -2, -2.0000\pm4.1231i \right\}
-    $$
-    $$
-    \sigma\left( A+BK_{4\,\alpha2} \right)=\left\{ -2, -0.1000\pm2.3259i \right\}
-    $$
+    Определим собственные числа замкнутых систем $\left( A+BK_{j\,\alpha_i} \right)$
+    \begin{align*}
+    \sigma\left( A+BK_{3\,\alpha_1} \right)=\left\{ -2, -2.4114\pm4.3116i \right\},\\
+    \sigma\left( A+BK_{3\,\alpha_2} \right)=\left\{ -2, -0.6692\pm2.3797i \right\},\\
+    \sigma\left( A+BK_{4\,\alpha_1} \right)=\left\{ -2, -2.0000\pm4.1231i \right\},\\
+    \sigma\left( A+BK_{4\,\alpha_2} \right)=\left\{ -2, -0.1000\pm2.3259i \right\};
+    \end{align*}
+    В каждом спектре наблюдаем неуправляемое собственное число $-2$ -- это верно. При $Q=0$ желаемая
+    степень устойчивости была достигнута -- действительные части собственных чисел совпадают с соответствующими
+    $\alpha_i$. При $Q=I$ результат менее точный, чем при $Q=0$, однако собственные числа ближе к желаемой степени устойчивости в сравнении с результатами для регуляторов $K_{1\,\alpha_i}$.
+    Спектр $A+BK_{4\,\alpha_1}$ полностью совпадает с результатом для $K_{2\,\alpha_1}$, а в случае с $\alpha_2$ -- почти полностью.
+    В общем решение через матричное уравнение типа Риккати дает более точные результаты.
 
 
     \subsection{Компьютерное моделирование для дополнительного пункта}
-    ...
+    Для замкнутых систем $A+BK_{j\,\alpha_i}$ выполним компьютерное моделирование -- построим
+    графики $u(t),x(t)$ при начальных условиях $$x(0)=\begin{bmatrix}
+        1\\1\\1
+    \end{bmatrix}$$
+    Для $A+BK_{4\,\alpha_1}$ графики строить избыточно -- результаты полностью совпали с результатом для $A+BK_{2\,\alpha_1}$.
+    Достаточно посмотреть на рис. \ref{fig:1task_K2a1_u}, \ref{fig:1task_K2a1_x}.
+
+
+    Далее расположены графики $u(t),x(t)$, смоделированные по схеме, представленной на рис. \ref{fig:scheme_task1}
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K3a1_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_1=2$ при $K_{3\,\alpha_1}$}
+        \label{fig:1task_K3a1_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K3a1_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $\alpha_1=2$ при $K_{3\,\alpha_1}$}
+        \label{fig:1task_K3a1_x}
+    \end{figure}
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K3a2_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{3\,\alpha_2}$}
+        \label{fig:1task_K3a2_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K3a2_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $\alpha_1=0.1$ при $K_{3\,\alpha_2}$}
+        \label{fig:1task_K3a2_x}
+    \end{figure}
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K4a2_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_2=0.1$ при $K_{4\,\alpha_2}$}
+        \label{fig:1task_K4a2_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{1task_K4a2_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ для $\alpha_1=0.1$ при $K_{4\,\alpha_2}$}
+        \label{fig:1task_K4a2_x}
+    \end{figure}
+
+
+    \subsection{Сопоставление результатов для дополнительного пункта}
+    Видим, что в случаях с $K_4$ система приобретает больше осцилляций,
+    чем с $K_3$ (сравн. рис. \ref{fig:1task_K2a1_x}, \ref{fig:1task_K3a1_x} и \ref{fig:1task_K4a2_x}, \ref{fig:1task_K3a2_x}).
+    Время схождения системы к нулю быстрее с $K_3$, однако с $K_4$ требуется меньше управления. В общем графики
+    почти совпадают с результатами для $K_{1,2}$ (в случае $K_{4\,\alpha_1}$ результаты полностью совпали с $K_{2\,\alpha_1}$). Таким образом,
+    можно предположить, что синтез регулятора через матричное уравнение Риккати почти решает задачу минимизации управления.
 
 
     \subsection{Вывод}
-    ...
+    В данном задании был исследован синтез регулятора через матричное неравенство типа Ляпунова и
+    матричное уравнение типа Риккати. Были получены графики, подтверждающие корректность расчетов и рассуждений.
+    Удалось получить желаемую степень устойчивости с помощью неограниченного и минимального управлений. Результат решения через Риккати
+    напоминает результат решения задачи минимизации управления.
 
 
     \section{Общий вывод по работе}

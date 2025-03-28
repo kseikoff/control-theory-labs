@@ -11,10 +11,10 @@ C=[-2 2 2 2;
 A_e = eig(A)
 
 % Jordan decomposition
-[P, J] = jordan(A)
-P_inv = inv(P)
-B = P_inv * B
-C = C * P
+[PA, JA] = jordan(A)
+PA_inv = inv(PA)
+BA = PA_inv * B
+CA = C * PA
 
 % Desired decay rate
 a1 = 4;
@@ -71,7 +71,7 @@ cvx_begin sdp
 variable Q(4,4)
 variable Y(4,2)
 variable mumu(2,2)
-minimize norm(mumu, inf)
+minimize norm(mumu)
 Q>0.0001*eye(4);
 A'*Q + Q*A+ 2*al*Q + C'*Y' + Y*C <= 0;
 [Q e0;

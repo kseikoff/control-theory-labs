@@ -279,8 +279,10 @@
     представленную на рис. \ref{fig:scheme_task1}. Построим графики $u(t),x(t)$ при начальных условиях
     $$x(0)=\begin{bmatrix}
         1 \\1 \\1
-    \end{bmatrix}$$
-    Результаты представлены далее на рис. \ref{fig:1task_K1a1_u}--\ref{fig:1task_K2a2_x}
+    \end{bmatrix}$$ и сопоставим результаты.
+
+    
+    Графики представлены далее на рис. \ref{fig:1task_K1a1_u}--\ref{fig:1task_K2a2_x}
     \newpage
     \vspace*{0.01mm}
     \begin{figure}[H]
@@ -543,13 +545,13 @@
     \subsection{Степень сходимости}
     Так как система не полностью наблюдаема, то от наблюдателя полной размерности не получится
     добиться любой желаемой степени сходимости. Максимально возможная $\alpha_L=4$, так как
-    ненаблюдаемое собственно число $\lambda_2=-4$.
+    ненаблюдаемое собственное число $\lambda_2=-4$.
 
 
     \subsection{Схема моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния и закона управления}
     Построим схему моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния
     $\dot{\hat{x}}=A\hat{x}+Bu+L\left( C\hat{x}-y \right)$ и закона управления $u=K\hat{x},$ используя \texttt{SIMULINK}.
-    Данная схема позволяет построить графики $u(t),e(t),x(t),\hat{x}(t)$
+    Данная схема позволяет построить график $u(t)$ и покомпонентно графики $e(t),\left(x(t),\hat{x}(t)\right)$
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{scheme_task2.png}
@@ -708,7 +710,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aK=aL_x2.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_2(t),\hat{x}_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \caption{Графики $x_2(t),\hat{x}_2(t)$ для $\alpha_K=\alpha_L=4$}
         \label{2task_aKeqaL_x2}
     \end{figure}
     \begin{figure}[H]
@@ -724,7 +726,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aK=aL_x3.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_3(t),\hat{x}_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \caption{Графики $x_3(t),\hat{x}_3(t)$ для $\alpha_K=\alpha_L=4$}
         \label{2task_aKeqaL_x3}
     \end{figure}
     \begin{figure}[H]
@@ -740,7 +742,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aK=aL_x4.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_4(t),\hat{x}_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \caption{Графики $x_4(t),\hat{x}_4(t)$ для $\alpha_K=\alpha_L=4$}
         \label{2task_aKeqaL_x4}
     \end{figure}
     \begin{figure}[H]
@@ -772,7 +774,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aKgaL_x2.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_2(t),\hat{x}_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \caption{Графики $x_2(t),\hat{x}_2(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
         \label{2task_aKgaL_x2}
     \end{figure}
     \begin{figure}[H]
@@ -788,7 +790,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aKgaL_x3.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_3(t),\hat{x}_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \caption{Графики $x_3(t),\hat{x}_3(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
         \label{2task_aKgaL_x3}
     \end{figure}
     \begin{figure}[H]
@@ -804,7 +806,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aKgaL_x4.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_4(t),\hat{x}_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \caption{Графики $x_4(t),\hat{x}_4(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
         \label{2task_aKgaL_x4}
     \end{figure}
     \begin{figure}[H]
@@ -836,7 +838,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aKlaL_x2.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_2(t),\hat{x}_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \caption{Графики $x_2(t),\hat{x}_2(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
         \label{2task_aKlaL_x2}
     \end{figure}
     \begin{figure}[H]
@@ -852,7 +854,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aKlaL_x3.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_3(t),\hat{x}_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \caption{Графики $x_3(t),\hat{x}_3(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
         \label{2task_aKlaL_x3}
     \end{figure}
     \begin{figure}[H]
@@ -868,7 +870,7 @@
         \centering
         \includegraphics[scale=0.8]{2task_aKlaL_x4.png}
         \captionsetup{skip=0pt}
-        \caption{Графики $x_4(t),\hat{x}_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \caption{Графики $x_4(t),\hat{x}_4(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
         \label{2task_aKlaL_x4}
     \end{figure}
     \begin{figure}[H]
@@ -903,10 +905,99 @@
     
     
     \subsection{Сравнение результатов}
-    ...
+    При $\alpha_K<\alpha_L$ система стабилизируется медленнее в сравнении с другими случаями,
+    но наблюдатель раньше приходит к истинному состоянию системы (сравн. рис. \ref{2task_aKlaL_x4}, \ref{2task_aKgaL_x4}, \ref{2task_aKeqaL_x4}).
+    Быстрее всего система сошлась к нулю при сопоставимых значениях $\alpha_K=\alpha_L$ (сравн. рис. \ref{2task_aKeqaL_x1}, \ref{2task_aKgaL_x1}, \ref{2task_aKlaL_x1}). Меньше всего
+    управления потребовалось, когда $\alpha_K>\alpha_L$ (сравн. рис. \ref{2task_aKeqaL_u}, \ref{2task_aKgaL_u}, \ref{2task_aKlaL_u}).
+    Медленнее всего наблюдатель сходится к истинным траекториям системы при $\alpha_K>\alpha_L$ (сравн. \ref{2task_aKgaL_x2} с \ref{2task_aKeqaL_x2}, \ref{2task_aKlaL_x2}; \ref{2task_aKgaL_x3} с \ref{2task_aKeqaL_x3}, \ref{2task_aKlaL_x3}).
 
 
     \subsection{Вывод}
+    В данном задании мы выяснили, что система полностью управляема, стабилизируема, не полностью наблюдаема и обнаруживаема.
+    Мы экспериментировали с влиянием регулятора и наблюдателя с различными наборами значений степени устойчивости и сходимости на систему.
+    Были получены соответствующие матрицы $K,L$ и проведено компьютерное моделирование. Результаты подтвердили корретность проведенных расчетов.
+    По графикам были сделаны выводы об управлении и слежении.
+
+
+    \section{Задание 3. Регулятор с качественной экспоненциальной устойчивостью}
+    Рассмотрим систему
+    $$
+    \dot{x}=Ax+Bu,\ A=\begin{bmatrix}
+        5 &2 &7\\
+        2 &1 &2\\
+        -2 &-3 &-4
+    \end{bmatrix},\ B=\begin{bmatrix}
+        3\\1\\-1
+    \end{bmatrix};
+    $$
+
+
+    \subsection{Управляемость и стабилизируемость}
+    В первом задании мы уже находили собственные числа матрицы $A$. Программа для третьего задания
+    находится на листинге \ref{task3code} в приложении 3
+    $$
+    \sigma\left( A \right)=\left\{ -2,2\pm i \right\}
+    $$
+    Собственное число $\lambda_1=-2$ асимптотически устойчивое, может быть неуправляемым. Комплексная пара неустойчивая,
+    нужна управляемость. Найдем матрицу $J_{re}$ из вещественного жорданова разложения матрицы $A=P_{re}J_{re}P_{re}^{-1}$.
+    Переведем матрицу $B$ в базис собственных векторов матрицы $A$
+    $$
+    J_{re}=\begin{bmatrix}
+    -2     &0     &0\\
+    0     &2     &1\\
+    0    &-1     &2
+    \end{bmatrix},\ B_{Jre}=\begin{bmatrix}
+        0\\
+     3\\
+    -1
+    \end{bmatrix};
+    $$
+    Все жордановы клетки относятся к различным собственным числам. Число $\lambda_1=-2$ является неуправляемым,
+    остальные управляемые (первый элемент $B_{Jre}$ -- ноль). Таким образом, система не полностью управляема,
+    но стабилизируема.
+
+
+    \subsection{Средняя степень устойчивости}
+    Зададим следующие параметры: $\beta<0$,
+    характеризующий среднее значение поведения
+    траекторий ($|\beta|$ как <<средняя степень устойчивости>>),
+    и $r>0$, характеризующий разброс поведения траекторий относительно
+    среднего значения $\beta$. Будем соблюдать условия
+    $$
+    \beta+r<0,\ r=\dfrac{|\beta|}{k},\ 1.5\leq k\leq 4;\ |\lambda_{\text{неупр.}}-\beta|\leq r;
+    $$
+    Пусть
+    $$
+    \beta=-2,\ k=4\Rightarrow r=\dfrac{|-2|}{4}=0.5;\ \lambda_{\text{неупр.}}=-2\Rightarrow |-2-(-2)|=0\leq r=0.5;
+    $$
+
+
+    \subsection{Наборы параметров Q и R}
+    Зададимся четырьмя наборами параметров $Q,R$
+    \begin{align*}
+        &\circ Q=I,\ R=1;\\
+        &\circ Q=I,\ R=0;\\
+        &\circ Q=0,\ R=1;\\
+        &\circ Q=0,\ R=0;
+    \end{align*}
+
+
+    \subsection{Схема моделирования системы, замкнутой регулятором}
+    Схема моделирования системы аналогична первому заданию -- см. рис. \ref{fig:scheme_task1}.
+
+
+    \subsection{Синтез регулятора}
+    Для каждого набора параметров $Q,R$ синтезируем регулятор, обеспечивающий качественную экспоненциальную
+    устойчивость при помощи матричного уравнения типа Риккати
+    $$
+    \left( A-BK-\beta I \right)^TP\left( A-BK-\beta I \right)-r^2P=-Q,
+    $$
+    $$K=-\left( R+B^TPB \right)^{-1}B^TP\left( A-\beta I \right);
+    $$
+    Пользуемся \texttt{vpasolve()} в \texttt{MATLAB} и рассчитываем на элемент случайности.
+    
+
+    Найдем $K_1$ при $Q=I,\ R=1$
     ...
 
 
@@ -1053,10 +1144,10 @@
     A_e = eig(A)
 
     % Jordan decomposition
-    [P, J] = jordan(A)
-    P_inv = inv(P)
-    B = P_inv * B
-    C = C * P
+    [PA, JA] = jordan(A)
+    PA_inv = inv(PA)
+    BA = PA_inv * B
+    CA = C * PA
 
     % Desired decay rate
     a1 = 4;
@@ -1089,7 +1180,7 @@
     variable Q(4,4)
     variable Y(4,2)
     variable mumu(2,2)
-    minimize norm(mumu, inf)
+    minimize norm(mumu)
     Q>0.0001*eye(4);
     A'*Q + Q*A+ 2*al*Q + C'*Y' + Y*C <= 0;
     [Q e0;
@@ -1113,7 +1204,7 @@
     variable Q(4,4)
     variable Y(4,2)
     variable mumu(2,2)
-    minimize norm(mumu, inf)
+    minimize norm(mumu)
     Q>0.0001*eye(4);
     A'*Q + Q*A+ 2*al*Q + C'*Y' + Y*C <= 0;
     [Q e0;
@@ -1138,5 +1229,11 @@
     % L found case 1
     L_case3 = L_case1
     eL_case3 = eL_case1
+    \end{lstlisting}
+
+
+    \subsection{Приложение 3}
+    \begin{lstlisting}[label=task3code, caption={Программа для третьего задания}]
+        to be done
     \end{lstlisting}
 \end{document}

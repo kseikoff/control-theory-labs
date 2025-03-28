@@ -548,7 +548,7 @@
 
     \subsection{Схема моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния и закона управления}
     Построим схему моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния
-    $$\dot{\hat{x}}=A\hat{x}+Bu+L\left( C\hat{x}-y \right)$$ и закона управления $$u=K\hat{x},$$ используя \texttt{SIMULINK}.
+    $\dot{\hat{x}}=A\hat{x}+Bu+L\left( C\hat{x}-y \right)$ и закона управления $u=K\hat{x},$ используя \texttt{SIMULINK}.
     Данная схема позволяет построить графики $u(t),e(t),x(t),\hat{x}(t)$
     \begin{figure}[H]
         \centering
@@ -682,11 +682,232 @@
     а также график ошибки наблюдателя $e(t)=x(t)-\hat{x}(t)$. Для построения пользуемся схемой, представленной на рис. \ref{fig:scheme_task2}.
 
 
-    Далее расположены перечисленные графики на рис.
+    Далее расположены перечисленные графики на рис. \ref{2task_aKeqaL_x1}--\ref{2task_aKlaL_u}
 
     
+    % 963,257,718,369
     \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_x1.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_1(t),\hat{x}_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_x1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_e1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_e1}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_x2.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_2(t),\hat{x}_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_x2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_e2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_2(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_e2}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_x3.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_3(t),\hat{x}_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_x3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_e3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_3(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_e3}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_x4.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_4(t),\hat{x}_1(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_x4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aK=aL_e4.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_4(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_e4}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_x1.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_1(t),\hat{x}_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_x1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_e1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_e1}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_x2.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_2(t),\hat{x}_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_x2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_e2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_2(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_e2}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_x3.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_3(t),\hat{x}_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_x3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_e3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_3(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_e3}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_x4.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_4(t),\hat{x}_1(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_x4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKgaL_e4.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_4(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_e4}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_x1.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_1(t),\hat{x}_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_x1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_e1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_e1}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_x2.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_2(t),\hat{x}_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_x2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_e2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_2(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_e2}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_x3.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_3(t),\hat{x}_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_x3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_e3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_3(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_e3}
+    \end{figure}
+    \newpage
+    \vspace*{20mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_x4.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $x_4(t),\hat{x}_1(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_x4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.8]{2task_aKlaL_e4.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_4(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_e4}
+    \end{figure}
+    \newpage
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.74]{2task_aK=aL_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_K=\alpha_L=4$}
+        \label{2task_aKeqaL_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.74]{2task_aKgaL_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_K>\alpha_L\Leftrightarrow4>1$}
+        \label{2task_aKgaL_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.74]{2task_aKlaL_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ для $\alpha_K<\alpha_L\Leftrightarrow1<4$}
+        \label{2task_aKlaL_u}
+    \end{figure}
     
+    
+    \subsection{Сравнение результатов}
+    ...
+
+
+    \subsection{Вывод}
+    ...
 
 
     \section{Общий вывод по работе}

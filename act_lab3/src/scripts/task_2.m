@@ -9,6 +9,8 @@ C=[-2 2 2 2;
 
 % A matrix eigenvalues
 A_e = eig(A)
+
+% Jordan decomposition
 [P, J] = jordan(A)
 P_inv = inv(P)
 B = P_inv * B
@@ -45,7 +47,7 @@ cvx_begin sdp
 variable Q(4,4)
 variable Y(4,2)
 variable mumu(2,2)
-minimize norm(mumu, inf)
+minimize norm(mumu)
 Q>0.0001*eye(4);
 A'*Q + Q*A+ 2*al*Q + C'*Y' + Y*C <= 0;
 [Q e0;

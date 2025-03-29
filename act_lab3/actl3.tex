@@ -998,11 +998,206 @@
     
 
     Найдем $K_1$ при $Q=I,\ R=1$
-    ...
+    $$
+    K_1=\begin{bmatrix}
+        -1.8110966785064287110220433888041\\-4.3160849593283698027780387510567\\-1.8110966785064287110220433888041
+    \end{bmatrix}^T
+    $$
+    Проверим собственные числа замкнутой системы $A+BK_1$
+    $$
+    \sigma\left( A+BK_1 \right)=$$
+    $$
+    \left\{ -2,-1.9691391581706136124110627643325 \pm 0.072704192232709769030434861420894i \right\}
+    $$
+    Действительные части собственных чисел отрицательны, похоже на правду. Выведем их на комплексную плоскость,
+    чтобы проверить, находятся ли они в пределах круга с центром в точке $\left( \beta;0 \right)$ и радиусом $r$.
+    Результат см. рис. \ref{3task_eig_QI_R1}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_eig_QI_R1.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка собственных чисел з. с. $\left(A+BK_1\right)$ при $Q=I,\ R=1$}
+        \label{3task_eig_QI_R1}
+    \end{figure}
+    \noindent Собственные числа находятся внутри круга, следовательно, регулятор синтезирован корректно.
+
+
+    Повторим шаги для $K_2$ при $Q=I,\ R=0$
+    $$
+    K_2=\begin{bmatrix}
+        -1.8117543951362541390851582228351\\-4.3177192340462210264038924401546\\-1.8117543951362541390851582228351
+    \end{bmatrix}^T
+    $$
+    Проверка $\sigma\left( A+BK_2  \right)$
+    $$
+    \left\{ -2, -2, -1.9412280243187293045742088858247 \right\}
+    $$
+    Отрицательные числа -- похоже на правду. Проверим графиком (см. рис. \ref{3task_eig_QI_R0})
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_eig_QI_R0.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка собственных чисел з. с. $\left(A+BK_2\right)$ при $Q=I,\ R=0$}
+        \label{3task_eig_QI_R0}
+    \end{figure}
+    \noindent Собственные числа находятся внутри круга, следовательно, регулятор синтезирован корректно.
+
+
+    Найдем $K_3$ при $Q=0,\ R=1$
+    $$
+    K_3=\begin{bmatrix}
+        -1.85 &-4.3 &-1.85
+    \end{bmatrix}
+    $$
+    Проверка собственных чисел замкнутой системы $A+BK_3$
+    $$
+    \sigma\left( A+BK_3 \right)=\left\{ -2.5, -2, -1.5 \right\}
+    $$
+    Собственные числа отрицательные -- похоже на правду. Проверим графиком (см. рис. \ref{3task_eig_Q0_R1})
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_eig_Q0_R1.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка собственных чисел з. с. $\left(A+BK_3\right)$ при $Q=0,\ R=1$}
+        \label{3task_eig_Q0_R1}
+    \end{figure}
+    \noindent Собственное число $-2$ находится внутри круга, остальные на его границе.
+    Следовательно, регулятор синтезирован корректно.
+
+
+    Повторим для $K_4$ при $Q=0,\ R=0$
+    $$
+    K_4=\begin{bmatrix}
+        -1.8534107402031930333817126269956\\-4.0261248185776487663280116110305\\-1.8534107402031930333817126269956
+    \end{bmatrix}^T
+    $$
+    Проверим $\sigma\left( A+BK_4 \right)$
+    $$
+    \left\{ -2, -2, -1.7329462989840348330914368650218 \right\}
+    $$
+    Наблюдаем отрицательные собственные числа -- похоже на правду. Проверим графиком (см. рис. \ref{3task_eig_Q0_R0})
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_eig_Q0_R0.png}
+        \captionsetup{skip=0pt}
+        \caption{Проверка собственных чисел з. с. $\left(A+BK_4\right)$ при $Q=0,\ R=0$}
+        \label{3task_eig_Q0_R0}
+    \end{figure}
+    \noindent Собственные числа находятся внутри круга, следовательно, регулятор синтезирован корректно.
+
+
+    \subsection{Компьютерное моделирование}
+    Выполним компьютерное моделирование замкнутых систем по схеме, представленной на рис. \ref{fig:scheme_task1}. Построим
+    графики формируемого регуляторами управления $u(t)$ и вектора состояния замкнутых систем $x(t)$
+    при начальных условиях $$x(0)=\begin{bmatrix}
+        1\\1\\1
+    \end{bmatrix}$$
+    Результаты представлены далее на рис. \ref{fig:3task_K1_u}--\ref{fig:3task_Ki_u_close}
+
+
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K1_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ при $K_1,\ Q=I,\ R=1$}
+        \label{fig:3task_K1_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K1_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $K_{1},\ Q=I,\ R=1$}
+        \label{fig:3task_K1_x}
+    \end{figure}
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K2_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ при $K_2,\ Q=I,\ R=0$}
+        \label{fig:3task_K2_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K2_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $K_{2},\ Q=I,\ R=0$}
+        \label{fig:3task_K2_x}
+    \end{figure}
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K3_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ при $K_3,\ Q=0,\ R=1$}
+        \label{fig:3task_K3_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K3_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $K_{3},\ Q=0,\ R=1$}
+        \label{fig:3task_K3_x}
+    \end{figure}
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K4_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График $u(t)$ при $K_4,\ Q=0,\ R=0$}
+        \label{fig:3task_K4_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_K4_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $K_{4},\ Q=0,\ R=0$}
+        \label{fig:3task_K4_x}
+    \end{figure}
+    \newpage
+    \vspace*{0.01mm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_Ki_u.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $u(t)$ при различных $K_i$ (им соответствуют $u_i(t)$)}
+        \label{fig:3task_Ki_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics{3task_Ki_u_close.png}
+        \captionsetup{skip=0pt}
+        \caption{Графики $u(t)$ при различных $K_i$ в приближении}
+        \label{fig:3task_Ki_u_close}
+    \end{figure}
+
+
+    \subsection{Сравнение результатов}
+    Поведения систем при различных $K_i$ очень похожи. По рис. \ref{fig:3task_Ki_u_close}, \ref{fig:3task_Ki_u}
+    можно сделать вывод, что при $K_1$ и $K_2$ управление быстрее приводит систему к нулю
+    в сравнении с другими $K_i$, при этом требуется немного меньше управления. Медленнее всего при $K_4$,
+    при этом затрачивается немного больше управления несмотря на то, что оно начинается с меньшего по модулю числа
+    (сравн. рис. \ref{fig:3task_K4_u} с \ref{fig:3task_K3_u}, \ref{fig:3task_K2_u}, \ref{fig:3task_K1_u}).
+
+
+    \subsection{Вывод}
+    В данном задании было определено, что система не полностью управляема, но стабилизируема.
+    Были синтезированы регуляторы с качественной экспоненциальной устойчивостью и проведено
+    компьютерное моделирование, подтверждающее корректность расчетов.
 
 
     \section{Общий вывод по работе}
-    ...
+    В ходе выполнения лабораторной работы были изучены немодальные методы стабилизации систем.
+    Были использованы методы матричных неравенств и уравнений Риккати.
+    Было проведено исследование управления по выходу с заданной степенью устойчивости, вклада
+    регулятора и наблюдателя в результат.
+    Были синтезированы различные регуляторы с качественной степенью устойчивости.
+    Для каждого задания было выполнено компьютерное моделирование, подтверждающее корректность расчетов и рассуждений.
 
 
     \section{Приложения}
@@ -1234,6 +1429,68 @@
 
     \subsection{Приложение 3}
     \begin{lstlisting}[label=task3code, caption={Программа для третьего задания}]
-        to be done
+    % plant parameters
+    A = [5 2 7; 2 1 2; -2 -3 -4];
+    B = [3; 1; -1];
+
+    % A matrix eigenvalues
+    A_e = eig(A)
+
+    % Jordan matrix
+    [P, J] = jordan(A);
+    Pre(:,2) = imag(P(:,2));
+    Pre(:,3) = real(P(:,3))
+    Pre_inv = Pre^-1
+    Jre = Pre_inv * A * Pre
+    Bjre = Pre_inv * B
+
+    % truncation
+    Jre_less = Jre;
+    Jre_less(1,:)=[];
+    Jre_less(:,1)=[]
+    Bjre_less = Bjre;
+    Bjre_less(1,:)=[]
+
+    % plant parameters b,k,r
+    b = -2;
+    k = 4;
+    r = abs(b)/k;
+
+    % aftermath
+    % Q=I, R=1
+    % K_1 = [-1.8110966785064287110220433888041, -4.3160849593283698027780387510567, -1.8110966785064287110220433888041]
+    % Q=I, R=0
+    % K_2 = [-1.8117543951362541390851582228351, -4.3177192340462210264038924401546, -1.8117543951362541390851582228351]
+    % Q=0, R=1
+    % K_3 = [-1.85, -4.3, -1.85]
+    % Q=0, R=0
+    % K_4 = [-1.8534107402031930333817126269956, -4.0261248185776487663280116110305, -1.8534107402031930333817126269956]
+
+    % Riccati
+    Q = 0;
+    R = 0;
+
+    syms P_ [2 2]
+    K_ = -(inv(R+Bjre_less'*P_*Bjre_less)*Bjre_less'*P_*(Jre_less-b*eye(2)));
+    eqs = (Jre_less+Bjre_less*K_-b*eye(2))'*P_*(Jre_less+Bjre_less*K_-b*eye(2))-r^2*P_==-Q;
+
+    s = vpasolve(eqs, [P_], Random=true);
+    P_=[s.P_1_1 s.P_1_2;
+        s.P_2_1 s.P_2_2];
+    K=[0 -(inv(R+Bjre_less'*P_*Bjre_less)*Bjre_less'*P_*(Jre_less-b*eye(2)))]*Pre^-1
+    e=eig(A+B*K)
+
+    % eigen check
+    th = 0:pi/50:2*pi;
+    xunit = r * cos(th)+ b;
+    yunit = r * sin(th);
+    plot(xunit, yunit);
+    hold on
+    plot(real(e),imag(e),"x")
+    axis equal
+    grid on
+    xlabel("Re")
+    ylabel("Im")
+    hold off
     \end{lstlisting}
 \end{document}

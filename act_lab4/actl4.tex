@@ -1,0 +1,190 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[left=25mm, top=25mm, right=25mm, bottom=25mm]{geometry}
+\usepackage{cmap}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{etoolbox}
+\usepackage{titlesec}
+\pagestyle{plain}
+\patchcmd{\tableofcontents}{\contentsname}{\centering\contentsname}{}{}
+\titleformat{\section}[block]{\normalfont\large\bfseries\centering}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\normalsize\bfseries\centering}{}{0pt}{}
+\allowdisplaybreaks
+\graphicspath{{src/images/}}
+\usetikzlibrary{patterns}
+\definecolor{LightGray}{gray}{0.95}
+\definecolor{LightGray2}{gray}{0.7}
+\lstdefinestyle{code}{
+    language=MATLAB, % replace language here
+    basicstyle=\footnotesize\ttfamily,
+    % numbers=left,
+    % numberstyle=\scriptsize\color{gray},
+    % stepnumber=1,
+    % numbersep=5pt,
+    backgroundcolor=\color{LightGray},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    frame=single,
+    rulecolor=\color{LightGray2},
+    linewidth=\linewidth,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{purple},
+    escapeinside={\%*}{*)},
+    inputencoding=utf8x,
+    xleftmargin=0pt,
+    framexleftmargin=0pt,
+    framexrightmargin=0pt
+}
+\lstset{style=code}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={contents setup},
+    pdfpagemode=FullScreen,
+}
+
+
+\begin{document}
+    \begin{titlepage}
+
+        \begin{center}
+        Федеральное государственное автономное образовательное учреждение высшего образования
+        «Национальный Исследовательский Университет ИТМО»
+        \vfill
+        
+        \includegraphics[width=0.3\textwidth]{itmo.png} % requires /src/images/itmo.png
+
+        {\large\bf ЛАБОРАТОРНАЯ РАБОТА №4}\\
+        {\large\bf ПРЕДМЕТ «ТЕОРИЯ АВТОМАТИЧЕСКОГО УПРАВЛЕНИЯ»}\\
+        {\large\bf ТЕМА «СЛЕЖЕНИЕ И КОМПЕНСАЦИЯ: ВИРТУАЛЬНЫЙ ВЫХОД»}\\
+        Вариант №2
+        \vfill
+
+        \begin{flushright}
+            \begin{minipage}{.45\textwidth}
+            {
+                \hbox{Преподаватель:}
+                \hbox{Пашенко А. В.}
+                \hbox{}
+                \hbox{Выполнил:}
+                \hbox{Румянцев А. А.}
+                \hbox{}
+                \hbox{Факультет: СУиР}
+                \hbox{Группа: R3341}
+                \hbox{Поток: ТАУ R22 бак 1.1.1}
+            }
+            \end{minipage}
+        \end{flushright}
+        \vfill
+  
+        Санкт-Петербург\\
+        2025
+        \end{center}
+    \end{titlepage}
+    
+    \tableofcontents
+
+    \newpage
+    \section{Задание 1. Компенсирующий регулятор по состоянию}
+    Рассмотрим систему
+    $$
+    \dot{x}=Ax+Bu+B_f\omega_f,
+    $$
+    $$
+    A=\begin{bmatrix}
+        5 &2 &7\\
+        2 &1 &2\\
+        -2 &-3 &-4
+    \end{bmatrix},\ B=\begin{bmatrix}
+        3\\1\\-1
+    \end{bmatrix},\ B_f=\begin{bmatrix}
+        -4 &0 &0 &-1\\
+        0 &0 &0 &0\\
+        4 &0 &0 &0
+    \end{bmatrix},\ x(0)=\begin{bmatrix}
+        0\\0\\0
+    \end{bmatrix},
+    $$
+    генератор внешнего возмущения
+    $$
+    \dot{\omega}_f=\Gamma\omega_f,\ \Gamma=\begin{bmatrix}
+        25 &6 &-20 &11\\
+        14 &3 &-10 &4\\
+        40 &11 &-31 &17\\
+        6 &4 &-4 &3
+    \end{bmatrix},\ \omega_f(0)=\begin{bmatrix}
+        1\\1\\1\\1
+    \end{bmatrix}
+    $$
+    и виртуальный выход вида
+    $$
+    z=C_Zx,\ C_Z=\begin{bmatrix}
+        -2 &1 &-1
+    \end{bmatrix};
+    $$
+
+    
+    \subsection{Характер внешнего возмущения}
+    ...
+
+
+    \subsection{Схема моделирования системы, замкнутой компенсирующим регулятором}
+    ...
+
+
+    \subsection{Синтез <<фидбек>>-компоненты компенсирующего регулятора}
+    ...
+
+
+    \subsection{Синтез <<фидфорвард>>-компоненты компенсирующего регулятора}
+    ...
+
+
+    \subsection{Компьютерное моделирование разомкнутой системы}
+    ...
+
+
+    \subsection{Компьютерное моделирование системы, замкнутой регулятором только с <<фидбек>>-компонентой}
+    ...
+
+
+    \subsection{Компьютерное моделирование системы, замкнутой компенсирующим регулятором}
+    ...
+
+
+    \subsection{Вывод}
+    ...
+
+
+    \section{Задание 2. Следящий регулятор по состоянию}
+    ...
+
+
+    \section{Общий вывод по работе}
+    ...
+
+
+    \section{Приложения}
+    \subsection{Приложение 1}
+    \begin{lstlisting}{label=task1, caption={Программа для задания 1}}
+        to be done
+    \end{lstlisting}
+\end{document}

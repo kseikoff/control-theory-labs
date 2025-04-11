@@ -106,7 +106,7 @@
     \section{Задание 1. Компенсирующий регулятор по состоянию}
     Рассмотрим систему
     $$
-    \dot{x}=Ax+Bu+B_f\omega_f,
+    \dot{x}=Ax+Bu+B_f w_f,
     $$
     $$
     A=\begin{bmatrix}
@@ -125,12 +125,12 @@
     $$
     генератор внешнего возмущения
     $$
-    \dot{\omega}_f=\Gamma\omega_f,\ \Gamma=\begin{bmatrix}
+    \dot{ w}_f=\Gamma w_f,\ \Gamma=\begin{bmatrix}
         25 &6 &-20 &11\\
         14 &3 &-10 &4\\
         40 &11 &-31 &17\\
         6 &4 &-4 &3
-    \end{bmatrix},\ \omega_f(0)=\begin{bmatrix}
+    \end{bmatrix},\  w_f(0)=\begin{bmatrix}
         1\\1\\1\\1
     \end{bmatrix}
     $$
@@ -154,7 +154,7 @@
 
     \subsection{Схема моделирования системы, замкнутой компенсирующим регулятором}
     Построим схему моделирования системы, замкнутой компенсирующим регулятором
-    $$u=K_1x+K_2\omega_f,$$ обеспечивающим выполнение целевого условия $$\lim\limits_{t\to\infty}z(t)=0$$
+    $$u=K_1x+K_2 w_f,$$ обеспечивающим выполнение целевого условия $$\lim\limits_{t\to\infty}z(t)=0$$
     при внешнем воздействии, задаваемом генератором. Снимаем осциллограммы $u(t)$, $w_f(t)$, $x(t)$, $z(t)$
     \begin{figure}[H]
         \centering
@@ -231,14 +231,14 @@
     Выполним компьютерное моделирование разомкнутой системы $\left( u=0 \right)$;
     системы, замкнутой регулятором только с $K_1$ компонентой; системы, замкнутой компенсирующим регулятором.
     Построим графики вектора состояния генератора внешнего возмущения
-    $\omega_f(t)$, формируемого регулятором управления $u(t)$, вектора состояния объекта управления
+    $ w_f(t)$, формируемого регулятором управления $u(t)$, вектора состояния объекта управления
     $x(t)$ и виртуального выхода $z(t)$.
     Результаты представлены на рис. \ref{fig:1task_wf}--\ref{fig:1task_zz}
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{1task_wf.png}
         \captionsetup{skip=0pt}
-        \caption{График возмущений $\omega_f(t)$}
+        \caption{График возмущений $ w_f(t)$}
         \label{fig:1task_wf}
     \end{figure}
     \begin{figure}[H]
@@ -252,7 +252,7 @@
         \centering
         \includegraphics[scale=0.75]{1task_uu.png}
         \captionsetup{skip=0pt}
-        \caption{График сравнения управлений $u(t)=K_1x$ и $u(t)=K_1x+K_2\omega_f$}
+        \caption{График сравнения управлений $u(t)=K_1x$ и $u(t)=K_1x+K_2 w_f$}
         \label{fig:1task_uu}
     \end{figure}
     \begin{figure}[H]
@@ -273,7 +273,7 @@
         \centering
         \includegraphics[scale=0.75]{1task_ukk_x.png}
         \captionsetup{skip=0pt}
-        \caption{График поведения системы $x(t)$ при $u(t)=K_1x+K_2\omega_f$}
+        \caption{График поведения системы $x(t)$ при $u(t)=K_1x+K_2 w_f$}
         \label{fig:1task_ukk_x}
     \end{figure}
     \begin{figure}[H]
@@ -287,7 +287,7 @@
         \centering
         \includegraphics[scale=0.75]{1task_zz.png}
         \captionsetup{skip=0pt}
-        \caption{График сравн. виртуальных выходов $z(t)$ при $u(t)=K_1x$ и $u(t)=K_1x+K_2\omega_f$}
+        \caption{График сравн. виртуальных выходов $z(t)$ при $u(t)=K_1x$ и $u(t)=K_1x+K_2 w_f$}
         \label{fig:1task_zz}
     \end{figure}
     \noindent Траектория $z(t)$ при компенсирующем регуляторе стремится к нулю -- регулятор выполнил свою задачу.
@@ -314,13 +314,13 @@
     $$
     генератор задающего сигнала
     $$
-    \dot{\omega}_g=\Gamma\omega_g,\ \omega_g(0)=\begin{bmatrix}
+    \dot{ w}_g=\Gamma w_g,\  w_g(0)=\begin{bmatrix}
         1 &1 &1 &1
     \end{bmatrix}^T
     $$
     и виртуальный выход вида
     $$
-    z=C_Zx+D_Z\omega_g,\ D_Z=\begin{bmatrix}
+    z=C_Zx+D_Z w_g,\ D_Z=\begin{bmatrix}
         -20 &-6 &16 &-9
     \end{bmatrix};
     $$
@@ -337,7 +337,7 @@
     \subsection{Схема моделирования системы, замкнутой следящим регулятором}
     Построим схему моделирования системы, замкнутой следящим регулятором
     $$
-    u=K_1x+K_2\omega_g,
+    u=K_1x+K_2 w_g,
     $$
     обеспечивающим выполнение целевого условия
     $$\lim\limits_{t\to\infty}z(t)=0$$
@@ -395,14 +395,14 @@
         \centering
         \includegraphics[scale=0.75]{2task_wg.png}
         \captionsetup{skip=0pt}
-        \caption{График возмущений $\omega_g(t)$}
+        \caption{График возмущений $ w_g(t)$}
         \label{fig:2task_wg}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{2task_uu.png}
         \captionsetup{skip=0pt}
-        \caption{График сравнения управлений $u(t)=K_1x$ и $u(t)=K_1x+K_2\omega_g$}
+        \caption{График сравнения управлений $u(t)=K_1x$ и $u(t)=K_1x+K_2 w_g$}
         \label{fig:2task_uu}
     \end{figure}
     \begin{figure}[H]
@@ -423,7 +423,7 @@
         \centering
         \includegraphics[scale=0.75]{2task_ukk_x.png}
         \captionsetup{skip=0pt}
-        \caption{График поведения системы $x(t)$ при $u(t)=K_1x+K_2\omega_g$}
+        \caption{График поведения системы $x(t)$ при $u(t)=K_1x+K_2 w_g$}
         \label{fig:2task_ukk_x}
     \end{figure}
     \begin{figure}[H]
@@ -437,7 +437,7 @@
         \centering
         \includegraphics[scale=0.75]{2task_zz.png}
         \captionsetup{skip=0pt}
-        \caption{График сравн. виртуальных выходов $z(t)$ при $u(t)=K_1x$ и $u(t)=K_1x+K_2\omega_g$}
+        \caption{График сравн. виртуальных выходов $z(t)$ при $u(t)=K_1x$ и $u(t)=K_1x+K_2 w_g$}
         \label{fig:2task_zz}
     \end{figure}
     \noindent Следящий регулятор выполнил свою задачу -- на рис. \ref{fig:2task_zz}
@@ -445,7 +445,7 @@
     с компонентой $K_1$ не расходится, но и не стабилизируется. При отсутствии управления $z(t)$
     расходится (см. рис. \ref{fig:2task_unull_z}). Вектор состояния объекта управления под действием
     регулятора только с $K_1$ компонентой стабилизируется к нулю, но виртуальный выход продолжает
-    движение под действием внешних возмущений ($C_Zx\rightarrow0,D_Z\omega_g\nrightarrow0$).
+    движение под действием внешних возмущений ($C_Zx\rightarrow0,D_Z w_g\nrightarrow0$).
     При наличии компонент $K_1,K_2$ график $x(t)$ не стабилизируется к нулю, но и не расходится (см. рис. \ref{fig:2task_ukk_x}),
     при этом $z(t)$ достигает целевого состояния. Без управления $x(t)$ расходится (см. рис. \ref{fig:2task_unull_x}).
     При наличии только компоненты $K_1$ управление со временем стабилизируется к нулю, при наличии обеих компонент -- нет (см. рис. \ref{fig:2task_uu}).
@@ -455,6 +455,228 @@
     В данном задании был исследован следящий регулятор по состоянию.
     Его синтез был проведен аналогично синтезу компенсирующего регулятора в задании 1.
     Было выполнено компьютерное моделирование систем со сравнением результатов.
+
+
+    \section{Задание 3. Слежение и компенсация по выходу}
+    Рассмотрим систему (матрицы $A,B,B_f,C_Z,D_Z$ такие же, как в предыдущих заданиях)
+    $$
+    \begin{cases}
+        \dot{x}=Ax+Bu+B_f w,\\
+        y=Cx+D w,
+    \end{cases}\ x(0)=\begin{bmatrix}
+        0 &0 &0
+    \end{bmatrix}^T
+    $$
+    и генератор внешнего воздействия
+    $$
+    \dot{ w}=\Gamma w,\  w(0)=\begin{bmatrix}
+        1 &1 &1 &1
+    \end{bmatrix}^T
+    $$
+    при
+    $$
+    C=\begin{bmatrix}
+        2 &0 &3
+    \end{bmatrix},\ D=\begin{bmatrix}
+        8 &2 &-6 &4
+    \end{bmatrix};
+    $$
+
+
+    \subsection{Характер внешнего возмущения}
+    Матрица $\Gamma$ такая же, как в предыдущих заданиях.
+    Ранее мы выяснили, что характер возмущений -- гармоники
+    без затухания и роста амплитуды с течением времени.
+
+
+    \subsection{Возможность осуществления слежения и компенсации по выходу}
+    Проверим пару $$\left(\begin{bmatrix}
+        C &D
+    \end{bmatrix},\begin{bmatrix}
+        A &B_f\\
+        0 &\Gamma
+    \end{bmatrix}\right)$$ на обнаруживаемость. Обозначим
+    $$
+    \mathcal{C}=\begin{bmatrix}
+        C &D
+    \end{bmatrix},\ \mathcal{A}=\begin{bmatrix}
+        A &B_f\\
+        \mathbf{0_{4\times3}} &\Gamma
+    \end{bmatrix};
+    $$
+    Найдем собственные числа матрицы $\mathcal{A}$. Программа в \texttt{MATLAB} представлена на листинге \ref{task3} в приложении 3
+    $$
+    \sigma\left( \mathcal{A} \right)=\left\{ -2,2\pm i,\pm i, \pm3i \right\}
+    $$
+    Собственное число $\lambda_1=-2$ асимптотически устойчивое, может быть ненаблюдаемым.
+    Комплексные пары $\lambda_{4,5}=\pm i,\lambda_{6,7}=\pm3i$ устойчивые, но не асимптотически.
+    Комплексная пара $\lambda_{2,3}=2\pm i$ неустойчивая, нужна наблюдаемость.
+    Найдем вещественное жорданово разложение матрицы $\mathcal{A}$,
+    а матрицу $\mathcal{C}$ переведем в базис собственных
+    векторов матрицы $\mathcal{A}$. Получаем
+    $$
+    \mathcal{A}_{J_{re}}=\begin{bmatrix}
+        -2         &0         &0    &0    &0   &0   &0\\
+         0    &2    &1    &0    &0   &0   &0\\
+         0   &-1    &2    &0    &0   &0   &0\\
+         0         &0         &0         &0    &1         &0         &0\\
+         0         &0         &0   &-1         &0         &0         &0\\
+         0         &0         &0         &0         &0         &0    &3\\
+         0         &0         &0         &0         &0   &-3         &0
+    \end{bmatrix},\ \mathcal{C}_{J_{re}}=\begin{bmatrix}
+        1.0000\\    1.0000\\         0.0000\\    0.9500\\    2.1500\\   -1.2192\\    0.5038
+    \end{bmatrix}^T;
+    $$
+    Все жордановы клетки относятся к различным собственным числам.
+    Для комплексной пары $\lambda_{2,3}=2\pm i$ в $\mathcal{C}_{J_{re}}$ один из двух
+    соответствующих ей столбцов ненулевой, следовательно $\lambda_{2,3}$ наблюдаемы.
+    Остальные собственные числа наблюдаемы.
+    Таким образом, система полностью наблюдаема и обнаруживаема.
+    Слежение и компенсация по выходу осуществимы.
+
+
+    \subsection{Уравнение регулятора в форме Вход-Состояние-Выход}
+    Найдем матрицу $\bar{A}$, которая будет нужна в дальнейшем для построения схемы
+    и проведения вычислений, через запись уравнения регулятора в форме В-С-В, где
+    вход это $y(t)$, а выход $u(t)$.
+    Расширенный объект имеет вид
+    \begin{align}
+        \begin{cases}
+            \dot{x}=Ax+Bu+B_f w,\\
+            \dot{ w}=\Gamma w,\\
+            y=Cx+D w,\\
+            z=C_Zx+D_Z w;
+        \end{cases} \label{eq:ext_obj}
+    \end{align}
+    Для него можно записать регулятор по выходу
+    \begin{align}
+        \begin{cases}
+            \dot{\hat{x}}=A\hat{x}+Bu+B_f\hat{w}+L_1\left( \hat{y}-y \right),\\
+            \dot{\hat{w}}=\Gamma \hat{w}+L_2\left( \hat{y}-y \right),\\
+            \hat{y}=C\hat{x}+D\hat{w},\\
+            u=K_1\hat{x}+K_2\hat{w};
+        \end{cases}\label{eq:uout}
+    \end{align}
+    Выполним подстановку $\hat{y},u$ в $\dot{\hat{x}}$ и выразим $\hat{x},\hat{w}$, чтобы позже
+    вынести эти компоненты как вектор, на который умножается матрица $\bar{A}$. Аналогично с $y$. Имеем
+    \begin{align}
+        &\dot{\hat{x}}=A\hat{x}+Bu+B_f\hat{w}+L_1\left( \hat{y}-y \right), \notag\\
+        &\dot{\hat{x}}=A\hat{x}+B\left( K_1\hat{x}+K_2\hat{w} \right)+B_f\hat{w}+L_1\left( C\hat{x}+D\hat{w}-y \right), \notag\\
+        &\dot{\hat{x}}=A\hat{x}+BK_1\hat{x}+BK_2\hat{w}+B_f\hat{w}+L_1C\hat{x}+L_1D\hat{w}-L_1y, \notag\\
+        &\dot{\hat{x}}=\left( A+BK_1+L_1C \right)\hat{x}+\left( BK_2+B_f+L_1D \right)\hat{w}-L_1y \label{eq:dot_x_est};
+    \end{align}
+    Проведем аналогичные действия для $\dot{\hat{w}}$
+    \begin{align}
+        &\dot{\hat{w}}=\Gamma \hat{w}+L_2\left( \hat{y}-y \right), \notag\\
+        &\dot{\hat{w}}=\Gamma \hat{w}+L_2\left( C\hat{x}+D\hat{w}-y \right), \notag\\
+        &\dot{\hat{w}}=\Gamma \hat{w}+L_2C\hat{x}+L_2D\hat{w}-L_2y, \notag\\
+        &\dot{\hat{w}}=\left( L_2C \right)\hat{x}+\left( \Gamma+L_2D \right)\hat{w}-L_2y \label{eq:dot_w_est};
+    \end{align}
+    Запишем регулятор по выходу (\ref{eq:uout}) с учетом подстановок (\ref{eq:dot_x_est}), (\ref{eq:dot_w_est})
+    \begin{align}
+        \begin{cases}
+            \dot{\hat{x}}=\left( A+BK_1+L_1C \right)\hat{x}+\left( BK_2+B_f+L_1D \right)\hat{w}-\left(L_1\right)y,\\
+            \dot{\hat{w}}=\left( L_2C \right)\hat{x}+\left( \Gamma+L_2D \right)\hat{w}-\left(L_2\right)y,\\
+            u=\left(K_1\right)\hat{x}+\left(K_2\right)\hat{w};
+        \end{cases}\label{eq:temp_in_state_out}
+    \end{align}
+    Вынесем компоненты за скобками в соответствующие векторы
+    \begin{align}
+        \begin{cases}
+            &\begin{bmatrix}
+                \dot{\hat{x}}\\
+                \dot{\hat{w}}
+            \end{bmatrix}=\begin{bmatrix}
+                A+BK_1+L_1C &BK_2+B_f+L_1D\\
+                L_2C &\Gamma+L_2D
+            \end{bmatrix}\begin{bmatrix}
+                \hat{x}\\
+                \hat{w}
+            \end{bmatrix}-\begin{bmatrix}
+                L_1\\
+                L_2
+            \end{bmatrix}y,\\
+            &u=\begin{bmatrix}
+                K_1 &0\\
+                0 &K_2
+            \end{bmatrix}\begin{bmatrix}
+                \hat{x}\\
+                \hat{w}
+            \end{bmatrix};
+        \end{cases}\label{eq:in_state_out}
+    \end{align}
+    Получили уравнение регулятора в форме Вход-Состояние-Выход. Матрица $\bar{A}$ имеет вид
+    \begin{align}
+        \bar{A}=\begin{bmatrix}
+            A+BK_1+L_1C &BK_2+B_f+L_1D\\
+            L_2C &\Gamma+L_2D
+        \end{bmatrix}\label{eq:barA}
+    \end{align}
+
+
+    \subsection{Схема моделирования системы для слежения и компенсации по выходу}
+    Построим схему моделирования системы, замкнутой регулятором, состоящим из расширенного наблюдателя
+    $$
+    \begin{bmatrix}
+        \dot{\hat{x}}\\ \dot{\hat{ w}}
+    \end{bmatrix}=\bar{A}\begin{bmatrix}
+        \hat{x}\\ \hat{ w}
+    \end{bmatrix}-Ly
+    $$
+    и закона управления
+    $$
+    u=K_1\hat{x}+K_2\hat{ w},
+    $$
+    обеспечивающего выполнение целевого условия
+    $$
+    \lim\limits_{t\to\infty}z(t)=0
+    $$
+    при внешнем воздействии, задаваемом генератором. Снимаем осциллограммы
+    $u(t)$, $\begin{bmatrix}
+        x(t)\\  w(t)
+    \end{bmatrix}$, $\begin{bmatrix}
+        \hat{x}(t)\\ \hat{ w}(t)
+    \end{bmatrix}$, $e(t)$, $y(t)$, $z(t)$
+    % \begin{figure}[H]
+    %     \centering
+    %     \includegraphics[scale=0.325]{3task_scheme.png}
+    %     \captionsetup{skip=0pt}
+    %     \caption{Схема моделирования системы для слежения и компенсации по выходу}
+    %     \label{fig:3task_scheme}
+    % \end{figure}
+
+
+    \subsection{Синтез компоненты обратной связи}
+    Аналогично заданию 1 синтезируем $K_1$ при помощи матричного
+    уравнения типа Риккати. Матрицы, участвующие в расчетах, не изменились.
+    Тогда, получаем
+    $$
+    K_1=\begin{bmatrix}
+    1.6000  &-11.2000    &1.6000
+    \end{bmatrix},\
+    \sigma\left( A+BK_1 \right)=\left\{ -2,-2.0000 \pm 4.1231i \right\};
+    $$
+    В первом задании уже выяснили, что регулятор синтезирован корректно.
+
+
+    \subsection{Синтез матрицы коррекции наблюдателя}
+    ...
+
+
+    \subsection{Синтез компоненты прямой связи следящего регулятора}
+    ...
+
+
+    \subsection{Принцип внутренней модели}
+    ...
+
+
+    \subsection{Компьютерное моделирование}
+    ...
+
+
+    \subsection{Вывод}
+    ...
 
 
     \section{Общий вывод по работе}
@@ -556,5 +778,11 @@
     cvx_end
 
     K2 = Y-K1*P
+    \end{lstlisting}
+
+
+    \subsection{Приложение 3}
+    \begin{lstlisting}[label=task3, caption={Программа для задания 3}]
+        tbd
     \end{lstlisting}
 \end{document}

@@ -191,7 +191,11 @@
 
 
     \subsection{Синтез компоненты обратной связи компенсирующего регулятора}
-    Синтезируем $K_1$ с помощью матричного уравнения типа Риккати. Зададим
+    Синтезируем $K_1$ с помощью матричного уравнения типа Риккати
+    $$
+    A^TP+PA+Q-\nu PBR^{-1}B^TP+2\alpha P=0,\,K=-R^{-1}B^TP;
+    $$
+    Зададим
     $Q=0,\ \nu=2,\ R=1$. Решаем при $\alpha=2$. Получаем матрицу регулятора
     $$
     K_1=\begin{bmatrix}
@@ -206,17 +210,13 @@
 
 
     \subsection{Синтез компоненты прямой связи компенсирующего регулятора}
-    Чтобы синтезировать $K_2$, нужно найти $K_1$ (уже нашли), найти $P,Y$
-    как решение системы уравнений
+    Чтобы синтезировать $K_2$, нужно найти $K_1$, найти $P,Y$
+    как решение системы уравнений, после чего вычислить $K_2$ по формуле
     $$
     \begin{cases}
-        P\Gamma-AP=BY+B_f\\
-        C_ZP+D=0
-    \end{cases}
-    $$
-    и вычислить $K_2$ по формуле
-    $$
-    K_2=Y-K_1P
+        P\Gamma-AP=BY+B_f,\\
+        C_ZP+D_Z=0,
+    \end{cases}\ K_2=Y-K_1P;
     $$
     Предоставим вычисления пакету \texttt{cvx} в \texttt{MATLAB}. Получаем
     $$
@@ -229,7 +229,7 @@
     % pos 885,224,768,358
     \subsection{Компьютерное моделирование}
     Выполним компьютерное моделирование разомкнутой системы $\left( u=0 \right)$;
-    системы, замкнутой регулятором только с $K_1$ компонентой; системы, замкнутой компенсирующим регулятором.
+    замкнутой регулятором только с $K_1$ компонентой; замкнутой компенсирующим регулятором.
     Построим графики вектора состояния генератора внешнего возмущения
     $ w_f(t)$, формируемого регулятором управления $u(t)$, вектора состояния объекта управления
     $x(t)$ и виртуального выхода $z(t)$.
@@ -484,8 +484,9 @@
 
 
     \subsection{Характер внешнего возмущения}
-    Матрица $\Gamma$ такая же, как в предыдущих заданиях.
-    Ранее мы выяснили, что характер возмущений -- гармоники
+    Матрица $\Gamma$ такая же, как в предыдущих заданиях. Ее спектр
+    содержит только мнимые числа.
+    Характер возмущений -- гармоники
     без затухания и роста амплитуды с течением времени.
 
 
@@ -548,7 +549,7 @@
             z=C_Zx+D_Z w;
         \end{cases} \label{eq:ext_obj}
     \end{align}
-    Для него можно записать регулятор по выходу
+    Для него можно записать следящий регулятор по выходу
     \begin{align}
         \begin{cases}
             \dot{\hat{x}}=A\hat{x}+Bu+B_f\hat{w}+L_1\left( \hat{y}-y \right),\\
@@ -621,7 +622,9 @@
         \dot{\hat{x}}\\ \dot{\hat{ w}}
     \end{bmatrix}=\bar{A}\begin{bmatrix}
         \hat{x}\\ \hat{ w}
-    \end{bmatrix}-Ly
+    \end{bmatrix}-\begin{bmatrix}
+        L_1\\L_2
+    \end{bmatrix}y
     $$
     и закона управления
     $$
@@ -637,13 +640,30 @@
     \end{bmatrix}$, $\begin{bmatrix}
         \hat{x}(t)\\ \hat{ w}(t)
     \end{bmatrix}$, $e(t)$, $y(t)$, $z(t)$
-    % \begin{figure}[H]
-    %     \centering
-    %     \includegraphics[scale=0.325]{3task_scheme.png}
-    %     \captionsetup{skip=0pt}
-    %     \caption{Схема моделирования системы для слежения и компенсации по выходу}
-    %     \label{fig:3task_scheme}
-    % \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.55]{3task_scheme.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы для слежения и компенсации по выходу}
+        \label{fig:3task_scheme}
+    \end{figure}
+
+
+    \subsection{Исследование системы перед синтезом регулятора}
+    Матрицы $A,B$ такие же, как в первом задании. Имеем
+    $$
+    \sigma\left( A \right)=\left\{ -2,2\pm i \right\},\ A_{J_{re}}=\begin{bmatrix}
+        -2     &0     &0\\
+        0     &2     &1\\
+        0    &-1     &2
+        \end{bmatrix},\ B_{J_{re}}=\begin{bmatrix}
+        0\\
+         3\\
+        -1
+        \end{bmatrix};
+    $$
+    Система не полностью управляема,
+    стабилизируема. Максимальная степень устойчивости $\alpha=2$.
 
 
     \subsection{Синтез компоненты обратной связи}
@@ -660,18 +680,111 @@
 
 
     \subsection{Синтез матрицы коррекции наблюдателя}
-    ...
+    Матрицу наблюдателя $\mathcal{L}$ будем искать с помощью матричных неравенств
+    $$
+    Q\succ0,\ \mathcal{A}^TQ+Q\mathcal{A}+2\alpha Q+\mathcal{C}^TY^T+Y\mathcal{C}\prec 0,\ \mathcal{L}=Q^{-1}Y
+    $$
+    совместно с решением задачи минимизации управления. Зададим $\alpha=1$. Используя \texttt{cvx}, получаем
+    $$
+    \mathcal{L}=\begin{bmatrix}
+        41.4979\\
+   31.3700\\
+  -30.9945\\
+    0.2455\\
+    1.4359\\
+    1.1914\\
+    0.6445
+    \end{bmatrix}=\begin{bmatrix}
+        L_1\\L_2
+    \end{bmatrix}\Rightarrow L_1=\begin{bmatrix}
+        41.4979\\
+   31.3700\\
+  -30.9945
+    \end{bmatrix},\ L_2=\begin{bmatrix}
+        0.2455\\
+    1.4359\\
+    1.1914\\
+    0.6445
+    \end{bmatrix};\ \mu=28.1390;
+    $$
+    Проверим собственные числа замкнутой системы $\mathcal{A}+\mathcal{L}\mathcal{C}$
+    $$
+    \sigma\left( \mathcal{A}+\mathcal{L}\mathcal{C} \right)=\left\{\begin{matrix}
+        -1.4717\\
+        -1.0103 \pm 3.3960i\\
+        -1.0300 \pm 1.7041i\\
+        -1.0850 \pm 0.3955i
+    \end{matrix}\right\}
+    $$
+    Наблюдатель синтезирован корректно.
 
 
     \subsection{Синтез компоненты прямой связи следящего регулятора}
-    ...
+    Синтезируем $K_2$ для различных виртуальных выходов. Рассмотрим
+    \begin{align*}
+        &z_{1}=C_Zx+D_Zw\\
+        &z_{2}=y=Cx+Dw
+    \end{align*}
+    Синтез возможен в том случае,
+    если матрицы $A+BK_1$ и $\mathcal{A}+\mathcal{L}\mathcal{C}$ гурвицевы.
+    В нашем случае условия выполнены -- мы проверяли собственные числа
+    этих замкнутых систем ранее -- спектры матриц принадлежат левой комплексной полуплоскости.
+    Процедура синтеза аналогична заданию 1. Получаем
+    $$
+    K_{2_{z1}}=\begin{bmatrix}
+        -41.1631   &-9.8092   &27.7538  &-19.4769
+    \end{bmatrix},
+    $$
+    $$
+    K_{2_{z2}}=\begin{bmatrix}
+        20.3076    &2.7419  &-14.2967    &8.5001
+    \end{bmatrix};
+    $$
 
 
     \subsection{Принцип внутренней модели}
-    ...
+    Если измеряемый выход $y$ равен регулируемому выходу $z$, и если
+    регулятор обеспечивает устойчивость объекта в случае $w\equiv0$,
+    то для решения задачи слежения и компенсации $\left( z\to0 \right)$
+    необходимо, чтобы $$\sigma\left( \Gamma \right)\in\sigma\left( \bar{A} \right)$$
+    Спектр матрицы $\Gamma$ мы уже находили
+    $$
+    \sigma\left( \Gamma \right)=\left\{ \pm i, \pm 3i \right\}
+    $$
+    Проверим спектры матриц $\bar{A}_{z_1}$ и $\bar{A}_{z_2}$. Матрицу $\bar{A}$
+    выводили ранее (\ref{eq:barA}), когда представляли уравнения регулятора в форме
+    В-С-В (\ref{eq:in_state_out}) с $y(t)$ как входом, $u(t)$ как выходом. Получаем
+    $$
+    \sigma\left( \bar{A}_{z_1} \right)=\left\{\begin{matrix}
+        -1.9996\\
+        -6.8702 \pm32.8647i\\
+        0.0175 \pm 3.0096i\\
+        -0.0085 \pm 0.9756i
+    \end{matrix}\right\},\ \sigma\left( \bar{A}_{z_2} \right)=\left\{\begin{matrix}
+        -1.9996\\
+        -6.8613 \pm32.8152i\\
+        \pm3.0000i\\
+        \pm1.0000i
+    \end{matrix}\right\};
+    $$
+    Для $z_1=C_Zx+D_Zw$ принцип внутренней модели не выполняется, для
+    $z_2=Cx+Dw$ -- выполняется. Регулятор $K_{2_{z2}}$ умеет воспроизводить
+    сигналы, за которыми надо проследить или которые нужно компенсировать.
 
 
     \subsection{Компьютерное моделирование}
+    Выполним компьютерное моделирование для $K_{2_{z1}}$ и $K_{2_{z2}}$
+    с нулевыми начальными условиями наблюдателя. Построим график
+    формируемого регулятором управления $u(t)$, сравнительные графики
+    $\begin{bmatrix}
+        x(t)\\w(t)
+    \end{bmatrix}$ и $\begin{bmatrix}
+        \hat{x}(t)\\ \hat{w}(t)
+    \end{bmatrix}$, график ошибки наблюдателя $e(t)=\begin{bmatrix}
+        x(t)\\w(t)
+    \end{bmatrix}-\begin{bmatrix}
+        \hat{x}(t)\\ \hat{w}(t)
+    \end{bmatrix}$ и сравнительные графики фактического и виртуального выходов $y(t)$ и $z(t)$
     ...
 
 
@@ -783,6 +896,110 @@
 
     \subsection{Приложение 3}
     \begin{lstlisting}[label=task3, caption={Программа для задания 3}]
-        tbd
+    % plant parameters
+    A = [5 2 7;
+         2 1 2;
+        -2 -3 -4];
+    B = [3; 1; -1];
+    Bf = [-4 0 0 -1;
+          0 0 0 0;
+          4 0 0 0];
+
+    G = [25 6 -20 11;
+         14 3 -10 4;
+         40 11 -31 17;
+         6 4 -4 3];
+
+    Cz = [-2 1 -1];
+    Dz = [-20 -6 16 -9];
+
+    C = [2 0 3];
+    D = [8 2 -6 4];
+
+    % matrices
+    bigC = [C D];
+    bigA = [A Bf;
+            zeros(4,3) G];
+
+    % eig bigA
+    eig_bigA = eig(bigA)
+
+    % re jordan
+    [P, J] = jordan(bigA);
+    P_re(:,1) = P(:,1);
+    P_re(:,2) = imag(P(:,2));
+    P_re(:,3) = real(P(:,3));
+    P_re(:,4) = imag(P(:,4));
+    P_re(:,5) = real(P(:,5));
+    P_re(:,6) = imag(P(:,6));
+    P_re(:,7) = real(P(:,7))
+    Pre_inv = P_re^-1
+    bigA_J_re = Pre_inv * bigA * P_re
+    C_J_re = bigC * P_re
+
+    % solving Riccati
+    Q = 0;
+    v = 2;
+    R = 1;
+    a = 2;
+
+    Aa = A + eye(3) * a;
+    [Pk,K,e]=icare(Aa,sqrt(2)*B,Q,R);
+    K1=-inv(R)*B'*Pk
+    eK1=eig(A+B*K1)
+
+    % find L: solving LMI with control constraint
+    al = 1;
+    xw0=[0;0;0;1;1;1;1];
+    xw0_est=[0;0;0;0;0;0;0];
+    xwe0=xw0-xw0_est;
+
+    cvx_begin sdp
+    variable Q(7,7)
+    variable Y(7,1)
+    variable mumu
+    minimize mumu
+    Q>0.0001*eye(7);
+    bigA'*Q + Q*bigA+ 2*al*Q + bigC'*Y' + Y*bigC <= 0;
+    [Q xwe0;
+     xwe0' 1]>0;
+    [Q Y;
+     Y' mumu]>0;
+    cvx_end
+    mu = sqrt(mumu)
+    bigL=inv(Q)*Y
+    e_bigL=eig(bigA+bigL*bigC)
+
+    % K2_CD regulator synthesis
+    cvx_begin sdp
+    variable P1(3,4)
+    variable Y1(1,4)
+    P1*G-A*P1 == B*Y1+Bf;
+    C*P1 + D == 0;
+    cvx_end
+
+    K2_CD = Y1-K1*P1
+
+    % K2_CzDz regulator synthesis
+    cvx_begin sdp
+    variable P2(3,4)
+    variable Y2(1,4)
+    P2*G-A*P2 == B*Y2+Bf;
+    Cz*P2 + Dz == 0;
+    cvx_end
+
+    K2_CzDz = Y2-K1*P2
+
+    L1 = [bigL(1); bigL(2); bigL(3)]
+    L2 = [bigL(4); bigL(5); bigL(6); bigL(7)]
+
+    % the principle of the internal model
+    eig_G = eig(G)
+    bar_A_CD = [A+B*K1+L1*C B*K2_CD+Bf+L1*D;
+                L2*C G+L2*D]
+    bar_A_CzDz = [A+B*K1+L1*C B*K2_CzDz+Bf+L1*D;
+                  L2*C G+L2*D]
+    eig_bar_A_CD = eig(bar_A_CD)
+    eig_bar_A_CzDz = eig(bar_A_CzDz)
     \end{lstlisting}
 \end{document}

@@ -776,16 +776,128 @@
     Выполним компьютерное моделирование для $K_{2_{z1}}$ и $K_{2_{z2}}$
     с нулевыми начальными условиями наблюдателя. Построим график
     формируемого регулятором управления $u(t)$, сравнительные графики
-    $\begin{bmatrix}
-        x(t)\\w(t)
-    \end{bmatrix}$ и $\begin{bmatrix}
-        \hat{x}(t)\\ \hat{w}(t)
-    \end{bmatrix}$, график ошибки наблюдателя $e(t)=\begin{bmatrix}
-        x(t)\\w(t)
-    \end{bmatrix}-\begin{bmatrix}
-        \hat{x}(t)\\ \hat{w}(t)
-    \end{bmatrix}$ и сравнительные графики фактического и виртуального выходов $y(t)$ и $z(t)$
-    ...
+    $$\begin{bmatrix}
+        x(t) &w(t)
+    \end{bmatrix}^T\text{ и }\begin{bmatrix}
+        \hat{x}(t) &\hat{w}(t)
+    \end{bmatrix}^T,$$ график ошибки наблюдателя $$e(t)=\begin{bmatrix}
+        x(t) &w(t)
+    \end{bmatrix}^T-\begin{bmatrix}
+        \hat{x}(t) &\hat{w}(t)
+    \end{bmatrix}^T$$ и сравнительные графики фактического и виртуального выходов $y(t)$ и $z(t)$.
+    Результаты представлены на рис. \ref{??}--\ref{??}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_ucd.png}
+        \captionsetup{skip=0pt}
+        \caption{График управления $u(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_ucd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_xxh1cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x_1(t),\hat{x}_1(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_xxh1cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_xe1cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_1(t)=x_1(t)-\hat{x}_1(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_xe1cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_xxh2cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x_2(t),\hat{x}_2(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_xxh2cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_xe2cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_2(t)=x_2(t)-\hat{x}_2(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_xe2cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_xxh3cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x_3(t),\hat{x}_3(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_xxh3cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_xe3cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_3(t)=x_3(t)-\hat{x}_3(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_xe3cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_wwh1cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График $w_1(t),\hat{w}_1(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_wwh1cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_we1cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_1(t)=w_1(t)-\hat{w}_1(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_we1cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_wwh2cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График $w_2(t),\hat{w}_2(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_wwh2cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_we2cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_2(t)=w_2(t)-\hat{w}_2(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_we2cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_wwh3cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График $w_3(t),\hat{w}_3(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_wwh3cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_we3cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_3(t)=w_3(t)-\hat{w}_3(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_we3cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_wwh4cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График $w_4(t),\hat{w}_4(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_wwh4cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_we4cd.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_4(t)=w_4(t)-\hat{w}_4(t)$ при $K_{2_{z2}}$}
+        \label{fig:3task_we4cd}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_zcd.png}
+        \captionsetup{skip=0pt}
+        \caption{График виртуального $z(t)$ и фактического $y(t)$ выходов при $K_{2_{z2}}$}
+        \label{fig:3task_zcd}
+    \end{figure}
 
 
     \subsection{Вывод}

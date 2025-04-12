@@ -1020,6 +1020,76 @@
     возмущениями. Принцип внутренней модели выполняется только при $z_2=Cx+Dw$.
 
 
+    \section{Задание 4. Тележка и меандр}
+    Рассмотрим объект управления <<тележка>>, представленный на рис. \ref{fig:4task_scheme}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.55]{4task_scheme.png}
+        \captionsetup{skip=0pt}
+        \caption{Тележка}
+        \label{fig:4task_scheme}
+    \end{figure}
+
+
+    \subsection{Математическая модель <<тележки>>}
+    Синтезируем математическую модель <<тележки>>,
+    приняв в качестве выхода линейную координату
+    $y(t)=x_1(t)$. На рисунке видим, что объект
+    имеет координату $x_1$ и скорость $\vec{v}=x_2=\dot{x}_1$.
+    К объекту прилагается сила $\vec{F}$ -- управление $u(t)$,
+    которое примем за ускорение $\vec{a}=\dot{x}_2=\ddot{x}_1=u$.
+    Измеряем только координату объекта $x_1$. Таким образом, запишем систему
+    $$
+    \begin{cases}
+        \dot{x}_1=x_2,\\
+        \dot{x}_2=u,\\
+        y=x_1;
+    \end{cases}
+    $$
+    Можем переписать в привычном нам виде
+    $$
+    \begin{cases}
+        \dot{x}=Ax+Bu,\\
+        y=Cx,
+    \end{cases}\ A=\begin{bmatrix}
+        0 &1\\
+        0 &0
+    \end{bmatrix},\ B=\begin{bmatrix}
+        0\\1
+    \end{bmatrix},\ C=\begin{bmatrix}
+        1 &0
+    \end{bmatrix};
+    $$
+
+
+    \subsection{Задающий сигнал}
+    Примем задающий сигнал $g(t)$ меандром
+    с амплитудой $\alpha=1$ и периодом $T=1/f=2\pi$
+    $$\alpha\cdot\mathrm{sgn}\left( \sin(2\pi f t) \right)=\mathrm{sgn}\left( \sin(t) \right)$$
+
+
+    \subsection{Ряд Фурье}
+    Разложим сигнал $g(t)$ в ряд Фурье. Зададимся конечным
+    числом гармоник $m=3$ для использования конечной
+    суммы ряда в качестве приближенного сигнала $\bar{g}(t)$.
+    Программа \texttt{MATLAB} находится на листинге \ref{task4}
+    в приложении 4. Получаем
+    $$
+    \bar{g}(t)=\dfrac{4}{\pi}\sin(t)+\dfrac{4}{3\pi}\sin(3t)+\dfrac{4}{5\pi}\sin(5t)
+    $$
+
+
+    \subsection{Формирование генератора}
+    Сформируем генератор типа
+    $$
+    \dot{w}_g=\Gamma w_g,\ w_g(0)=w_0,
+    $$
+    способный порождать выбранные гармоники-компоненты $\bar{g}(t)$
+
+
+    ...
+
+
     \section{Общий вывод по работе}
     ...
 
@@ -1229,5 +1299,11 @@
                   L2*C G+L2*D]
     eig_bar_A_CD = eig(bar_A_CD)
     eig_bar_A_CzDz = eig(bar_A_CzDz)
+    \end{lstlisting}
+
+
+    \subsection{Приложение 4}
+    \begin{lstlisting}[label=task4, caption={Программа для задания 4}]
+        tbd
     \end{lstlisting}
 \end{document}

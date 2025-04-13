@@ -1,23 +1,36 @@
 % plant parameters
-t = linspace(-2*pi, 2*pi, 1000);
-ampl = 1;
-m = 3;
+A= [0 1; 0 0];
+B=[0;1];
+C=[1 0];
+G = [0 1 0 0 0 0;
+    -1 0 0 0 0 0;
+     0 0 0 3 0 0;
+     0 0 -3 0 0 0;
+     0 0 0 0 0 5;
+     0 0 0 0 -5 0];
+Cz = [-1 0];
+Dz = [1 0 1 0 1 0];
+Bg = 0;
 
-g_approx = zeros(size(t));
+[P1, J] = jordan(A)
 
-for k = 1:m
-    n = 2*k - 1;
-    bn = (4*ampl)/(pi*n);
-    g_approx = g_approx + bn * sin(n * t);
-end
+% K1 regulator synthesis
+Q = 0;
+v = 2;
+R = 1;
+a = 2;
 
-% true square wave
-g_true = ampl * sign(sin(t));
+Aa = A + eye(2) * a;
+[Pk,K,e]=icare(Aa,sqrt(2)*B,Q,R);
+K1=-inv(R)*B'*Pk
+eK1=eig(A+B*K1)
 
-% plot
-plot(t, g_true, 'k--', 'LineWidth', 1.2); hold on;
-plot(t, g_approx, 'r', 'LineWidth', 2);
-legend('g', 'fourier g (m=3)');
-xlabel('t'); ylabel('g(t)');
-title('Fourier approximation');
-grid on;
+% K2
+cvx_begin sdp
+variable P(2,6)
+variable Y(1,6)
+P*G-A*P == B*Y+Bg;
+Cz*P + Dz == 0;
+cvx_end
+
+K2 = Y-K1*P

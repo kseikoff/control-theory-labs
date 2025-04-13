@@ -22,10 +22,10 @@ G_eig = eig(G)
 A_eig = eig(A)
 
 % Jordan matrix
-[Aj, J] = jordan(A);
-Pjre(:,1) = Aj(:,1);
-Pjre(:,2) = imag(Aj(:,2));
-Pjre(:,3) = real(Aj(:,3))
+[P1, J] = jordan(A);
+Pjre(:,1) = P1(:,1);
+Pjre(:,2) = imag(P1(:,2));
+Pjre(:,3) = real(P1(:,3))
 Pjre_inv = Pjre^-1
 Aj_re = Pjre_inv * A * Pjre
 B_jre = Pjre_inv * B

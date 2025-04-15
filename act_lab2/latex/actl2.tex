@@ -132,7 +132,7 @@
 
     
     \subsection{Управляемость и стабилизируемость}
-    Найдем собственные числа матрицы $A$ с помощью \texttt{MATLAB} (программу см. листинг \ref{task1} в приложении 1)
+    Найдем собственные числа матрицы $A$ с помощью \texttt{MATLAB} (программу см. листинг \ref{task1} в приложении А)
     $$
     \det{\left[\lambda I-A\right]}=\begin{vmatrix}
         \lambda-5 &-2 &-7\\
@@ -505,7 +505,7 @@
     \subsection{Наблюдаемость и обнаруживоемость}
     Найдем собственные числа матрицы $A$.
     Программа для вычислений в \texttt{MATLAB} находится в приложении
-    2 на листинге \ref{task2}
+    Б на листинге \ref{task2}
     $$
     \det{\left[\lambda I-A\right]}=\begin{vmatrix}
         \lambda &-1 &0 &-1\\
@@ -1012,7 +1012,7 @@
 
     \subsection{Управляемость, стабилизируемость, наблюдаемость, обнаруживоемость}
     Найдем собственные числа матрицы $A$. Программа для вычислений в \texttt{MATLAB} представлена
-    в приложении 3 на листинге \ref{task3}
+    в приложении В на листинге \ref{task3}
     $$
     \det{\left[\lambda I-A\right]}=\begin{vmatrix}     
     \lambda-2	  &0	  &4	 &-2\\
@@ -1361,7 +1361,7 @@
     $$
     Все собственные числа управляемы, система полностью управляема и стабилизируема.
     Найдем $C_J$ в базисе собственных векторов матрицы $A$. Программа \texttt{MATLAB}
-    для задания 4 находится в приложении 4 на листинге \ref{task4}
+    для задания 4 находится в приложении Г на листинге \ref{task4}
     $$
         C_J=CP=\begin{bmatrix}
             0 &0 &1 &0\\
@@ -1385,7 +1385,7 @@
     наблюдателя состояния пониженного порядка $$\dot{\hat{z}}=\Gamma \hat{z}-Yy+\left(QB+YD\right)u,\ \hat{x}=
     \begin{bmatrix}C\\Q\end{bmatrix}^{-1}\begin{bmatrix}y-Du\\ \hat{z}\end{bmatrix}$$ и закона управления $u=K\hat{x}$.
     Модальный регулятор $K$ берем из задания 3.
-    Параметры блока \texttt{MATLAB Function} расположены в приложении 5 на листинге \ref{task42}
+    Параметры блока \texttt{MATLAB Function} расположены в приложении Д на листинге \ref{task42}
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{scheme_task4.png}
@@ -1533,8 +1533,7 @@
     вычисления и рассуждения верны.
 
 
-    \section{Приложения}
-    \subsection{Приложение 1}
+    \section{Приложение А}
     \begin{lstlisting}[label=task1, caption={Программа для первого задания}]
     % input data
     A = [5 2 7; 2 1 2; -2 -3 -4];
@@ -1621,7 +1620,7 @@
     \end{lstlisting}
 
 
-    \subsection{Приложение 2}
+    \section{Приложение Б}
     \begin{lstlisting}[label=task2, caption={Программа для второго задания}]
     % input data
     A = [0 1 0 1;
@@ -1711,7 +1710,7 @@
     \end{lstlisting}
 
 
-    \subsection{Приложение 3}
+    \section{Приложение В}
     \begin{lstlisting}[label=task3, caption={Программа для третьего задания}]
     % input data
     A = [2 0 -4 2;
@@ -1801,7 +1800,7 @@
     \end{lstlisting}
 
 
-    \subsection{Приложение 4}
+    \section{Приложение Г}
     \begin{lstlisting}[label=task4, caption={Программа для четвертого задания}]
     % input data
     A = [2 0 -4 2;
@@ -1847,7 +1846,7 @@
     \end{lstlisting}
 
 
-    \subsection{Приложение 5}
+    \section{Приложение Д}
     \begin{lstlisting}[label=task42, caption={Параметры блока \texttt{MATLAB Function} (задание 4)}]
     function livematrix = x_est_part(z_est, y, D, u)
     livematrix = [y - D * u; z_est];

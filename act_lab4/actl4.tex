@@ -144,7 +144,7 @@
     
     \subsection{Характер внешнего возмущения}
     Для определения характера внешнего возмущения найдем собственные числа матрицы $\Gamma$.
-    Программа в \texttt{MATLAB} находится на листинге \ref{task1} в приложении 1
+    Программа в \texttt{MATLAB} находится на листинге \ref{task1} в приложении А
     $$
     \sigma\left( \Gamma \right)=\left\{ \pm i, \pm 3i \right\}
     $$
@@ -381,7 +381,7 @@
 
     \subsection{Синтез компоненты прямой связи следящего регулятора}
     Синтезируем $K_2$ аналогично заданию 1. Из системы уравнений пропадет $B_f$, взамен появится $D_Z$.
-    Программа представлена на листинге \ref{task2} в приложении 2. Получаем
+    Программа представлена на листинге \ref{task2} в приложении Б. Получаем
     $$
     K_2=\begin{bmatrix}
         7.2    &3.2  &-8.0  &4.0
@@ -505,7 +505,7 @@
         \mathbf{0_{4\times3}} &\Gamma
     \end{bmatrix};
     $$
-    Найдем собственные числа матрицы $\mathcal{A}$. Программа в \texttt{MATLAB} представлена на листинге \ref{task3} в приложении 3
+    Найдем собственные числа матрицы $\mathcal{A}$. Программа в \texttt{MATLAB} представлена на листинге \ref{task3} в приложении В
     $$
     \sigma\left( \mathcal{A} \right)=\left\{ -2,2\pm i,\pm i, \pm3i \right\}
     $$
@@ -1073,7 +1073,7 @@
     числом гармоник $m=3$ для использования конечной
     суммы ряда в качестве приближенного сигнала $\bar{g}(t)$.
     Программа \texttt{MATLAB} находится на листинге \ref{task4}
-    в приложении 4. Получаем
+    в приложении Г. Получаем
     $$
     \bar{g}(t)=\dfrac{4}{\pi}\sin(t)+\dfrac{4}{3\pi}\sin(3t)+\dfrac{4}{5\pi}\sin(5t)
     $$
@@ -1263,8 +1263,7 @@
     проведенных рассуждений.
 
 
-    \section{Приложения}
-    \subsection{Приложение 1}
+    \section{Приложение А}
     \begin{lstlisting}[label=task1, caption={Программа для задания 1}]
     % plant parameters
     A = [5 2 7;
@@ -1321,7 +1320,7 @@
     \end{lstlisting}
 
 
-    \subsection{Приложение 2}
+    \section{Приложение Б}
     \begin{lstlisting}[label=task2, caption={Программа для задания 2}]
     % plant parameters
     A = [5 2 7;
@@ -1361,7 +1360,7 @@
     \end{lstlisting}
 
 
-    \subsection{Приложение 3}
+    \section{Приложение В}
     \begin{lstlisting}[label=task3, caption={Программа для задания 3}]
     % plant parameters
     A = [5 2 7;
@@ -1471,7 +1470,7 @@
     \end{lstlisting}
 
 
-    \subsection{Приложение 4}
+    \section{Приложение Г}
     \begin{lstlisting}[label=task4, caption={Программа для задания 4}]
     % plant parameters
     A= [0 1; 0 0];

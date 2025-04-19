@@ -103,4 +103,274 @@
     \tableofcontents
 
     \newpage
+    \section{Задание 1. Исследование LQR}
+    Рассмотрим систему
+    $$
+    \dot{x}=Ax+Bu,\ x(0)=\begin{bmatrix}
+        1\\1\\1
+    \end{bmatrix},\ A=\begin{bmatrix}
+        5 &2 &7\\
+        2 &1 &2\\
+        -2 &-3 &-4
+    \end{bmatrix},\ B=\begin{bmatrix}
+        3\\1\\-1
+    \end{bmatrix};
+    $$
+
+
+    \subsection{Стабилизируемость системы}
+    Проверим систему на стабилизируемость. Найдем собственные
+    числа матрицы $A$. Ранее мы это делали в лабораторной работе
+    №2 <<Модальные регуляторы и наблюдатели>>.
+    Код матлаб представлен в приложении А на листинге \ref{task1}
+    $$
+    \sigma\left( A \right)=\left\{ -2,2\pm i \right\}
+    $$
+    Собственное число $\lambda_1=-2$ асимптотически устойчивое,
+    может быть неуправляемым. Комплексная пара $\lambda_{2,3}=2\pm i$
+    неустойчива, нужна управляемость. Разложим $A$ в ЖНФ в вещественном
+    виде, найдем $B$ в базисе собственных векторов $A$
+    $$
+    A_{J_{re}}=\begin{bmatrix}
+    -2     &0     &0\\
+    0     &2     &1\\
+    0    &-1     &2
+    \end{bmatrix},\ B_{J_{re}}=\begin{bmatrix}
+        0\\3\\-1
+    \end{bmatrix};
+    $$
+    Система не полностью управляема, стабилизируема (собственному
+    значению $-2$ соответствует ноль в матрице $B_{J_{re}}$).
+    
+
+    \subsection{Схема моделирования системы}
+    Построим схему моделирования системы, замкнутой регулятором $u=Kx$,
+    используя \texttt{SIMULINK}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.35]{1task_scheme.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы, замкнутой регулятором}
+        \label{fig:1task_scheme}
+    \end{figure}
+    Снимаем осциллограммы $u(t),x(t),J_{exp}(t)$.
+
+
+    \subsection{Набор пар матриц для исследования}
+    Зададим значения матриц $Q=I,R=1$ (время процесса и затраты на управление принимаем одинаково значимыми) и параметр $\alpha=4$.
+    Таким образом, сформируем набор
+    \begin{align*}
+        &\circ \left( Q=I, R=1 \right),\\
+        &\circ \left( Q=4I, R=1 \right),\\
+        &\circ \left( Q=I, R=4 \right),\\
+        &\circ \left( Q=4I, R=4 \right);
+    \end{align*}
+
+
+    \subsection{Синтез регулятора}
+    Для каждой из пар значений матриц $\left( Q,R \right)$ синтезируем
+    регулятор, минимизирующий функционал качества
+    $$
+    J=\int\limits_{0}^{\infty}\left( x^T(t)Qx(t)+u^T(t)Ru(t) \right)dt
+    $$
+    путем решения соответствующего матричного уравнения Риккати при $\nu=1$
+    $$
+    A^TP+PA+Q-\nu PBR^{-1}B^TP=0,\ K=-R^{-1}B^TP;
+    $$
+    Воспользуемся \texttt{icare} и получим
+    \begin{align*}
+        &\left( Q=I, R=1 \right),\ K_{I,1}=\begin{bmatrix}
+            -1.7473 &-5.4627 &-1.4004
+        \end{bmatrix},\\
+        &\left( Q=4I, R=1 \right),\ K_{4I,1}=\begin{bmatrix}
+            -2.0000 &-6.9630 &-0.9630
+        \end{bmatrix},\\
+        &\left( Q=I, R=4 \right),\ K_{I,4}=\begin{bmatrix}
+            -1.6433 &-4.9797 &-1.5454
+        \end{bmatrix},\\
+        &\left( Q=4I, R=4 \right),\ K_{4I,4}=\begin{bmatrix}
+            -1.7473 &-5.4627 &-1.4004
+        \end{bmatrix};
+    \end{align*}
+    Убедимся, что спектры замкнутых систем принадлежат левой комплексной полуплоскости
+    \begin{align*}
+        &\sigma\left( A+BK_{I,1} \right)=\left\{ -2,-1.4413,-3.8630 \right\},\\
+        &\sigma\left( A+BK_{4I,1} \right)=\left\{ -2,-1,-7 \right\},\\
+        &\sigma\left( A+BK_{I,4} \right)=\left\{ -2,-2.1821\pm0.6216i \right\},\\
+        &\sigma\left( A+BK_{4I,4} \right)=\left\{ -2,-1.4413,-3.8630 \right\};
+    \end{align*}
+    Получили отрицательные действительные части собственных чисел и наличие в спектрах неуправляемого $\lambda_1=-2$.
+    Следовательно, регуляторы синтезированы корректно.
+
+
+    \subsection{Минимизированное значение функционала качества}
+    Вычислим минимизированное значение функционала качества
+    $$
+    J_{min}=x_0^TPx_0
+    $$
+    для каждой пары $\left( Q,R \right)$. $P_i$ получили при решении
+    матричного уравнения типа Риккати
+    $$
+    P_{I,1}=\begin{bmatrix}
+        2.4681   &-3.5514    &2.1055\\
+        -3.5514   &13.4136   &-2.7033\\
+         2.1055   &-2.7033    &2.2129   
+    \end{bmatrix},\ P_{4I,1}=\begin{bmatrix}
+        4.0000   &-7.3333   & 2.6667\\
+   -7.3333   &24.9904   &-3.9726\\
+    2.6667   &-3.9726    &3.0645
+    \end{bmatrix},
+    $$
+    $$
+    P_{I,4}=\begin{bmatrix}
+        8.2455  &-10.2978    &7.8656\\
+  -10.2978   &41.3731   &-9.4392\\
+    7.8656   &-9.4392    &7.9761   
+    \end{bmatrix},\ P_{4I,4}=\begin{bmatrix}
+        9.8723  &-14.2056    &8.4221\\
+  -14.2056   &53.6545  &-10.8133\\
+    8.4221  &-10.8133    &8.8515
+    \end{bmatrix};
+    $$
+    Получаем
+    \begin{align*}
+        &Q=I,R=1:\ J_{min}=9.7962,\\
+        &Q=4I,R=1:\ J_{min}=14.7764,\\
+        &Q=I,R=4:\ J_{min}=33.8518,\\
+        &Q=4I,R=4:\ J_{min}=39.1846;
+    \end{align*}
+
+
+    \subsection{Компьютерное моделирование}
+    Выполним компьютерное моделирование замкнутых систем и для каждого случая построим
+    график управления $u(t)$, вектора состояния замкнутой системы $x(t)$
+    и экспериментального значения функционала качества $J_{exp}(t)$. Моделирование
+    $u(t)$ и $x(t)$ для случая $$Q=4I,R=4,K_{4I,4}=\begin{bmatrix}
+        -1.7473 &-5.4627 &-1.4004
+    \end{bmatrix}$$ делать не будем, так как регулятор для
+    этой пары совпал с регулятором для случая $$Q=I,R=1,K_{I,1}=\begin{bmatrix}
+        -1.7473 &-5.4627 &-1.4004
+    \end{bmatrix},$$ собственные числа тоже одинаковые. Результаты представлены на
+    рис. \ref{fig:1task_u}--\ref{fig:1task_jjjj}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График управления $u(t)$ при $K_{I,1},K_{4I,4}$}
+        \label{fig:1task_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_uu.png}
+        \captionsetup{skip=0pt}
+        \caption{График управления $u(t)$ при $K_{4I,1}$}
+        \label{fig:1task_uu}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_uuu.png}
+        \captionsetup{skip=0pt}
+        \caption{График управления $u(t)$ при $K_{I,4}$}
+        \label{fig:1task_uuu}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График вектора состояния $x(t)$ при $K_{I,1},K_{4I,4}$}
+        \label{fig:1task_x}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_xx.png}
+        \captionsetup{skip=0pt}
+        \caption{График вектора состояния $x(t)$ при $K_{4I,1}$}
+        \label{fig:1task_xx}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_xxx.png}
+        \captionsetup{skip=0pt}
+        \caption{График вектора состояния $x(t)$ при $K_{I,4}$}
+        \label{fig:1task_xxx}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_j.png}
+        \captionsetup{skip=0pt}
+        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{I,1}$}
+        \label{fig:1task_j}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_jj.png}
+        \captionsetup{skip=0pt}
+        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{4I,1}$}
+        \label{fig:1task_jj}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_jjj.png}
+        \captionsetup{skip=0pt}
+        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{I,4}$}
+        \label{fig:1task_jjj}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{1task_jjjj.png}
+        \captionsetup{skip=0pt}
+        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{4I,4}$}
+        \label{fig:1task_jjjj}
+    \end{figure}
+
+
+    \subsection{Сравнение результатов}
+    Когда нам важнее время процесса, чем затраты на управление $(Q>R)$, то
+    ожидаемо управления применяется больше (сравн. рис. \ref{fig:1task_uu}, \ref{fig:1task_uuu}),
+    при этом координаты $x_2(t),x_3(t)$ вектора состояния объекта быстрее сходятся к нулю (сравн. рис. \ref{fig:1task_xx}, \ref{fig:1task_xxx};
+    примечание: координата $x_1(t)$ сравнительно быстрее бы сошлась к нулю при б\'{о}льшем коэффициенте $\alpha$).
+    При $Q<R$ ситуация обратная -- время процесса не так важно, как затраты на управление (сравн. те же графики).
+    При равнозначных (равносильных) значениях $Q,R$ результат усредненный между временем процесса и затратами на управление.
+    Результаты $J_{exp}(t)$ примерно совпадают с вычисленными $J_{min}$. При этом
+    $$J_{min,I,1}=\dfrac{J_{min,4I,4}}{4},\ 9.7962\approx\dfrac{39.1846}{4}=9.79615,$$ то есть при увеличении
+    $Q,R$ в один и тот же коэффициент $\alpha$, минимизированное значение функционала качества увеличится в
+    $\alpha$ раз.
+
+
+    \section{Вывод}
+    ...
+
+
+    \section{Приложение А}
+    \begin{lstlisting}[label=task1, caption={Программа для задания 1}]
+    % plant parameters
+    A = [5 2 7; 2 1 2; -2 -3 -4];
+    B = [3; 1; -1];
+    x0 = [1;1;1];
+
+    % A matrix eigenvalues
+    eig_A = eig(A)
+
+    % Jordan matrix
+    [P_J, A_J] = jordan(A);
+    P_Jre(:,1) = P_J(:,1);
+    P_Jre(:,2) = imag(P_J(:,2));
+    P_Jre(:,3) = real(P_J(:,3));
+    A_Jre = P_Jre^-1 * A * P_Jre
+    B_jre = P_Jre^-1 * B
+
+    % solving Riccati
+    a = 4;
+    Q= a*eye(3);
+    R = a*1;
+
+    % a1
+    [P,K,e]=icare(A,B,Q,R);
+    P
+    K=-inv(R)*B'*P
+    e=eig(A+B*K)
+
+    % quality functional
+    J_min = x0'*P*x0
+    \end{lstlisting}
 \end{document}

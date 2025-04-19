@@ -24,7 +24,6 @@ a = 4;
 Q= a*eye(3);
 R = a*1;
 
-% a1
 [P,K,e]=icare(A,B,Q,R);
 P
 K=-inv(R)*B'*P

@@ -337,6 +337,130 @@
     $\alpha$ раз.
 
 
+    \section{Исследование фильтра Калмана}
+    Рассмотрим систему
+    $$
+    \begin{cases}
+        \dot{x}=Ax+f,\\
+        y=Cx+\xi,
+    \end{cases}\ x(0)=\begin{bmatrix}
+        1\\1\\1\\1
+    \end{bmatrix},\ A=\begin{bmatrix}
+        0 &1 &0 &1\\
+        -26 &-7 &20 &-11\\
+        0 &1 &-1 &2\\
+        16 &4 &-14 &8
+    \end{bmatrix},\ C=\begin{bmatrix}
+        -1 &0 &1 &-1
+    \end{bmatrix},
+    $$
+    где $f(t)$ и $\xi(t)$ -- случайные сигналы (гауссовский белый шум).
+
+
+    \subsection{Обнаруживаемость системы}
+    Проверим собственные числа матрицы $A$. Программа \texttt{MATLAB} представлена
+    в приложении Б на листинге \ref{task2}
+    $$
+    \sigma\left( A \right)=\left\{ \pm i,\pm2i \right\}
+    $$
+    Собственные числа устойчивые, но не асимптотически. Проверим наблюдаемость через
+    вещественную ЖНФ
+    $$
+    A_{J_{re}}=\begin{bmatrix}
+        0    &2   &0    &0\\
+   -2   &0    &0   &0\\
+    0   &0    &0    &1\\
+   0   &0   &-1   &0
+    \end{bmatrix},\ C_{J_{re}}=\begin{bmatrix}
+        -0.5   &-0.5   &-0.5  &0
+    \end{bmatrix};
+    $$
+    Комплексные пары наблюдаемы -- система полностью наблюдаема и стабилизируема.
+
+
+    \subsection{Схема моделирования системы}
+    Построим схему моделирования системы с наблюдателем состояния
+    $$\dot{\hat{x}}=A\hat{x}+L\left( C\hat{x}-y \right)$$
+    Снимаем осциллограммы $x(t),\hat{x}(t),e(t)$
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.45]{2task_scheme.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы с наблюдателем состояния}
+        \label{fig:2task_scheme}
+    \end{figure}
+
+
+    \subsection{Набор пар матриц для исследования}
+    Зададим значения матриц $Q=I,R=1$ (считаем помехи для $x(t)$ и $y(t)$ равнозначными)
+    и параметр $\alpha=100$. Таким образом, сформируем набор
+    \begin{align*}
+        &\circ \left( Q=I, R=1 \right),\\
+        &\circ \left( Q=100I, R=1 \right),\\
+        &\circ \left( Q=I, R=100 \right),\\
+        &\circ \left( Q=100I, R=100 \right);
+    \end{align*}
+
+
+    \subsection{Синтез наблюдателя}
+    Для каждой из пар значений матриц $\left( Q,R \right)$ синтезируем
+    наблюдатель, минимизирующий <<критерий доверия>>
+    $$
+    J=\int\limits_{0}^{\infty}\left( f^T(t)Q^{-1}f(t)+\xi^T(t)R^{-1}\xi(t) \right)dt
+    $$
+    путем решения соответствующего матричного уравнения Риккати при $\nu=1$
+    $$
+    AP+PA^T+Q-\nu PC^TR^{-1}CP=0,\ L=-PC^TR^{-1};
+    $$
+    Воспользуемся \texttt{icare} и получим
+    \begin{align*}
+        &\left( Q=I, R=1 \right),\ L_{I,1}=\begin{bmatrix}
+            0.5233  &-7.6440 &0.0221 &6.4594
+        \end{bmatrix}^T,\\
+        &\left( Q=100I, R=1 \right),\ L_{100I,1}=\begin{bmatrix}
+            7.6954 &-15.6987 &-4.5805 &15.1421
+        \end{bmatrix}^T,\\
+        &\left( Q=I, R=100 \right),\ L_{I,100}=\begin{bmatrix}
+            0.0079 &-1.7287 &0.5099 &2.0960
+        \end{bmatrix}^T,\\
+        &\left( Q=100I, R=4 \right),\ L_{100I,100}=\begin{bmatrix}
+            0.5233  &-7.6440 &0.0221 &6.4594
+        \end{bmatrix}^T;
+    \end{align*}
+    Убедимся, что спектры замкнутых систем принадлежат левой комплексной полуплоскости
+    \begin{align*}
+        &\sigma\left( A+L_{I,1}C \right)=\left\{ -0.3454\pm1.4689i, -3.1349\pm3.3599i \right\},\\
+        &\sigma\left( A+L_{100I,1}C \right)=\left\{ -0.3419\pm1.4702i, -13.3670\pm5.6243i \right\},\\
+        &\sigma\left( A+L_{I,100}C \right)=\left\{ -0.4006\pm1.1676i,-0.3965\pm1.9848i \right\},\\
+        &\sigma\left( A+L_{100I,100}C \right)=\left\{ -0.3454\pm1.4689i, -3.1349\pm3.3599i \right\};
+    \end{align*}
+    Получили отрицательные действительные части собственных чисел.
+    Следовательно, наблюдатели синтезированы корректно.
+
+
+    \subsection{Компьютерное моделирование}
+    Выполним компьютерное моделирование с нулевыми начальными условиями наблюдателя.
+    Построим графики $x(t)$, $\hat{x}(t)$, $e(t)$.
+    Также приведены графики шумов $f(t)$, $\xi(t)$. Наблюдатели $L_{I,1},L_{100I,100}$ совпали аналогично регуляторам в задании 1
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{2task_x_noise.png}
+        \captionsetup{skip=0pt}
+        \caption{График шума $f(t)$}
+        \label{fig:2task_x_noise}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{2task_y_noise.png}
+        \captionsetup{skip=0pt}
+        \caption{График шума $\xi(t)$}
+        \label{fig:2task_y_noise}
+    \end{figure}
+
+
+    ...
+
+
     \section{Вывод}
     ...
 
@@ -364,7 +488,6 @@
     Q= a*eye(3);
     R = a*1;
 
-    % a1
     [P,K,e]=icare(A,B,Q,R);
     P
     K=-inv(R)*B'*P
@@ -372,5 +495,11 @@
 
     % quality functional
     J_min = x0'*P*x0
+    \end{lstlisting}
+
+
+    \section{Приложение Б}
+    \begin{lstlisting}[label=task2, caption={Программа для задания 2}]
+        tbd
     \end{lstlisting}
 \end{document}

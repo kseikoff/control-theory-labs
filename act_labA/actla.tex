@@ -568,7 +568,6 @@
         \caption{График $e_4(t)=x_4(t)-\hat{x}_4(t)$ при $L_{100I,1}$}
         \label{fig:2task_ee4}
     \end{figure}
-    %
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{2task_xxx1.png}
@@ -642,7 +641,7 @@
     меньше шумов, чем в результатах при $Q>R$ (например, сравн. рис. \ref{fig:2task_x2} с \ref{fig:2task_xx2}, \ref{fig:2task_xxx2}).
 
 
-    \subsection{Задание 3. Синтез LQG}
+    \section{Задание 3. Синтез LQG}
     Рассмотрим систему
     $$
     \begin{cases}
@@ -705,14 +704,167 @@
 
     \subsection{Схема моделирования системы}
     Построим схему моделирования системы, замкнутой регулятором, состоящим из
-    наблюдателя состояния и закона управления $u=K\hat{x}$
+    наблюдателя состояния $\dot{\hat{x}}=A\hat{x}+\left(B+LD\right)u+L\left(C\hat{x}-y\right)$ и закона управления $u=K\hat{x}$.
+    Снимаем осциллограммы $u(t),x(t),\hat{x}(t),e(t)$.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{3task_scheme.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы, замкнутой регулятором, состоящим из наблюдателя состояния и закона управления}
+        \label{fig:3task_scheme}
+    \end{figure}
+    
+    
+    \subsection{Пары матриц для регулятора и наблюдателя}
+    Зададимся парами матриц $\left( Q_K,R_K \right)$ для регулятора и $\left( Q_L,R_L \right)$
+    для наблюдателя. Пускай нам важнее затраты на управление, чем время процесса,
+    а наблюдатель меньше доверяет датчикам, чем прошлым состояниям объекта. Тогда
+    $$
+    Q_K=\begin{bmatrix}
+        1 &0 &0 &0\\
+        0 &1 &0 &0\\
+        0 &0 &1 &0\\
+        0 &0 &0 &1
+    \end{bmatrix},\ R_K=\begin{bmatrix}
+        10 &0\\
+        0 &10
+    \end{bmatrix},\ Q_L=\begin{bmatrix}
+        2 &0 &0 &0\\
+        0 &2 &0 &0\\
+        0 &0 &2 &0\\
+        0 &0 &0 &2
+    \end{bmatrix},\ R_L=\begin{bmatrix}
+        1 &0\\
+        0 &1
+    \end{bmatrix};
+    $$
 
 
-    ...
+    \subsection{Синтез регулятора}
+    Синтезируем матрицу регулятора с помощью матричного уравнения типа Риккати аналогично предыдущим заданиям
+    $$
+    K=\begin{bmatrix}
+        -10.2086   &-5.2443    &9.8924   &-5.5605\\
+         0         &0         &0         &0
+    \end{bmatrix},
+    $$
+    $$
+    \sigma\left( A+BK \right)=\left\{ -4,-4.8643,-1.5367,-8.1226 \right\};
+    $$
+    Регулятор синтезирован корректно.
+
+
+    \subsection{Синтез наблюдателя}
+    Синтезируем матрицу коррекции наблюдателя с помощью матричного уравнения типа Риккати
+    аналогично предыдущим заданиям
+    $$
+    L=\begin{bmatrix}
+        1.3660   &-4.7979\\
+   -1.3660   &-6.2121\\
+   -1.3660    &6.2121\\
+   -1.3660   &-4.7979
+    \end{bmatrix},
+    $$
+    $$
+    \sigma\left( A+LC \right)=\left\{ -4,-2.6486,-6.9282,-8.5431 \right\};
+    $$
+    Наблюдатель синтезирован корректно.
+
+
+    \subsection{Компьютерное моделирование}
+    Выполним компьютерное моделирование с нулевыми начальными условиями
+    наблюдателя $$\hat{x}(0)=\begin{bmatrix}
+        0\\ 0\\ 0\\ 0
+    \end{bmatrix}$$ Построим график формируемого регулятором
+    управления $u(t)$, сравнительные графики $x(t)$ и $\hat{x}(t)$,
+    а также график ошибки наблюдателя $e(t) = x(t) -\hat{x}(t)$.
+    Шумы примем такими
+    $$
+    f(t)=0.1\sin\left( \dfrac{\pi}{3}t \right)-0.3\cos\left( \dfrac{\pi}{3}t \right),
+    $$
+    $$
+    \xi(t)=-0.5\sin\left( \dfrac{\pi}{3}t \right)+0.2\cos\left( \dfrac{\pi}{3}t \right);
+    $$
+    Результаты представлены на рис. \ref{fig:3task_u}--\ref{fig:3task_e4}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График управления $u(t)$}
+        \label{fig:3task_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_x1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x_1(t),\hat{x}_1(t)$}
+        \label{fig:3task_x1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_e1.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_1(t)=x_1(t)-\hat{x}_1(t)$}
+        \label{fig:3task_e1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_x2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x_2(t),\hat{x}_2(t)$}
+        \label{fig:3task_x2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_e2.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_2(t)=x_2(t)-\hat{x}_2(t)$}
+        \label{fig:3task_e2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_x3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x_3(t),\hat{x}_3(t)$}
+        \label{fig:3task_x3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_e3.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_3(t)=x_3(t)-\hat{x}_3(t)$}
+        \label{fig:3task_e3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_x4.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x_4(t),\hat{x}_4(t)$}
+        \label{fig:3task_x4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{3task_e4.png}
+        \captionsetup{skip=0pt}
+        \caption{График $e_4(t)=x_4(t)-\hat{x}_4(t)$}
+        \label{fig:3task_e4}
+    \end{figure}
+
+    
+    \subsection{Описание результатов}
+    Наблюдатель достаточно хорошо воспроизводит истинное поведение системы, но присутствует устоявшаяся ошибка.
+    Регулятор не привел $x(t)$ к нулю, но ему удалось стабилизировать систему
+    к незатухающим колебаниям (без роста и убывания амплитуды). По управлению
+    видим некоторое перерегулирование в начале.
 
 
     \section{Вывод}
-    ...
+    В ходе выполнения работы были рассмотрены виды оптимальных
+    регуляторов и наблюдателей -- LQR, фильтр Калмана, LQG.
+    Для LQR и фильтра Калмана были исследованы различные пары
+    значений матриц, использующихся для решения матричного уравнения типа Риккати.
+    В каждом задании было проведено моделирование системы,
+    результаты были сравнены. Полученные графики подтверждают корректность расчетов и рассуждений.
 
 
     \section{Приложение А}
@@ -783,6 +935,42 @@
 
     \section{Приложение В}
     \begin{lstlisting}[label=task3, caption={Программа для задания 3}]
-        tbd
+    % plant parameters
+    A = [2 0 -4 2;
+         0 2 -2 4;
+        -4 -2 2 0;
+         2 4 0 2];
+    B= [2 0;
+        4 0;
+        6 0;
+        8 0];
+    C= [-2 2 2 2;
+        2 0 0 2];
+    D=[0 3;
+    0 1];
+
+    % A matrix eigenvalues
+    eig_A = eig(A)
+
+    % Jordan matrix
+    [P_J, A_J] = jordan(A)
+    B_J = P_J^-1 * B
+    C_J = C*P_J
+
+    % regulator
+    Qr= eye(4);
+    Rr = 10*eye(2);
+
+    [Pr,K,e]=icare(A,B,Qr,Rr);
+    K=-inv(Rr)*B'*Pr
+    ek=eig(A+B*K)
+
+    % observer
+    Ql= 2*eye(4);
+    Rl = eye(2);
+
+    [Pl,L,e]=icare(A',C',Ql,Rl);
+    L=-Pl*C'*Rl^-1
+    el=eig(A+L*C)
     \end{lstlisting}
 \end{document}

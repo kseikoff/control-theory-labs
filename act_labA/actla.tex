@@ -233,12 +233,12 @@
     \end{bmatrix};
     $$
     Получаем
-    \begin{align*}
-        &Q=I,R=1:\ J_{min}=9.7962,\\
-        &Q=4I,R=1:\ J_{min}=14.7764,\\
-        &Q=I,R=4:\ J_{min}=33.8518,\\
-        &Q=4I,R=4:\ J_{min}=39.1846;
-    \end{align*}
+    \begin{align}
+        &Q=I,R=1:\ J_{min}=9.7962, \label{eq:jminI1}\\
+        &Q=4I,R=1:\ J_{min}=14.7764, \label{eq:jmin4I1}\\
+        &Q=I,R=4:\ J_{min}=33.8518, \label{eq:jminI4}\\
+        &Q=4I,R=4:\ J_{min}=39.1846; \label{eq:jmin4I4}
+    \end{align}
 
 
     \subsection{Компьютерное моделирование}
@@ -298,28 +298,28 @@
         \centering
         \includegraphics[scale=0.75]{1task_j.png}
         \captionsetup{skip=0pt}
-        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{I,1}$}
+        \caption{График $J_{exp}(t)$ при $K_{I,1}$; $J_{exp}\rightarrow_{t\to5} 9.796131$}
         \label{fig:1task_j}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{1task_jj.png}
         \captionsetup{skip=0pt}
-        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{4I,1}$}
+        \caption{График $J_{exp}(t)$ при $K_{4I,1}$; $J_{exp}\rightarrow_{t\to5} 14.775224$}
         \label{fig:1task_jj}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{1task_jjj.png}
         \captionsetup{skip=0pt}
-        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{I,4}$}
+        \caption{График $J_{exp}(t)$ при $K_{I,4}$; $J_{exp}\rightarrow_{t\to5} 33.851845$}
         \label{fig:1task_jjj}
     \end{figure}
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{1task_jjjj.png}
         \captionsetup{skip=0pt}
-        \caption{График экспериментального значения функционала качества $J(t)$ при $K_{4I,4}$}
+        \caption{График $J_{exp}(t)$ при $K_{4I,4}$; $J_{exp}\rightarrow_{t\to5} 39.184526$}
         \label{fig:1task_jjjj}
     \end{figure}
 
@@ -331,8 +331,8 @@
     примечание: координата $x_1(t)$ сравнительно быстрее бы сошлась к нулю при б\'{о}льшем коэффициенте $\alpha$).
     При $Q<R$ ситуация обратная -- время процесса не так важно, как затраты на управление (сравн. те же графики).
     При равнозначных (равносильных) значениях $Q,R$ результат усредненный между временем процесса и затратами на управление.
-    Результаты $J_{exp}(t)$ примерно совпадают с вычисленными $J_{min}$. При этом
-    $$J_{min,I,1}=\dfrac{J_{min,4I,4}}{4},\ 9.7962\approx\dfrac{39.1846}{4}=9.79615,$$ то есть при увеличении
+    Результаты $J_{exp}(t)$ примерно совпадают с вычисленными $J_{min}$ (сравн. $J_{exp,t\to5}$ под рис. \ref{fig:1task_j}--\ref{fig:1task_jjjj} с вычисленными (\ref{eq:jminI1})--(\ref{eq:jmin4I4})). При этом
+    $$J_{min,I,1}=\dfrac{J_{min,4I,4}}{4},\ 9.7962\approx\dfrac{39.184526}{4}=9.7961315,$$ то есть при увеличении
     $Q,R$ в один и тот же коэффициент $\alpha$, минимизированное значение функционала качества увеличится в
     $\alpha$ раз.
 

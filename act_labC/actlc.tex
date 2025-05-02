@@ -1,0 +1,360 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[left=25mm, top=25mm, right=25mm, bottom=25mm]{geometry}
+\usepackage{cmap}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{etoolbox}
+\usepackage{titlesec}
+\pagestyle{plain}
+\patchcmd{\tableofcontents}{\contentsname}{\centering\contentsname}{}{}
+\titleformat{\section}[block]{\normalfont\large\bfseries\centering}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\normalsize\bfseries\centering}{}{0pt}{}
+\allowdisplaybreaks
+\graphicspath{{src/images/}}
+\usetikzlibrary{patterns}
+\definecolor{LightGray}{gray}{0.95}
+\definecolor{LightGray2}{gray}{0.7}
+\lstdefinestyle{code}{
+    language=MATLAB, % replace language here
+    basicstyle=\footnotesize\ttfamily,
+    % numbers=left,
+    % numberstyle=\scriptsize\color{gray},
+    % stepnumber=1,
+    % numbersep=5pt,
+    backgroundcolor=\color{LightGray},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    frame=single,
+    rulecolor=\color{LightGray2},
+    linewidth=\linewidth,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{purple},
+    escapeinside={\%*}{*)},
+    inputencoding=utf8x,
+    xleftmargin=0pt,
+    framexleftmargin=0pt,
+    framexrightmargin=0pt
+}
+\lstset{style=code}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={contents setup},
+    pdfpagemode=FullScreen,
+}
+
+
+\begin{document}
+    \begin{titlepage}
+
+        \begin{center}
+        Федеральное государственное автономное образовательное учреждение высшего образования
+        «Национальный Исследовательский Университет ИТМО»
+        \vfill
+        
+        \includegraphics[width=0.3\textwidth]{itmo.png} % requires /src/images/itmo.png
+
+        {\large\bf ЛАБОРАТОРНАЯ РАБОТА №C}\\
+        {\large\bf ПРЕДМЕТ «ТЕОРИЯ АВТОМАТИЧЕСКОГО УПРАВЛЕНИЯ»}\\
+        {\large\bf ТЕМА «СЛЕЖЕНИЕ И КОМПЕНСАЦИЯ: ФРАНКИС, ДЭВИСОН И НАБЛЮДАТЕЛИ»}\\
+        Вариант №2
+        \vfill
+
+        \begin{flushright}
+            \begin{minipage}{.45\textwidth}
+            {
+                \hbox{Преподаватель:}
+                \hbox{Пашенко А. В.}
+                \hbox{}
+                \hbox{Выполнил:}
+                \hbox{Румянцев А. А.}
+                \hbox{}
+                \hbox{Факультет: СУиР}
+                \hbox{Группа: R3341}
+                \hbox{Поток: ТАУ R22 бак 1.1.1}
+            }
+            \end{minipage}
+        \end{flushright}
+        \vfill
+  
+        Санкт-Петербург\\
+        2025
+        \end{center}
+    \end{titlepage}
+    
+    \tableofcontents
+
+    \newpage
+    \section{Задание 1. Слежение и компенсация: матричные уравнения}
+    Рассмотрим систему
+    $$
+    \begin{cases}
+        \dot{x}=Ax+Bu+B_ff,\\
+        y=Cx+Du+D_ff,
+    \end{cases} x(0)=\begin{bmatrix}
+        0\\0\\0
+    \end{bmatrix},
+    $$
+    генератор внешнего возмущения
+    $$
+    \begin{cases}
+        \dot{w}=\Gamma_f w_f,\\
+        f=Y_fw_f,
+    \end{cases} w_f(0)=\begin{bmatrix}
+        1\\1\\1\\1\\
+    \end{bmatrix}
+    $$
+    и генератор задающего воздействия
+    $$
+    \begin{cases}
+        \dot{w}_g=\Gamma_gw_g,\\
+        g=Y_gw_g,
+    \end{cases} w_g(0)
+    $$
+    при параметрах объекта управления
+    $$
+    A=\begin{bmatrix}
+        5 &2 &7\\
+        2 &1 &2\\
+        -2 &-3 &-4
+    \end{bmatrix},\ B=\begin{bmatrix}
+        3\\1\\-1
+    \end{bmatrix},\ B_f=\begin{bmatrix}
+        -4 &-1\\
+        0 &0\\
+        4 &0
+    \end{bmatrix},\ C=\begin{bmatrix}
+        2\\0\\3
+    \end{bmatrix}^T,\ D=2,\ D_f=\begin{bmatrix}
+        8\\3
+    \end{bmatrix}^T
+    $$
+    и параметрах генератора
+    $$
+    \Gamma_f=\begin{bmatrix}
+        25 &6 &-20 &11\\
+        14 &3 &-10 &4\\
+        40 &11 &-31 &17\\
+        6 &4 &-4 &3
+    \end{bmatrix},\ Y_f=\begin{bmatrix}
+        8 &-20\\
+        2 &-6\\
+        -6 &16\\
+        4 &-9
+    \end{bmatrix}^T,\ g(t)=4\sin\left( t \right)-1;
+    $$
+    Программа для задания 1 находится в приложении А на листинге \ref{task1}
+
+
+    \subsection{Характер внешнего возмущения}
+    Найдем собственные числа матрицы $\Gamma_f$,
+    чтобы определить характер внешнего возмущения
+    $$
+    \sigma\left( \Gamma_f \right)=\left\{ \pm i,\pm3i \right\}
+    $$
+    Спектр состоит только из мнимых чисел. Характер возмущения --
+    гармоники без роста и затухания амплитуды с течением времени.
+
+
+    \subsection{Генератор задающего воздействия}
+    $$
+    \Gamma_g=\begin{bmatrix}
+        0 &1 &0\\
+        -1 &0 &0\\
+        0 &0 &0
+    \end{bmatrix},\ Y_g=\begin{bmatrix}
+        4 &0 &-1
+    \end{bmatrix},\ w_g(0)=\begin{bmatrix}
+        0\\1\\1
+    \end{bmatrix};
+    $$
+
+
+    \subsection{Схема моделирования системы}
+    ...
+
+
+    \subsection{Синтез компоненты обратной связи}
+    Исследуем систему на стабилизируемость
+    $$
+    \sigma\left( A \right)=\left\{ -2,2\pm i \right\},\ A_{J_re}=\begin{bmatrix}
+        -2 &0 &0\\
+        0 &2 &1\\
+        0 &-1 &2
+    \end{bmatrix},\ B_{J_re}=\begin{bmatrix}
+        0\\3\\-1
+    \end{bmatrix};
+    $$
+    Система не полностью управляема, стабилизируема. Максимальная степень
+    устойчивости $\alpha=2$.
+
+
+    Синтезируем компоненту обратной связи $K$ с помощью матричного уравнения
+    типа Риккати
+    $$
+    A^TP+PA+Q-\nu PBR^{-1}B^TP+2\alpha P=0,\,K=-R^{-1}B^TP;
+    $$
+    при $Q=I,\nu=2,R=1,\alpha=2$. Получаем
+    $$
+    K=\begin{bmatrix}
+        2.1111  &-13.4448    &1.6787
+    \end{bmatrix},$$
+    $$
+    \sigma\left( A+BK \right)=\left\{ -2,-2.3951\pm 4.3138i \right\};
+    $$
+    Желаемая степень устойчивости достигнута -- регулятор синтезирован корректно.
+
+
+    \subsection{Общий вид матричных уравнений Франкиса-Дэвисона}
+    Матричные уравнения Франкиса-Дэвисона в общем виде представляются системой
+    $$
+    \begin{cases}
+        AP+BK+Y_1=P\Gamma,\\
+        CP+DK+Y_2=0;
+    \end{cases}
+    $$
+    Решение относительно $P$ и $K$ для произвольных
+    $Y_1$ и $Y_2$ существует, если
+    $$
+    \text{rank}\begin{bmatrix}
+        A-I\lambda_{i\Gamma} &B\\
+        C &D
+    \end{bmatrix}=\text{число строк}
+    $$
+    $\lambda_{i\Gamma}$ -- собственные числа $\Gamma$.
+
+
+    \subsection{Синтез компоненты слежения}
+    ...
+
+
+    \subsection{Синтез компоненты компенсации по входу}
+    ...
+
+
+    \subsection{Компьютерное моделирование}
+    ...
+
+
+    \subsection{Сравнение результатов}
+    ...
+
+
+    \section{Приложение А}
+    \begin{lstlisting}[label=task1, caption={Программа для задания 1}]
+    % plant parameters
+    A=[5 2 7;
+       2 1 2;
+      -2 -3 -4];
+    B=[3;1;-1];
+    Bf=[-4 -1;
+        0 0;
+        4 0];
+    C=[2 0 3];
+    D=2;
+    Df=[8 3];
+
+    Gf=[25 6 -20 11;
+        14 3 -10 4;
+        40 11 -31 17;
+        6 4 -4 3];
+    Yf=[8 2 -6 4;
+       -20 -6 16 -9];
+
+    Gg = [0 1 0;
+         -1 0 0;
+          0 0 0];
+    Yg=[4 0 -1];
+    wg0 = [0;1;1];
+
+    % A eigenvalues
+    A_eig = eig(A)
+
+    % Jordan matrix
+    [P1, J] = jordan(A);
+    Pjre(:,1) = P1(:,1);
+    Pjre(:,2) = imag(P1(:,2));
+    Pjre(:,3) = real(P1(:,3))
+    Pjre_inv = Pjre^-1
+    Aj_re = Pjre_inv * A * Pjre
+    B_jre = Pjre_inv * B
+
+    % G eigenvalues
+    Gf_eig = eig(Gf)
+    Gg_eig = eig(Gg)
+
+    % solving Riccati: feedback comp
+    Q = eye(3);
+    v = 2;
+    R = 1;
+    a = 2;
+
+    Aa = A + eye(3) * (a-0.00000000000001);
+    [Pk,K,e]=icare(Aa,sqrt(v)*B,Q,R);
+    K=-inv(R)*B'*Pk
+    eK=eig(A+B*K)
+
+    % check Frankis-Davison: Kg
+    check_Kg1 = [A-eye(3)*Gg_eig(1) B; C D]
+    rank(check_Kg1)
+
+    check_Kg2 = [A-eye(3)*Gg_eig(2) B; C D]
+    rank(check_Kg2)
+
+    check_Kg3 = [A-eye(3)*Gg_eig(3) B; C D]
+    rank(check_Kg3)
+
+    % solving Frankis-Davison: Kg
+    cvx_begin sdp
+    variable Pg(3,3)
+    variable Kg(1,3)
+    Pg*Gg-A*Pg == B*Kg;
+    Yg-C*Pg == D*Kg;
+    cvx_end
+
+    Pg=Pg
+    Kg=Kg
+
+    % check Frankis-Davison: Kf
+    check_Kf1 = [A-eye(3)*Gf_eig(1) B; C D]
+    rank(check_Kf1)
+
+    check_Kf2 = [A-eye(3)*Gf_eig(2) B; C D]
+    rank(check_Kf2)
+
+    check_Kf3 = [A-eye(3)*Gf_eig(3) B; C D]
+    rank(check_Kf3)
+
+    check_Kf4 = [A-eye(3)*Gf_eig(4) B; C D]
+    rank(check_Kf4)
+
+    % solving Frankis-Davison: Kf
+    cvx_begin sdp
+    variable Pf(3,4)
+    variable Kf(1,4)
+    Pf*Gf-A*Pf-Bf*Yf == B*Kf;
+    -C*Pf == D*Kf;
+    cvx_end
+
+    Pf=Pf
+    Kf=Kf
+    \end{lstlisting}
+\end{document}

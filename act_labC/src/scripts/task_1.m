@@ -51,12 +51,15 @@ K=-inv(R)*B'*Pk
 eK=eig(A+B*K)
 
 % check Frankis-Davison: Kg
+Gg_eig(1)
 check_Kg1 = [A-eye(3)*Gg_eig(1) B; C D]
 rank(check_Kg1)
 
+Gg_eig(2)
 check_Kg2 = [A-eye(3)*Gg_eig(2) B; C D]
 rank(check_Kg2)
 
+Gg_eig(3)
 check_Kg3 = [A-eye(3)*Gg_eig(3) B; C D]
 rank(check_Kg3)
 
@@ -64,23 +67,27 @@ rank(check_Kg3)
 cvx_begin sdp
 variable Pg(3,3)
 variable Kg(1,3)
-Pg*Gg-A*Pg == B*Kg;
-Yg-C*Pg == D*Kg;
+Pg*Gg-(A+B*K)*Pg == B*Kg;
+(C+D*K)*Pg+D*Kg == Yg;
 cvx_end
 
 Pg=Pg
 Kg=Kg
 
 % check Frankis-Davison: Kf
+Gf_eig(1)
 check_Kf1 = [A-eye(3)*Gf_eig(1) B; C D]
 rank(check_Kf1)
 
+Gf_eig(2)
 check_Kf2 = [A-eye(3)*Gf_eig(2) B; C D]
 rank(check_Kf2)
 
+Gf_eig(3)
 check_Kf3 = [A-eye(3)*Gf_eig(3) B; C D]
 rank(check_Kf3)
 
+Gf_eig(4)
 check_Kf4 = [A-eye(3)*Gf_eig(4) B; C D]
 rank(check_Kf4)
 
@@ -88,8 +95,8 @@ rank(check_Kf4)
 cvx_begin sdp
 variable Pf(3,4)
 variable Kf(1,4)
-Pf*Gf-A*Pf-Bf*Yf == B*Kf;
--C*Pf == D*Kf;
+Pf*Gf-(A+B*K)*Pf-Bf*Yf == B*Kf;
+(C+D*K)*Pf+D*Kf == -Df*Yf;
 cvx_end
 
 Pf=Pf

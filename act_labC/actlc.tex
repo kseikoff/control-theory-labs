@@ -175,6 +175,9 @@
 
 
     \subsection{Генератор задающего воздействия}
+    Через модель осциллятора
+    $x(t)=A\cos\left(\omega t \right)=0,y(t)=A\sin\left( \omega t \right)=4\sin\left( t \right)$ и $\dot{z}(t)=0,z(t)=-1$
+    при $g(t)=4\sin\left( t \right)-1$ определим $\Gamma_g,Y_g,w_g(0)$
     $$
     \Gamma_g=\begin{bmatrix}
         0 &1 &0\\
@@ -189,7 +192,23 @@
 
 
     \subsection{Схема моделирования системы}
-    ...
+    Система замкнута регулятором
+    $$
+    u=Kx+K_gw_g+K_fw_f,
+    $$
+    обеспечивающим выполнение целевого условия
+    $$
+    \lim\limits_{t\to\infty}|g(t)-y(t)|=0;
+    $$
+    Построим схему моделирования системы в \texttt{SIMULINK}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{1task_scheme.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы, замкнутой регулятором}
+        \label{fig:1task_scheme}
+    \end{figure}
+    \noindent Строим графики $f(t),g(t),u(t),x(t),y(t),e(t)$.
 
 
     \subsection{Синтез компоненты обратной связи}
@@ -234,7 +253,7 @@
     Решение относительно $P$ и $K$ для произвольных
     $Y_1$ и $Y_2$ существует, если
     $$
-    \text{rank}\begin{bmatrix}
+    \text{rank}\left( \mathcal{M} \right)=\text{rank}\begin{bmatrix}
         A-I\lambda_{i\Gamma} &B\\
         C &D
     \end{bmatrix}=\text{число строк}
@@ -243,19 +262,203 @@
 
 
     \subsection{Синтез компоненты слежения}
-    ...
+    Проверим условие существования решения
+    системы уравнений
+    \begin{align}
+    \begin{cases}
+    P_g\Gamma_g-\left( A+BK \right)P_g=BK_g,\\
+    \left( C+DK \right)P_g+DK_g=Y_g;
+    \end{cases} \label{eq:Kg}
+    \end{align}
+    Собственные числа матрицы $\Gamma_g$
+    $$
+    \sigma\left( \Gamma_g \right)=\left\{ 0,\pm i \right\}
+    $$
+    Проверим ранги матриц. Выясним количество строк
+    $$A_{3\times3},I_{3\times3},B_{3\times1},C_{1\times3},D_{1\times1}\Rightarrow \mathcal{M}_{4\times4}$$
+    Сравниваем ранг с $n=4$
+    $$
+    \text{rank}\begin{bmatrix}
+        A-Ii &B\\
+        C &D
+    \end{bmatrix}=4,
+    $$
+    $$
+    \text{rank}\begin{bmatrix}
+        A+Ii &B\\
+        C &D
+    \end{bmatrix}=4,
+    $$
+    $$
+    \text{rank}\begin{bmatrix}
+        A+0I &B\\
+        C &D
+    \end{bmatrix}=4;
+    $$
+    Условие выполнено. Синтезируем компоненту слежения $K_g$ через уравнения (\ref{eq:Kg}).
+    Получаем
+    $$
+    K_g=
+    \begin{bmatrix}
+        -0.0932   &18.6951   &-8.1152
+    \end{bmatrix}
+    $$
 
 
     \subsection{Синтез компоненты компенсации по входу}
-    ...
+    Проверим условие существования решения системы уравнений
+    \begin{align}
+        \begin{cases}
+            P_f\Gamma_f-\left( A+BK \right)P_f-B_fY_f=BK_f,\\
+            \left( C+DK \right)P_f+DK_f=-D_fY_f;
+        \end{cases}\label{eq:Kf}
+    \end{align}
+    Собственные числа матрицы $\Gamma_f$
+    $$
+    \sigma\left( \Gamma_f \right)=\left\{ \pm i,\pm3i \right\}
+    $$
+    Сравниваем ранг с $n=4$
+    $$
+    \text{rank}\begin{bmatrix}
+        A-Ii &B\\
+        C &D
+    \end{bmatrix}=4,
+    $$
+    $$
+    \text{rank}\begin{bmatrix}
+        A+Ii &B\\
+        C &D
+    \end{bmatrix}=4,
+    $$
+    $$
+    \text{rank}\begin{bmatrix}
+        A-3Ii &B\\
+        C &D
+    \end{bmatrix}=4,
+    $$
+    $$
+    \text{rank}\begin{bmatrix}
+        A+3Ii &B\\
+        C &D
+    \end{bmatrix}=4;
+    $$
+    Условие выполнено. Синтезируем компоненту компенсации $K_f$ через уравнения (\ref{eq:Kf}).
+    Получаем
+    $$
+    K_f=\begin{bmatrix}
+        -725.9021 &-225.1491  &586.1685 &-359.3897
+    \end{bmatrix}
+    $$
 
 
     \subsection{Компьютерное моделирование}
-    ...
+    Промоделируем систему при $u=0,u=Kx,u=Kx+K_fw_f,u=Kx+K_gw_g$ и $u=Kx+K_gw_g+K_fw_f$
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_f.png}
+            \caption{График возмущений $f(t)$}
+            \label{fig:1task_f}
+        \end{subfigure}
+        \hspace{5mm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_g.png}
+            \caption{График задающего воздействия $g(t)$}
+            \label{fig:1task_g}
+        \end{subfigure}
+        \caption{Графики $f(t),g(t)$ для разомкнутой системы $\left( u=0 \right)$}
+        \label{fig:1task_fg}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_x.png}
+            \caption{График вектора состояния ОУ $x(t)$}
+            \label{fig:1task_x}
+        \end{subfigure}
+        \hspace{5mm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_y.png}
+            \caption{График выхода системы $y(t)$}
+            \label{fig:1task_y}
+        \end{subfigure}
+        \caption{Графики $x(t),y(t)$ для разомкнутой системы $\left( u=0 \right)$}
+        \label{fig:1task_xy}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_x_kx.png}
+            \caption{График $x(t)$ при $u=Kx$}
+            \label{fig:1task_x_kx}
+        \end{subfigure}
+        \hspace{5mm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_x_kxkf.png}
+            \caption{График $x(t)$ при $u=Kx+K_fw_f$}
+            \label{fig:1task_x_kxkf}
+        \end{subfigure}
+        \caption{Графики $x(t)$ для замкнутой системы}
+        \label{fig:1task_x_kx_kxkf}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_x_kxkg.png}
+            \caption{График $x(t)$ при $u=Kx+K_gw_g$}
+            \label{fig:1task_x_kxkg}
+        \end{subfigure}
+        \hspace{5mm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_x_kxkgkf.png}
+            \caption{График $x(t)$ при $Kx,K_g,K_f$}
+            \label{fig:1task_x_kxkgkf}
+        \end{subfigure}
+        \caption{Графики $x(t)$ для замкнутой системы}
+        \label{fig:1task_x_kxkg_kxkgkf}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_u.png}
+            \caption{Сравнение графиков $u(t)$}
+            \label{fig:1task_u}
+        \end{subfigure}
+        \hspace{5mm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{1task_yy.png}
+            \caption{Сравнение графиков $y(t)$}
+            \label{fig:1task_yy}
+        \end{subfigure}
+        \caption{Графики $u(t),y(t)$ для замкнутой системы}
+        \label{fig:1task_u_yy}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{1task_e.png}
+        \caption{Сравнение графиков $e(t)=g(t)-y(t)$ для замкнутой системы}
+        \label{fig:1task_e}
+    \end{figure}
 
 
     \subsection{Сравнение результатов}
-    ...
+    При отсутствии управления объект управления разошелся.
+    При наличии в управлении всех компонент выход системы $y(t)$
+    удалось свести к задающему воздействию $g(t)$. Результат
+    при $K,K_f$ схож с результатом при всех компонентах.
+    Также схожи результаты при $K$ и $K,K_g$.
 
 
     \section{Приложение А}
@@ -277,7 +480,7 @@
         40 11 -31 17;
         6 4 -4 3];
     Yf=[8 2 -6 4;
-       -20 -6 16 -9];
+    -20 -6 16 -9];
 
     Gg = [0 1 0;
          -1 0 0;
@@ -313,12 +516,15 @@
     eK=eig(A+B*K)
 
     % check Frankis-Davison: Kg
+    Gg_eig(1)
     check_Kg1 = [A-eye(3)*Gg_eig(1) B; C D]
     rank(check_Kg1)
 
+    Gg_eig(2)
     check_Kg2 = [A-eye(3)*Gg_eig(2) B; C D]
     rank(check_Kg2)
 
+    Gg_eig(3)
     check_Kg3 = [A-eye(3)*Gg_eig(3) B; C D]
     rank(check_Kg3)
 
@@ -326,23 +532,27 @@
     cvx_begin sdp
     variable Pg(3,3)
     variable Kg(1,3)
-    Pg*Gg-A*Pg == B*Kg;
-    Yg-C*Pg == D*Kg;
+    Pg*Gg-(A+B*K)*Pg == B*Kg;
+    (C+D*K)*Pg+D*Kg == Yg;
     cvx_end
 
     Pg=Pg
     Kg=Kg
 
     % check Frankis-Davison: Kf
+    Gf_eig(1)
     check_Kf1 = [A-eye(3)*Gf_eig(1) B; C D]
     rank(check_Kf1)
 
+    Gf_eig(2)
     check_Kf2 = [A-eye(3)*Gf_eig(2) B; C D]
     rank(check_Kf2)
 
+    Gf_eig(3)
     check_Kf3 = [A-eye(3)*Gf_eig(3) B; C D]
     rank(check_Kf3)
 
+    Gf_eig(4)
     check_Kf4 = [A-eye(3)*Gf_eig(4) B; C D]
     rank(check_Kf4)
 
@@ -350,8 +560,8 @@
     cvx_begin sdp
     variable Pf(3,4)
     variable Kf(1,4)
-    Pf*Gf-A*Pf-Bf*Yf == B*Kf;
-    -C*Pf == D*Kf;
+    Pf*Gf-(A+B*K)*Pf-Bf*Yf == B*Kf;
+    (C+D*K)*Pf+D*Kf == -Df*Yf;
     cvx_end
 
     Pf=Pf

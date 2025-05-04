@@ -105,30 +105,31 @@
     \newpage
     \section{Задание 1. Слежение и компенсация: матричные уравнения}
     Рассмотрим систему
-    $$
+    \begin{align}
     \begin{cases}
         \dot{x}=Ax+Bu+B_ff,\\
         y=Cx+Du+D_ff,
-    \end{cases} x(0)=\begin{bmatrix}
+    \end{cases}
+    x(0)=\begin{bmatrix}
         0\\0\\0
-    \end{bmatrix},
-    $$
+    \end{bmatrix},\label{eq:sys1}
+    \end{align}
     генератор внешнего возмущения
-    $$
+    \begin{align}
     \begin{cases}
         \dot{w}=\Gamma_f w_f,\\
         f=Y_fw_f,
     \end{cases} w_f(0)=\begin{bmatrix}
         1\\1\\1\\1\\
-    \end{bmatrix}
-    $$
+    \end{bmatrix}\label{eq:sys12}
+    \end{align}
     и генератор задающего воздействия
-    $$
+    \begin{align}
     \begin{cases}
         \dot{w}_g=\Gamma_gw_g,\\
         g=Y_gw_g,
-    \end{cases} w_g(0)
-    $$
+    \end{cases} w_g(0)\label{eq:sys13}
+    \end{align}
     при параметрах объекта управления
     $$
     A=\begin{bmatrix}
@@ -197,9 +198,9 @@
     u=Kx+K_gw_g+K_fw_f,
     $$
     обеспечивающим выполнение целевого условия
-    $$
-    \lim\limits_{t\to\infty}|g(t)-y(t)|=0;
-    $$
+    \begin{align}
+    \lim\limits_{t\to\infty}|g(t)-y(t)|=0;\label{eq:aim}
+    \end{align}
     Построим схему моделирования системы в \texttt{SIMULINK}
     \begin{figure}[H]
         \centering
@@ -461,6 +462,144 @@
     Также схожи результаты при $K$ и $K,K_g$.
 
 
+    \section{Задание 2. Слежение и компенсация по выходу}
+    Рассмотрим систему (\ref{eq:sys1}),
+    генератор внешнего возмущения (\ref{eq:sys12}) и
+    генератор задающего воздействия (\ref{eq:sys13}).
+    Матрицы $K,K_g,K_f$ используем как в первом задании
+    \begin{align*}
+    &K=\begin{bmatrix}
+        2.1111  &-13.4448    &1.6787
+    \end{bmatrix},\\
+    &K_g=
+    \begin{bmatrix}
+        -0.0932   &18.6951   &-8.1152
+    \end{bmatrix},\\
+    &K_f=\begin{bmatrix}
+        -725.9021 &-225.1491  &586.1685 &-359.3897
+    \end{bmatrix};
+    \end{align*}
+    Программа для задания 2 представлена в приложении Б на листинге \ref{task2}.
+
+
+    \subsection{Схема моделирования системы}
+    Система замкнута регулятором,
+    состоящим из наблюдателя задающего воздействия,
+    наблюдателя расширенной размерности
+    и закона управления
+    $$
+    u=K\hat{x}+K_g\hat{w}_g+K_f\hat{w}_f,
+    $$
+    обеспечивающим выполнение целевого условия (\ref{eq:aim}).
+    Строим график формируемого регулятором
+    управления $u(t)$, сравнительные графики
+    $$
+    \begin{bmatrix}
+        w_f(t)\\x(t)
+    \end{bmatrix}\text{ и }\begin{bmatrix}
+        \hat{w}_f(t)\\ \hat{x}(t)
+    \end{bmatrix},
+    $$
+    график ошибки наблюдателя расширенной размерности
+    $$
+    e_f(t)=\begin{bmatrix}
+        w_f(t)\\x(t)
+    \end{bmatrix}-\begin{bmatrix}
+        \hat{w}_f(t)\\ \hat{x}(t)
+    \end{bmatrix},
+    $$
+    сравнительные графики $w_g(t)$ и $\hat{w}_g(t)$, график
+    ошибки наблюдателя задающего воздействия $e_g(t)=w_g(t)-\hat{w}_g(t)$,
+    график выхода $y(t)$ и график ошибки управления $e(t)=g(t)-y(t)$
+    ...
+
+
+    \subsection{Наблюдатель задающего воздействия}
+    Зададим желаемую динамику наблюдателя $\left( \Gamma,Y \right)$, где $\Gamma$ -- гурвицева
+    $$
+    \Gamma=\begin{bmatrix}
+        -1 &0 &0\\
+        0 &-1 &0\\
+        0 &0 &-1
+    \end{bmatrix},\ Y=\begin{bmatrix}
+        1\\1\\1
+    \end{bmatrix};
+    $$
+    $\Gamma$ определяет скорость схождения ошибки $\tilde{w}_g=w_g-\hat{w}_g$ к 0. Цель
+    $$
+    \lim\limits_{t\to\infty}||w_g(t)-\hat{w}_g(t)||=0
+    $$
+    Наблюдатель сигнала задания
+    $$
+    \dot{\bar{w}}_g=\Gamma\bar{w}_g+Yg
+    $$
+    Найдем матрицу смены базиса $Q$
+    $$
+    \bar{w}_g=Q\hat{w}_g
+    $$
+    через уравнение типа Сильвестра
+    $$
+    Q\Gamma_g-\Gamma Q=YY_g
+    $$
+    Получаем
+    $$
+    Q=\begin{bmatrix}
+    2    &-2    &-1\\
+     2    &-2    &-1\\
+     2    &-2    &-1
+    \end{bmatrix}
+    $$
+
+
+    \subsection{Синтез наблюдателя расширенной размерности}
+    Сформируем расширенную систему
+    $$
+    x_f=\begin{bmatrix}
+        w_f\\
+        x
+    \end{bmatrix},\ \bar{A}=\begin{bmatrix}
+        \Gamma_f &0_{4\times3}\\
+        B_fY_f &A
+    \end{bmatrix},\ \bar{B}=\begin{bmatrix}
+        0_{4\times1}\\B
+    \end{bmatrix},\ \bar{C}=\begin{bmatrix}
+        D_fY_f &C
+    \end{bmatrix};
+    $$
+    Наблюдатель повышенной размерности
+    $$
+    \begin{cases}
+        \dot{\hat{x}}_f=\bar{A}\hat{x}_f+\left( \bar{B}+LD \right)u+L\left( \hat{y}-y \right),\\
+        \hat{y}=\bar{C}\hat{x}_f;
+    \end{cases}
+    $$
+    Синтезируем матрицу коррекции наблюдателя путем решения матричного уравнения
+    типа Риккати
+    $$
+    \bar{A}P+P\bar{A}^T+Q_{L}-\nu P\bar{C}^TR^{-1}\bar{C}P=0,\ L=-P\bar{C}^TR^{-1}
+    $$
+    При $Q_{L}=I_{7\times7},\ R=1,\ \nu=1$ получаем
+    $$
+    L=10^3\cdot\begin{bmatrix}
+    -0.0066&
+    0.0219&
+   -0.0143&
+   -0.0229&
+    1.7022&
+    1.0491&
+   -1.0838
+    \end{bmatrix}^T
+    $$
+
+
+    \subsection{Компьютерное моделирование}
+    Зададим нулевые начальные условия наблюдателей и выполним компьютерное моделирование замкнутой системы
+
+
+    \subsection{Сравнение результатов}
+    ...
+
+
     \section{Приложение А}
     \begin{lstlisting}[label=task1, caption={Программа для задания 1}]
     % plant parameters
@@ -566,5 +705,69 @@
 
     Pf=Pf
     Kf=Kf
+    \end{lstlisting}
+
+
+    \section{Приложение Б}
+    \begin{lstlisting}[label=task2, caption={Программа для задания 2}]
+    % plant parameters
+    A=[5 2 7;
+       2 1 2;
+      -2 -3 -4];
+    B=[3;1;-1];
+    Bf=[-4 -1;
+        0 0;
+        4 0];
+    C=[2 0 3];
+    D=2;
+    Df=[8 3];
+
+    Gf=[25 6 -20 11;
+        14 3 -10 4;
+        40 11 -31 17;
+        6 4 -4 3];
+    Yf=[8 2 -6 4;
+    -20 -6 16 -9];
+
+    Gg = [0 1 0;
+         -1 0 0;
+          0 0 0];
+    Yg=[4 0 -1];
+    wg0 = [0;1;1];
+
+    K=[2.1111 -13.4448 1.6787];
+    Kg=[-0.0932 18.6951 -8.1152];
+    Kf=[-725.9021 -225.1491 586.1685 -359.3897];
+
+    G=[-1 0 0;
+        0 -1 0;
+        0 0 -1];
+    Y=[1; 1; 1];
+
+    % find Q
+    cvx_begin sdp
+    variable Q(3,3)
+    Q*Gg-G*Q == Y*Yg;
+    cvx_end
+
+    Q=Q
+
+    null1=[0 0 0;
+           0 0 0;
+           0 0 0;
+           0 0 0];
+    null2=[0;0;0;0];
+    barA = [Gf null1;
+            Bf*Yf A]
+    barB = [null2;B]
+    barC=[Df*Yf C]
+
+    % solving Riccati
+    Q = eye(7);
+    v = 1;
+    R = 1;
+
+    [P,L,e]=icare(barA',barC',Q,R);
+    L=-P*barC'*R^-1
     \end{lstlisting}
 \end{document}

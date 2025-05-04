@@ -28,17 +28,18 @@ Kg=[-0.0932 18.6951 -8.1152];
 Kf=[-725.9021 -225.1491 586.1685 -359.3897];
 
 G=[-1 0 0;
-    0 -1 0;
-    0 0 -1];
+    0 -5 0;
+    0 0 -10];
 Y=[1; 1; 1];
 
 % find Q
 cvx_begin sdp
 variable Q(3,3)
 Q*Gg-G*Q == Y*Yg;
-cvx_end
+cvx_end 
 
 Q=Q
+invQ=inv(Q)
 
 null1=[0 0 0;
        0 0 0;
@@ -51,9 +52,9 @@ barB = [null2;B]
 barC=[Df*Yf C]
 
 % solving Riccati
-Q = eye(7);
+QL = eye(7);
 v = 1;
 R = 1;
 
-[P,L,e]=icare(barA',barC',Q,R);
+[P,L,e]=icare(barA',barC',QL,R);
 L=-P*barC'*R^-1

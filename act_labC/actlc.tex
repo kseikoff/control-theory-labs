@@ -511,7 +511,13 @@
     сравнительные графики $w_g(t)$ и $\hat{w}_g(t)$, график
     ошибки наблюдателя задающего воздействия $e_g(t)=w_g(t)-\hat{w}_g(t)$,
     график выхода $y(t)$ и график ошибки управления $e(t)=g(t)-y(t)$
-    ...
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{2task_scheme.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы, замкнутой регулятором}
+        \label{fig:2task_scheme}
+    \end{figure}
 
 
     \subsection{Наблюдатель задающего воздействия}
@@ -519,8 +525,8 @@
     $$
     \Gamma=\begin{bmatrix}
         -1 &0 &0\\
-        0 &-1 &0\\
-        0 &0 &-1
+        0 &-5 &0\\
+        0 &0 &-10
     \end{bmatrix},\ Y=\begin{bmatrix}
         1\\1\\1
     \end{bmatrix};
@@ -544,9 +550,9 @@
     Получаем
     $$
     Q=\begin{bmatrix}
-    2    &-2    &-1\\
-     2    &-2    &-1\\
-     2    &-2    &-1
+        -0.6806   &14.6250  &-22.4444\\
+        0.2083  &-17.8750   &33.6667\\
+       -2.7778   &65.0000 &-112.2222
     \end{bmatrix}
     $$
 
@@ -591,9 +597,171 @@
     \end{bmatrix}^T
     $$
 
-
+    
+    % pos 389.8,229.8,768,357.6
     \subsection{Компьютерное моделирование}
     Зададим нулевые начальные условия наблюдателей и выполним компьютерное моделирование замкнутой системы
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_u.png}
+        \captionsetup{skip=0pt}
+        \caption{График управления $u(t)$}
+        \label{fig:2task_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_wfhwf1.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_1}(t)$ и его оценки $\hat{w}_{f_1}(t)$}
+        \label{fig:2task_wfhwf1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ef1.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_1}(t)=w_{f_1}(t)-\hat{w}_{f_1}(t)$}
+        \label{fig:2task_ef1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_wfhwf2.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_2}(t)$ и его оценки $\hat{w}_{f_2}(t)$}
+        \label{fig:2task_wfhwf2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ef2.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_2}(t)=w_{f_2}(t)-\hat{w}_{f_2}(t)$}
+        \label{fig:2task_ef2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_wfhwf3.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_3}(t)$ и его оценки $\hat{w}_{f_3}(t)$}
+        \label{fig:2task_wfhwf3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ef3.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_3}(t)=w_{f_3}(t)-\hat{w}_{f_3}(t)$}
+        \label{fig:2task_ef3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_wfhwf4.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_4}(t)$ и его оценки $\hat{w}_{f_4}(t)$}
+        \label{fig:2task_wfhwf4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ef4.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_4}(t)=w_{f_4}(t)-\hat{w}_{f_4}(t)$}
+        \label{fig:2task_ef4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_xhx1.png}
+        \captionsetup{skip=0pt}
+        \caption{График координаты вектора состояния ОУ $x_{1}(t)$ и ее оценки $\hat{x}_{1}(t)$}
+        \label{fig:2task_xhx1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ex1.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{x_1}(t)=x_{1}(t)-\hat{x}_{1}(t)$}
+        \label{fig:2task_ex1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_xhx2.png}
+        \captionsetup{skip=0pt}
+        \caption{График координаты вектора состояния ОУ $x_{2}(t)$ и ее оценки $\hat{x}_{2}(t)$}
+        \label{fig:2task_xhx2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ex2.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{x_2}(t)=x_{2}(t)-\hat{x}_{2}(t)$}
+        \label{fig:2task_ex2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_xhx3.png}
+        \captionsetup{skip=0pt}
+        \caption{График координаты вектора состояния ОУ $x_{3}(t)$ и ее оценки $\hat{x}_{3}(t)$}
+        \label{fig:2task_xhx3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ex3.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{x_3}(t)=x_{3}(t)-\hat{x}_{3}(t)$}
+        \label{fig:2task_ex3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_wghwg1.png}
+        \captionsetup{skip=0pt}
+        \caption{График задающего воздействия $w_{g_1}(t)$ и его оценки $\hat{w}_{g_1}(t)$}
+        \label{fig:2task_wghwg1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_eg1.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{g_1}(t)=w_{g_1}(t)-\hat{w}_{g_1}(t)$}
+        \label{fig:2task_eg1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_wghwg2.png}
+        \captionsetup{skip=0pt}
+        \caption{График задающего воздействия $w_{g_2}(t)$ и его оценки $\hat{w}_{g_2}(t)$}
+        \label{fig:2task_wghwg2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_eg2.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{g_2}(t)=w_{g_2}(t)-\hat{w}_{g_2}(t)$}
+        \label{fig:2task_eg2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_wghwg3.png}
+        \captionsetup{skip=0pt}
+        \caption{График задающего воздействия $w_{g_3}(t)$ и его оценки $\hat{w}_{g_3}(t)$}
+        \label{fig:2task_wghwg3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_eg3.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{g_3}(t)=w_{g_3}(t)-\hat{w}_{g_3}(t)$}
+        \label{fig:2task_eg3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_y.png}
+        \captionsetup{skip=0pt}
+        \caption{График выхода $y(t)$}
+        \label{fig:2task_y}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{2task_ey.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e(t)=g(t)-y(t)$}
+        \label{fig:2task_ey}
+    \end{figure}
 
 
     \subsection{Сравнение результатов}
@@ -740,8 +908,8 @@
     Kf=[-725.9021 -225.1491 586.1685 -359.3897];
 
     G=[-1 0 0;
-        0 -1 0;
-        0 0 -1];
+        0 -5 0;
+        0 0 -10];
     Y=[1; 1; 1];
 
     % find Q
@@ -751,6 +919,7 @@
     cvx_end
 
     Q=Q
+    invQ=inv(Q)
 
     null1=[0 0 0;
            0 0 0;
@@ -763,11 +932,11 @@
     barC=[Df*Yf C]
 
     % solving Riccati
-    Q = eye(7);
+    QL = eye(7);
     v = 1;
     R = 1;
 
-    [P,L,e]=icare(barA',barC',Q,R);
+    [P,L,e]=icare(barA',barC',QL,R);
     L=-P*barC'*R^-1
     \end{lstlisting}
 \end{document}

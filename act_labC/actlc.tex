@@ -278,24 +278,20 @@
     Проверим ранги матриц. Выясним количество строк
     $$A_{3\times3},I_{3\times3},B_{3\times1},C_{1\times3},D_{1\times1}\Rightarrow \mathcal{M}_{4\times4}$$
     Сравниваем ранг с $n=4$
-    $$
-    \text{rank}\begin{bmatrix}
+    \begin{align*}
+    &\text{rank}\left( \mathcal{M}_{\lambda_1} \right)=\text{rank}\begin{bmatrix}
         A-Ii &B\\
         C &D
-    \end{bmatrix}=4,
-    $$
-    $$
-    \text{rank}\begin{bmatrix}
+    \end{bmatrix}=4,\\
+    &\text{rank}\left( \mathcal{M}_{\lambda_2} \right)=\text{rank}\begin{bmatrix}
         A+Ii &B\\
         C &D
-    \end{bmatrix}=4,
-    $$
-    $$
-    \text{rank}\begin{bmatrix}
+    \end{bmatrix}=4,\\
+    &\text{rank}\left( \mathcal{M}_{\lambda_3} \right)=\text{rank}\begin{bmatrix}
         A+0I &B\\
         C &D
     \end{bmatrix}=4;
-    $$
+    \end{align*}
     Условие выполнено. Синтезируем компоненту слежения $K_g$ через уравнения (\ref{eq:Kg}).
     Получаем
     $$
@@ -319,30 +315,24 @@
     \sigma\left( \Gamma_f \right)=\left\{ \pm i,\pm3i \right\}
     $$
     Сравниваем ранг с $n=4$
-    $$
-    \text{rank}\begin{bmatrix}
+    \begin{align*}
+    &\text{rank}\left( \mathcal{M}_{\lambda_1} \right)=\text{rank}\begin{bmatrix}
         A-Ii &B\\
         C &D
-    \end{bmatrix}=4,
-    $$
-    $$
-    \text{rank}\begin{bmatrix}
+    \end{bmatrix}=4,\\
+    &\text{rank}\left( \mathcal{M}_{\lambda_2} \right)=\text{rank}\begin{bmatrix}
         A+Ii &B\\
         C &D
-    \end{bmatrix}=4,
-    $$
-    $$
-    \text{rank}\begin{bmatrix}
+    \end{bmatrix}=4,\\
+    &\text{rank}\left( \mathcal{M}_{\lambda_3} \right)=\text{rank}\begin{bmatrix}
         A-3Ii &B\\
         C &D
-    \end{bmatrix}=4,
-    $$
-    $$
-    \text{rank}\begin{bmatrix}
+    \end{bmatrix}=4,\\
+    &\text{rank}\left( \mathcal{M}_{\lambda_4} \right)=\text{rank}\begin{bmatrix}
         A+3Ii &B\\
         C &D
     \end{bmatrix}=4;
-    $$
+    \end{align*}
     Условие выполнено. Синтезируем компоненту компенсации $K_f$ через уравнения (\ref{eq:Kf}).
     Получаем
     $$

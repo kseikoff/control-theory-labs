@@ -37,8 +37,9 @@ G=[-0.5 0 0 0;
     0 0 0 -2];
 Y=[1 0 1 0;
    0 1 0 1];
+newY=[1;1;1;1];
 
-% find Q
+% find QL
 cvx_begin sdp
 variable QL(4,4)
 QL*G-Gf'*QL == Yf'*Y;
@@ -57,3 +58,12 @@ cvx_end
 barC=barC
 
 F=Gf-L*Yf
+
+% find Qout
+cvx_begin sdp
+variable Qout(4,4)
+Qout*Gf-G*Qout == newY*Df*Yf;
+cvx_end
+
+Qout=Qout
+invQout=inv(Qout)

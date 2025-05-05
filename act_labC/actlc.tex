@@ -540,10 +540,14 @@
     Получаем
     $$
     Q=\begin{bmatrix}
+        2.0000   &-2.0000   &-1.0000\\
+    0.7692   &-0.1538   &-0.2000\\
+    0.3960   &-0.0396   &-0.1000
+    \end{bmatrix},\ Q^{-1}=\begin{bmatrix}
         -0.6806   &14.6250  &-22.4444\\
-        0.2083  &-17.8750   &33.6667\\
-       -2.7778   &65.0000 &-112.2222
-    \end{bmatrix}
+    0.2083  &-17.8750   &33.6667\\
+   -2.7778   &65.0000 &-112.2222
+    \end{bmatrix};
     $$
 
 
@@ -778,9 +782,9 @@
             -725.9021 &-225.1491  &586.1685 &-359.3897
         \end{bmatrix},\\
         &Q=\begin{bmatrix}
-            -0.6806   &14.6250  &-22.4444\\
-            0.2083  &-17.8750   &33.6667\\
-           -2.7778   &65.0000 &-112.2222
+            2.0000   &-2.0000   &-1.0000\\
+    0.7692   &-0.1538   &-0.2000\\
+    0.3960   &-0.0396   &-0.1000
         \end{bmatrix};
     \end{align*}
     Считаем вектор состояния системы $x(t)$ доступным к измерению.
@@ -844,13 +848,112 @@
     $$
 
 
-    \subsection{Схема моделирования системы с наблюдателем возмущения по состоянию}
+    \subsection{Схема моделирования системы с наблюдателем возмущения по состоянию. Компьютерное моделирование системы}
     Система замкнута регулятором, состоящим из наблюдателя задающего воздействия, 
-    наблюдателя возмущения по состоянию и закона управления $$u=Kx+K_g\hat{w}_g+K_f\hat{w}_f,$$
-    обеспечивающим выполнение целевого условия (\ref{eq:aim})
+    наблюдателя возмущения по состоянию и закона управления $u=Kx+K_g\hat{w}_g+K_f\hat{w}_f,$
+    обеспечивающим выполнение целевого условия (\ref{eq:aim}). Снимем графики $u(t)$, $x(t)$, $w_f(t)$, $\hat{w}_f(t)$, $e_f(t)$, $e(t)$
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{3task_scheme_1.png}
+        \captionsetup{skip=0pt}
+        \caption{Схема моделирования системы с наблюдателем возмущения по состоянию}
+        \label{fig:3task_scheme_1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_u1.png}
+        \captionsetup{skip=0pt}
+        \caption{График управления $u(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_u1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_x1.png}
+        \captionsetup{skip=0pt}
+        \caption{График вектора сост. ОУ $x(t)$ с наблюдателем возмущения по состоянию}
+        \label{fig:3task_x1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_wfhwf1.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_1}(t)$ и его оценки $\hat{w}_{f_1}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_wfhwf1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_ef1.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_1}(t)=w_{f_1}(t)-\hat{w}_{f_1}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_ef1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_wfhwf2.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_2}(t)$ и его оценки $\hat{w}_{f_2}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_wfhwf2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_ef2.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_2}(t)=w_{f_2}(t)-\hat{w}_{f_2}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_ef2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_wfhwf3.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_3}(t)$ и его оценки $\hat{w}_{f_3}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_wfhwf3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_ef3.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_3}(t)=w_{f_3}(t)-\hat{w}_{f_3}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_ef3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_wfhwf4.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущения $w_{f_4}(t)$ и его оценки $\hat{w}_{f_4}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_wfhwf4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_ef4.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e_{f_4}(t)=w_{f_4}(t)-\hat{w}_{f_4}(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_ef4}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_y1.png}
+        \captionsetup{skip=0pt}
+        \caption{График выхода системы $y(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_y1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{3task_ey1.png}
+        \captionsetup{skip=0pt}
+        \caption{График ошибки $e(t)=g(t)-y(t)$ (набл. возм. по сост.)}
+        \label{fig:3task_ey1}
+    \end{figure}
 
 
     \subsection{Наблюдатель возмущения по выходу}
+    ...
+
+
+    \subsection{Сравнение результатов}
+    ...
+
+
+    \section{Общий вывод по работе}
     ...
 
 

@@ -319,16 +319,14 @@
     &\text{rank}\left( \mathcal{M}_{\lambda_1} \right)=\text{rank}\begin{bmatrix}
         A-Ii &B\\
         C &D
-    \end{bmatrix}=4,\\
-    &\text{rank}\left( \mathcal{M}_{\lambda_2} \right)=\text{rank}\begin{bmatrix}
+    \end{bmatrix}=4,\ \text{rank}\left( \mathcal{M}_{\lambda_2} \right)=\text{rank}\begin{bmatrix}
         A+Ii &B\\
         C &D
     \end{bmatrix}=4,\\
     &\text{rank}\left( \mathcal{M}_{\lambda_3} \right)=\text{rank}\begin{bmatrix}
         A-3Ii &B\\
         C &D
-    \end{bmatrix}=4,\\
-    &\text{rank}\left( \mathcal{M}_{\lambda_4} \right)=\text{rank}\begin{bmatrix}
+    \end{bmatrix}=4,\ \text{rank}\left( \mathcal{M}_{\lambda_4} \right)=\text{rank}\begin{bmatrix}
         A+3Ii &B\\
         C &D
     \end{bmatrix}=4;
@@ -346,100 +344,79 @@
     Промоделируем систему при $u=0,u=Kx,u=Kx+K_fw_f,u=Kx+K_gw_g$ и $u=Kx+K_gw_g+K_fw_f$
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_f.png}
-            \caption{График возмущений $f(t)$}
-            \label{fig:1task_f}
-        \end{subfigure}
-        \hspace{5mm}
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_g.png}
-            \caption{График задающего воздействия $g(t)$}
-            \label{fig:1task_g}
-        \end{subfigure}
-        \caption{Графики $f(t),g(t)$ для разомкнутой системы $\left( u=0 \right)$}
-        \label{fig:1task_fg}
+        \includegraphics[scale=0.6]{1task_f.png}
+        \captionsetup{skip=0pt}
+        \caption{График возмущений $f(t)$ для разомкнутой системы $\left( u=0 \right)$}
+        \label{fig:1task_f}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_x.png}
-            \caption{График вектора состояния ОУ $x(t)$}
-            \label{fig:1task_x}
-        \end{subfigure}
-        \hspace{5mm}
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_y.png}
-            \caption{График выхода системы $y(t)$}
-            \label{fig:1task_y}
-        \end{subfigure}
-        \caption{Графики $x(t),y(t)$ для разомкнутой системы $\left( u=0 \right)$}
-        \label{fig:1task_xy}
-    \end{figure}
-
-    \begin{figure}[H]
-        \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_x_kx.png}
-            \caption{График $x(t)$ при $u=Kx$}
-            \label{fig:1task_x_kx}
-        \end{subfigure}
-        \hspace{5mm}
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_x_kxkf.png}
-            \caption{График $x(t)$ при $u=Kx+K_fw_f$}
-            \label{fig:1task_x_kxkf}
-        \end{subfigure}
-        \caption{Графики $x(t)$ для замкнутой системы}
-        \label{fig:1task_x_kx_kxkf}
+        \includegraphics[scale=0.6]{1task_g.png}
+        \captionsetup{skip=0pt}
+        \caption{График задающего воздействия $g(t)$ для разомкнутой системы $\left( u=0 \right)$}
+        \label{fig:1task_g}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_x_kxkg.png}
-            \caption{График $x(t)$ при $u=Kx+K_gw_g$}
-            \label{fig:1task_x_kxkg}
-        \end{subfigure}
-        \hspace{5mm}
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_x_kxkgkf.png}
-            \caption{График $x(t)$ при $Kx,K_g,K_f$}
-            \label{fig:1task_x_kxkgkf}
-        \end{subfigure}
-        \caption{Графики $x(t)$ для замкнутой системы}
-        \label{fig:1task_x_kxkg_kxkgkf}
-    \end{figure}
-
-    \begin{figure}[H]
-        \centering
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_u.png}
-            \caption{Сравнение графиков $u(t)$}
-            \label{fig:1task_u}
-        \end{subfigure}
-        \hspace{5mm}
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{1task_yy.png}
-            \caption{Сравнение графиков $y(t)$}
-            \label{fig:1task_yy}
-        \end{subfigure}
-        \caption{Графики $u(t),y(t)$ для замкнутой системы}
-        \label{fig:1task_u_yy}
+        \includegraphics[scale=0.6]{1task_x.png}
+        \captionsetup{skip=0pt}
+        \caption{График вектора состояния ОУ $x(t)$ для разомкнутой системы $\left( u=0 \right)$}
+        \label{fig:1task_x}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.45\textwidth]{1task_e.png}
-        \caption{Сравнение графиков $e(t)=g(t)-y(t)$ для замкнутой системы}
+        \includegraphics[scale=0.6]{1task_y.png}
+        \captionsetup{skip=0pt}
+        \caption{График выхода системы $y(t)$ для разомкнутой системы $\left( u=0 \right)$}
+        \label{fig:1task_y}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{1task_x_kx.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $u=Kx$}
+        \label{fig:1task_x_kx}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{1task_x_kxkf.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $u=Kx+K_fw_f$}
+        \label{fig:1task_x_kxkf}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{1task_x_kxkg.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $u=Kx+K_gw_g$}
+        \label{fig:1task_x_kxkg}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{1task_x_kxkgkf.png}
+        \captionsetup{skip=0pt}
+        \caption{График $x(t)$ при $u=Kx+K_gw_g+K_fw_f$}
+        \label{fig:1task_x_kxkgkf}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{1task_u.png}
+        \captionsetup{skip=0pt}
+        \caption{Сравнение графиков $u(t)$ для замкнутых систем}
+        \label{fig:1task_u}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{1task_yy.png}
+        \captionsetup{skip=0pt}
+        \caption{Сравнение графиков $y(t)$ для замкнутых систем}
+        \label{fig:1task_yy}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{1task_e.png}
+        \captionsetup{skip=0pt}
+        \caption{Сравнение графиков $e(t)=g(t)-y(t)$ для замкнутых систем}
         \label{fig:1task_e}
     \end{figure}
 
@@ -499,8 +476,9 @@
     \end{bmatrix},
     $$
     сравнительные графики $w_g(t)$ и $\hat{w}_g(t)$, график
-    ошибки наблюдателя задающего воздействия $e_g(t)=w_g(t)-\hat{w}_g(t)$,
-    график выхода $y(t)$ и график ошибки управления $e(t)=g(t)-y(t)$
+    ошибки наблюдателя задающего воздействия $$e_g(t)=w_g(t)-\hat{w}_g(t),$$
+    график выхода $y(t)$ и график ошибки управления $$e(t)=g(t)-y(t)$$
+    Схема представлена на рис. \ref{fig:2task_scheme}
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.75]{2task_scheme.png}

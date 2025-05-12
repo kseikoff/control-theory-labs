@@ -498,7 +498,95 @@
 
 
     \subsection{Структурные свойства многоканальной системы}
-    ...
+    В первом задании уже находили ЖНФ матрицы $A$ и соответствующие ей $B_J,C_{J_y}$
+    $$
+    J=\begin{bmatrix}
+        1     &1\\
+     0     &1
+    \end{bmatrix},\ B_J=\begin{bmatrix}
+        3    &-3\\
+     4    &-1
+    \end{bmatrix},\ C_{J_y}=\begin{bmatrix}
+        -3     &2\\
+    -1     &3
+    \end{bmatrix};
+    $$
+    Найдем $C_{J_z}$
+    $$
+    A=PJP^{-1},\ C_{J_z}=C_z\cdot P\Rightarrow C_{J_z}=\begin{bmatrix}
+        -6     &4\\
+     0    &-1
+    \end{bmatrix}
+    $$
+    Найдем $U_{out_y},U_{out_z}$
+    $$
+    U=\begin{bmatrix}
+        B &AB
+    \end{bmatrix},
+    $$
+    $$
+    U_{out_y}=\begin{bmatrix}
+        CU &D
+    \end{bmatrix},\
+    U_{out_y}=\begin{bmatrix}
+     -1    &7   &-13   &10    &-2     &0\\
+     9   &0    &5    &1    & 0     &1
+    \end{bmatrix},\ \text{rank}\left[ U_{out_y} \right]=2,
+    $$
+    $$
+    U_{out_z}=\begin{bmatrix}
+        C_zU &D_z
+    \end{bmatrix},\
+    U_{out_z}=\begin{bmatrix}
+     -2    &14   &-26    &20     &2     &0\\
+    -4     &1    &-4     &1     &0     &1
+    \end{bmatrix},\ \text{rank}\left[ U_{out_z} \right]=2;
+    $$
+    Таким образом,
+    \begin{align*}
+        &\circ \text{ Система полностью управляема по состоянию и стабилизируема},\\
+        &\circ \text{ Система полностью управляема по выходу } y(t),\\
+        &\circ \text{ Система полностью управляема по виртуальному (регулируемому) выходу } z(t),\\
+        &\circ \text{ Система полностью наблюдаема и обнаруживаема относительно выхода } y(t),\\
+        &\circ \text{ Система полностью наблюдаема и обнаруживаема относительно}\\
+        &\,\,\,\,\,\,\text{ виртуального (регулируемого) выхода } z(t);
+    \end{align*}
+
+
+    \subsection{Передаточные матрицы многоканальной системы}
+    Составим передаточную матрицу многоканальной системы от управляющих
+    воздействий $u(t)$ к выходу $y(t)$
+    $$
+    W_y(s)=C\left[ sI-A \right]^{-1}B+D,
+    $$
+    $$
+    W_y(s)=\begin{bmatrix}
+        \dfrac{-2s^2+3s-13}{s^2-2s+1}	    &\dfrac{7s-4}{s^2-2s+1}\\
+       \dfrac{9s-13}{s^2-2s+1}	&\dfrac{s^2-2s+2}{s^2-2s+1}
+    \end{bmatrix};
+    $$
+    Проверим на вырожденность
+    $$
+    \det\left[ W_y(s) \right]=\dfrac{-2s^2+3s-78}{s^2-2s+1}\neq0
+    $$
+    Матрица $W_y(s)$ невырожденная. Составим аналогично $W_z(s)$ к выходу $z(t)$
+    $$
+    W_y(s)=C_z\left[ sI-A \right]^{-1}B+D_z,
+    $$
+    $$
+    W_z(s)=\begin{bmatrix}
+        \dfrac{2s^2-6s-20}{s^2-2s+1}	&\dfrac{14s-8}{s^2-2s+1}\\
+                  \dfrac{-4}{s-1}	             &\dfrac{s}{s-1}
+    \end{bmatrix};
+    $$
+    Проверим на вырожденность
+    $$
+    \det\left[ W_z(s) \right]=\dfrac{2s^2-4s+32}{s^2-2s+1}\neq0
+    $$
+    Матрица $W_z(s)$ невырожденная.
+
+
+    \subsection{}
 
 
     \section{Общий вывод по работе}

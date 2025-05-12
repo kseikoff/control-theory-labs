@@ -586,7 +586,63 @@
     Матрица $W_z(s)$ невырожденная.
 
 
-    \subsection{}
+    \subsection{Матрицы и начальные условия генератора внешнего воздействия}
+    Определим матрицы $\Gamma_w,Y_g,Y_1,Y_2$ и начальные условия генератора внешнего воздействия $w(0)$.
+    Возмущения $f_i,g$ содержат гармоники с частотами $\omega_1=2,\omega_2=3,\omega_3=4$. Вспомним модель осциллятора
+    и запишем <<большую>> $\Gamma_w$, состоящую из <<маленьких>> $\Gamma_{w_i}$
+    $$
+    \Gamma_{w_i}=\begin{bmatrix}
+        0 &\omega_i\\
+        -\omega_i &0
+    \end{bmatrix}\Rightarrow \Gamma_w=\begin{bmatrix}
+        0 &2 &0 &0 &0 &0\\
+        -2 &0 &0 &0 &0 &0\\
+        0 &0 &0 &3 &0 &0\\
+        0 &0 &-3 &0 &0 &0\\
+        0 &0 &0 &0 &0 &4\\
+        0 &0 &0 &0 &-4 &0
+    \end{bmatrix}
+    $$
+    Таким образом, получится вектор возмущений с начальными условиями при $t=0$
+    $$
+    w(t)=\begin{bmatrix}
+        \cos\left( 2t \right)\\
+        \sin\left( 2t \right)\\
+        \cos\left( 3t \right)\\
+        \sin\left( 3t \right)\\
+        \cos\left( 4t \right)\\
+        \sin\left( 4t \right)
+    \end{bmatrix},\
+    w(t=0)=\begin{bmatrix}
+        \cos\left( 0 \right)\\
+        \sin\left( 0 \right)\\
+        \cos\left( 0 \right)\\
+        \sin\left( 0 \right)\\
+        \cos\left( 0 \right)\\
+        \sin\left( 0 \right)
+    \end{bmatrix}=\begin{bmatrix}
+        1\\
+        0\\
+        1\\
+        0\\
+        1\\
+        0
+    \end{bmatrix};
+    $$
+    Осталось матрицами задать амплитуду и гармоники для каждого возмущения. Выходов два,
+    координат у $w(t)$ шесть -- матрицы $Y_i$ будут размера $2\times6$. Зададим эти матрицы
+    $$
+    Y_1=\begin{bmatrix}
+        0 &0 &0 &9 &0 &0\\
+        3 &0 &0 &0 &0 &0
+    \end{bmatrix},\ Y_2=\begin{bmatrix}
+        6 &0 &0 &0 &0 &0\\
+        0 &0 &0 &8 &0 &0
+    \end{bmatrix},\ Y_g=\begin{bmatrix}
+        0 &0 &0 &0 &3 &0\\
+        0 &0 &0 &0 &0 &6
+    \end{bmatrix};
+    $$
 
 
     \section{Общий вывод по работе}

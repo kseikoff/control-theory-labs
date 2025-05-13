@@ -52,15 +52,15 @@ eK=eig(A+B*K)
 
 % check Frankis-Davison: Kg
 Gg_eig(1)
-check_Kg1 = [A-eye(3)*Gg_eig(1) B; C D]
+check_Kg1 = [(A+B*K)-eye(3)*Gg_eig(1) B; (C+D*K) D]
 rank(check_Kg1)
 
 Gg_eig(2)
-check_Kg2 = [A-eye(3)*Gg_eig(2) B; C D]
+check_Kg2 = [(A+B*K)-eye(3)*Gg_eig(2) B; (C+D*K) D]
 rank(check_Kg2)
 
 Gg_eig(3)
-check_Kg3 = [A-eye(3)*Gg_eig(3) B; C D]
+check_Kg3 = [(A+B*K)-eye(3)*Gg_eig(3) B; (C+D*K) D]
 rank(check_Kg3)
 
 % solving Frankis-Davison: Kg
@@ -76,19 +76,19 @@ Kg=Kg
 
 % check Frankis-Davison: Kf
 Gf_eig(1)
-check_Kf1 = [A-eye(3)*Gf_eig(1) B; C D]
+check_Kf1 = [(A+B*K)-eye(3)*Gf_eig(1) B; (C+D*K) D]
 rank(check_Kf1)
 
 Gf_eig(2)
-check_Kf2 = [A-eye(3)*Gf_eig(2) B; C D]
+check_Kf2 = [(A+B*K)-eye(3)*Gf_eig(2) B; (C+D*K) D]
 rank(check_Kf2)
 
 Gf_eig(3)
-check_Kf3 = [A-eye(3)*Gf_eig(3) B; C D]
+check_Kf3 = [(A+B*K)-eye(3)*Gf_eig(3) B; (C+D*K) D]
 rank(check_Kf3)
 
 Gf_eig(4)
-check_Kf4 = [A-eye(3)*Gf_eig(4) B; C D]
+check_Kf4 = [(A+B*K)-eye(3)*Gf_eig(4) B; (C+D*K) D]
 rank(check_Kf4)
 
 % solving Frankis-Davison: Kf

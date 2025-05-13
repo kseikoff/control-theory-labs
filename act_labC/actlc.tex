@@ -276,20 +276,20 @@
     \sigma\left( \Gamma_g \right)=\left\{ 0,\pm i \right\}
     $$
     Проверим ранги матриц. Выясним количество строк
-    $$A_{3\times3},I_{3\times3},B_{3\times1},C_{1\times3},D_{1\times1}\Rightarrow \mathcal{M}_{4\times4}$$
+    $$A_{3\times3},B_{3\times1},K_{1\times3},I_{3\times3},P_{g\,3\times3},C_{1\times3},D_{1\times1}\Rightarrow \mathcal{M}_{4\times4}$$
     Сравниваем ранг с $n=4$
     \begin{align*}
     &\text{rank}\left( \mathcal{M}_{\lambda_1} \right)=\text{rank}\begin{bmatrix}
-        A-Ii &B\\
-        C &D
+        \left( A+BK \right)-Ii &B\\
+        \left( C+DK \right) &D
     \end{bmatrix}=4,\\
     &\text{rank}\left( \mathcal{M}_{\lambda_2} \right)=\text{rank}\begin{bmatrix}
-        A+Ii &B\\
-        C &D
+        \left( A+BK \right)+Ii &B\\
+        \left( C+DK \right) &D
     \end{bmatrix}=4,\\
     &\text{rank}\left( \mathcal{M}_{\lambda_3} \right)=\text{rank}\begin{bmatrix}
-        A+0I &B\\
-        C &D
+        \left( A+BK \right)+0I &B\\
+        \left( C+DK \right) &D
     \end{bmatrix}=4;
     \end{align*}
     Условие выполнено. Синтезируем компоненту слежения $K_g$ через уравнения (\ref{eq:Kg}).
@@ -314,21 +314,21 @@
     $$
     \sigma\left( \Gamma_f \right)=\left\{ \pm i,\pm3i \right\}
     $$
-    Сравниваем ранг с $n=4$
+    Сравниваем ранг с $n=4$ (пусть $\left( A+BK \right)=\mathcal{A},\left( C+DK \right)=\mathcal{C}$)
     \begin{align*}
     &\text{rank}\left( \mathcal{M}_{\lambda_1} \right)=\text{rank}\begin{bmatrix}
-        A-Ii &B\\
-        C &D
+        \mathcal{A}-Ii &B\\
+        \mathcal{C} &D
     \end{bmatrix}=4,\ \text{rank}\left( \mathcal{M}_{\lambda_2} \right)=\text{rank}\begin{bmatrix}
-        A+Ii &B\\
-        C &D
+        \mathcal{A}+Ii &B\\
+        \mathcal{C} &D
     \end{bmatrix}=4,\\
     &\text{rank}\left( \mathcal{M}_{\lambda_3} \right)=\text{rank}\begin{bmatrix}
-        A-3Ii &B\\
-        C &D
+        \mathcal{A}-3Ii &B\\
+        \mathcal{C} &D
     \end{bmatrix}=4,\ \text{rank}\left( \mathcal{M}_{\lambda_4} \right)=\text{rank}\begin{bmatrix}
-        A+3Ii &B\\
-        C &D
+        \mathcal{A}+3Ii &B\\
+        \mathcal{C} &D
     \end{bmatrix}=4;
     \end{align*}
     Условие выполнено. Синтезируем компоненту компенсации $K_f$ через уравнения (\ref{eq:Kf}).
@@ -1137,15 +1137,15 @@
 
     % check Frankis-Davison: Kg
     Gg_eig(1)
-    check_Kg1 = [A-eye(3)*Gg_eig(1) B; C D]
+    check_Kg1 = [(A+B*K)-eye(3)*Gg_eig(1) B; (C+D*K) D]
     rank(check_Kg1)
 
     Gg_eig(2)
-    check_Kg2 = [A-eye(3)*Gg_eig(2) B; C D]
+    check_Kg2 = [(A+B*K)-eye(3)*Gg_eig(2) B; (C+D*K) D]
     rank(check_Kg2)
 
     Gg_eig(3)
-    check_Kg3 = [A-eye(3)*Gg_eig(3) B; C D]
+    check_Kg3 = [(A+B*K)-eye(3)*Gg_eig(3) B; (C+D*K) D]
     rank(check_Kg3)
 
     % solving Frankis-Davison: Kg
@@ -1161,19 +1161,19 @@
 
     % check Frankis-Davison: Kf
     Gf_eig(1)
-    check_Kf1 = [A-eye(3)*Gf_eig(1) B; C D]
+    check_Kf1 = [(A+B*K)-eye(3)*Gf_eig(1) B; (C+D*K) D]
     rank(check_Kf1)
 
     Gf_eig(2)
-    check_Kf2 = [A-eye(3)*Gf_eig(2) B; C D]
+    check_Kf2 = [(A+B*K)-eye(3)*Gf_eig(2) B; (C+D*K) D]
     rank(check_Kf2)
 
     Gf_eig(3)
-    check_Kf3 = [A-eye(3)*Gf_eig(3) B; C D]
+    check_Kf3 = [(A+B*K)-eye(3)*Gf_eig(3) B; (C+D*K) D]
     rank(check_Kf3)
 
     Gf_eig(4)
-    check_Kf4 = [A-eye(3)*Gf_eig(4) B; C D]
+    check_Kf4 = [(A+B*K)-eye(3)*Gf_eig(4) B; (C+D*K) D]
     rank(check_Kf4)
 
     % solving Frankis-Davison: Kf

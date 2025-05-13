@@ -644,6 +644,208 @@
     \end{bmatrix};
     $$
 
+    
+    \subsection{Схема моделирования системы}
+    Построим схему моделирования системы, замкнутой регулятором,
+    состоящим из необходимых для решения данной задачи управления наблюдателей и закона
+    управления $$u=K\hat{x}+K_w\hat{w}=\begin{bmatrix}K_w &K\end{bmatrix}\begin{bmatrix}
+        \hat{w}\\ \hat{x}
+    \end{bmatrix}=\bar{K}\hat{x}_f,$$ обеспечивающим выполнение целевого условия $$\lim\limits_{t\to\infty}z(t)=0$$ 
+    Строим графики $u(t),f_i(t),g(t),x(t),\hat{x}(t),w(t),\hat{w}(t),e_x(t),e_w(t),y(t),z(t)$.
+    Схема расположена на рисунке \ref{fig:2task_scheme}
+    % \begin{figure}[H]
+    %     \centering
+    %     \includegraphics[scale=0.5]{2task_scheme.png}
+    %     \captionsetup{skip=0pt}
+    %     \caption{Схема моделирования системы, замкнутой регулятором}
+    %     \label{fig:2task_scheme}
+    % \end{figure}
+
+
+    \subsection{Синтез компоненты обратной связи}
+    Зададимся эталонной моделью замкнутой системы на основании требований в соответствии с вариантом
+    $$
+    2<|\operatorname{Re}\left( \lambda_i^* \right)|<3,
+    $$
+    $$
+    0\leq|\operatorname{Im}\left( \lambda_i^* \right)|<7;
+    $$
+    Пусть
+    $$
+    \sigma\left( A+BK \right)=\left\{ -2.5\pm i \right\}
+    $$
+    Тогда матрица $\Gamma$
+    $$
+    \Gamma=\begin{bmatrix}
+        -2.5+i &0\\
+        0 &-2.5-i
+    \end{bmatrix}
+    $$
+    Можем переписать в вещественном виде
+    $$
+    \Gamma=\begin{bmatrix}
+        -2.5 &1\\
+        -1 &-2.5
+    \end{bmatrix}
+    $$
+    Подберем $Y$ такой, чтобы пара $\left( Y,\Gamma \right)$ была наблюдаема.
+    Проверим, вычислив ранг матрицы наблюдаемости
+    $$
+    Y=\begin{bmatrix}
+        1 &0\\
+        0 &1
+    \end{bmatrix},\ \operatorname{rank}\begin{bmatrix}
+        Y\\Y\Gamma
+    \end{bmatrix}=\operatorname{rank}\begin{bmatrix}
+    1         &0\\
+         0    &1\\
+   -2.5    &1\\
+   -1   &-2.5
+    \end{bmatrix}=2;
+    $$
+    Пара $\left( Y,\Gamma \right)$ наблюдаема.
+    Пара $\left( A,B \right)$ управляема (выяснили ранее через ЖНФ)
+    и $\sigma\left( A \right)\cap \sigma\left( \Gamma \right)=\varnothing$.
+    Следовательно, существует единственное невырожденное решение уравнения
+    Сильвестра
+    $$
+    AP-P\Gamma=BY,\ K=-YP^{-1};
+    $$
+    Вычислим $P$, после чего найдем матрицу регулятора. Также проверим спектр замкнутой системы. Получаем
+    $$
+    K=\begin{bmatrix}
+        -0.8523    &0.9009\\
+   -0.9312   &-0.5275
+    \end{bmatrix},\ \sigma\left( A+BK \right)=\left\{ -2.5 \pm i \right\};
+    $$
+    Регулятор синтезирован корректно.
+
+
+    \subsection{Синтез компоненты прямой связи регулятора}
+    Составим систему матричных уравнений Франкиса-Дэвисона
+    для синтеза компоненты $K_w$ регулятора
+    $$
+    \begin{cases}
+        P\Gamma_w-\left( A+BK \right)P-B_fY_1=BK_w,\\
+        \left( C_z+D_zK \right)P+D_zK_w=Y_g;
+    \end{cases}
+    $$
+    В общем виде уравнения имеют вид
+    $$
+    \begin{cases}
+        AP+BK+Y_1=P\Gamma,\\
+        CP+DK+Y_2=0;
+    \end{cases}
+    $$
+    Решение относительно $P$ и $K$ для произвольных $Y_1$ и $Y_2$
+    есть, если
+    $$
+    \operatorname{rank}\begin{bmatrix}
+        A-I\lambda_{i\Gamma} &B\\
+        C &D
+    \end{bmatrix}=\text{число строк}
+    $$
+    и
+    \begin{align*}
+        &\circ\text{ Множество нулей системы } W(s) \text{ не пересекается со спектром }\Gamma,\\
+        &\circ\text{ Система }W(s)\text{ полностью управляема по выходу},\\
+        &\circ\text{ Количество входов равно или больше количества выходов системы},\\
+        &\circ\text{ Если количество входов равно количеству выходов, то система }W(s)\\
+        &\,\,\,\,\,\,\text{ должна быть невырожденной};
+    \end{align*}
+    Ранее мы выяснили, что система полностью управляема по выходу $y(t)$ и $z(t)$; количество входов и выходов равно 2;
+    $W_y(s),W_z(s)$ являются невырожденными. Проверим множества нулей $W_k(s)$
+    $$
+    W_y(s): n_{1,2}=0.7500 \pm 6.1998i,
+    $$
+    $$
+    W_z(s): n_{1,2}=1 \pm 3.8730i;
+    $$
+    Не пересекаются со спектром $\Gamma$. Осталось проверить ранги матриц
+    $$
+    \operatorname{rank}\begin{bmatrix}
+        \left( A+BK \right)-I\lambda_{i\Gamma} &B\\
+        \left( C_z+D_zK \right) &D_z
+    \end{bmatrix}=\text{число строк}
+    $$
+    Проверим
+    $$
+    \operatorname{rank}\begin{bmatrix}
+        \left( A+BK \right)-I\left( -2.5\pm i \right) &B\\
+        \left( C_z+D_zK \right) &D_z
+    \end{bmatrix}=\begin{bmatrix}
+    -0.2147\mp i   &0.8459   &1    &2 \\
+  -1.2367    &0.2147\mp i  &-3    &3 \\
+   2.2954    &3.8018    &2   & 0 \\
+  -1.9312    &0.4725    &0    &1 
+    \end{bmatrix}=4;
+    $$
+    Все условия выполнены -- можно синтезировать $K_w$. Используя \texttt{MATLAB} и \texttt{cvx},
+    получаем
+    $$
+    K_w=\begin{bmatrix}
+    -3.0612   &-5.0195    &7.9863  &-12.7069   &12.2869   &20.2823\\
+   -6.4128   &-0.9151   &-2.9433   &-7.3826   &17.6422   &-0.5952
+    \end{bmatrix}
+    $$
+
+
+    \subsection{Синтез матрицы коррекции наблюдателя}
+    Синтезируем необходимый для выполнения целевого условия наблюдатель.
+    Составим расширенную систему
+    $$
+    \begin{cases}
+    \dot{x}_f=\bar{A}x_f+\bar{B}u,\\
+    y_f=y-g=\bar{C}x_f+Du,
+    \end{cases} x_f=\begin{bmatrix}
+        w\\x
+    \end{bmatrix},
+    $$
+    $$
+    \bar{A}=\begin{bmatrix}
+        \Gamma_w &0_{6\times2}\\
+        B_fY_1 &A
+    \end{bmatrix},\ \bar{B}=\begin{bmatrix}
+        0_{6\times2}\\B
+    \end{bmatrix},\ \bar{C}=\begin{bmatrix}
+        D_fY_2-Y_g &C
+    \end{bmatrix};
+    $$
+    Тогда наблюдатель будет иметь вид
+    $$
+    \begin{cases}
+    \dot{\hat{x}}_f=\bar{A}\hat{x}_f+\left( \bar{B}+\bar{L}D \right)u+\bar{L}\left( \bar{C}\hat{x}_f-y_f \right),\\
+    \hat{y}_f=\bar{C}\hat{x}_f+Du,
+    \end{cases} \hat{x}_f=\begin{bmatrix}
+        \hat{w}\\\hat{x}
+    \end{bmatrix},
+    $$
+    Для нахождения $\bar{L}$ воспользуемся матричным уравнением типа Риккати
+    $$
+    \bar{A}P+P\bar{A}^T+Q-\nu P\bar{C}^TR^{-1}\bar{C}P=0,\ \bar{L}=-P\bar{C}^TR^{-1};
+    $$
+    при $\nu=1,Q=I_{8\times8},R=I_{2\times2}$. Получаем
+    $$
+    \bar{L}=\begin{bmatrix}
+    -1.3123   &-0.3869\\
+   -0.3266   &-0.1466\\
+    0.4381   &-0.5637\\
+    0.3777   &-1.1609\\
+   -0.4550   &-0.5493\\
+    1.2212   &-0.0019\\
+   -0.3758   &-3.2880\\
+   -6.2985    &8.3707
+    \end{bmatrix}
+    $$
+
+
+    \subsection{Компьютерное моделирование}
+    Выполним компьютерное моделирование замкнутой системы
+    с нулевыми начальными условиями наблюдателей
+
+
+    \textbf{КМ.pngs}
+
 
     \section{Общий вывод по работе}
     ...
@@ -894,6 +1096,106 @@
 
     \section{Приложение Б}
     \begin{lstlisting}[label=task2, caption={Программа для задания 2}]
-        tbd
+        % plant parameters
+    A=[0 1; -1 2];
+    B=[1 2; -3 3];
+    C=[2 1; 3 -2];
+    D=[-2 0; 0 1];
+
+    Bf=[1 2; -1 3];
+    Df=[1 0; 0 -1];
+    Cz=[4 2; -1 1];
+    Dz=[2 0; 0 1];
+
+    G=[-2.5 1;
+    -1 -2.5];
+    Y=[1 0; 0 1];
+
+    Gw=[0 2 0 0 0 0;
+       -2 0 0 0 0 0;
+        0 0 0 3 0 0;
+        0 0 -3 0 0 0;
+        0 0 0 0 0 4;
+        0 0 0 0 -4 0];
+    Y1=[0 0 0 9 0 0;
+        3 0 0 0 0 0];
+    Y2=[6 0 0 0 0 0;
+        0 0 0 8 0 0];
+    Yg=[0 0 0 0 3 0;
+        0 0 0 0 0 6];
+
+    % out y
+    U = [B A*B];
+    U_out_y = [C*U D]
+    rank(U_out_y)
+
+    % out z
+    U_out_z = [Cz*U Dz]
+    rank(U_out_z)
+
+    % Jordan matrix
+    [P, J] = jordan(A)
+    B_J = inv(P) * B
+    C_J_y = C * P
+    C_J_z = Cz * P
+
+    % W_y(s)
+    sys_y = ss(A, B, C, D);
+    W_y_s = tf(sys_y)
+
+    % W_z(s)
+    sys_z = ss(A, B, Cz, Dz);
+    W_z_s = tf(sys_z)
+
+    % zeros
+    zeros_y = zero(sys_y)
+    zeros_z = zero(sys_z)
+
+    % check O(Y,G)
+    O_Y_G = [Y; Y*G]
+    rank_O_Y_G=rank(O_Y_G)
+
+    % K regulator synthesis
+    cvx_begin sdp
+    variable P(2,2)
+    A*P-P*G == B*Y;
+    cvx_end
+
+    K = -Y*inv(P)
+    ApBK=A+B*K;
+    eig_ApBK=eig(ApBK)
+
+    % check rank for K_w
+    CzpDzK=Cz+Dz*K;
+    eig_G=eig(G);
+    mat1 = [ApBK-eye(2)*eig_G(1) B; CzpDzK Dz]
+    mat2 = [ApBK-eye(2)*eig_G(2) B; CzpDzK Dz]
+    check_mat1=rank(mat1)
+    check_mat2=rank(mat2)
+
+    % solving Frankis-Davison: Kw
+    cvx_begin sdp
+    variable Pw(2,6)
+    variable Kw(2,6)
+    Pw*Gw-(A+B*K)*Pw-Bf*Y1 == B*Kw;
+    (Cz+Dz*K)*Pw+Dz*Kw == Yg;
+    cvx_end
+
+    Kw=Kw
+
+    % observer
+    null = [0 0; 0 0; 0 0; 0 0; 0 0; 0 0];
+    barA=[Gw null; Bf*Y1 A];
+    barB=[null; B];
+    barC=[Df*Y2-Yg C];
+
+    Ql = eye(8);
+    Rl = eye(2);
+
+    [Pl,barL,e]=icare(barA',barC',Ql,Rl);
+    barL=-Pl*barC'*Rl^-1
+    el=eig(barA+barL*barC)
+
+    barK=[Kw K]
     \end{lstlisting}
 \end{document}

@@ -87,9 +87,9 @@ Kw=Kw
 
 % observer
 null = [0 0; 0 0; 0 0; 0 0; 0 0; 0 0];
-barA=[Gw null; Bf*Y1 A];
-barB=[null; B];
-barC=[Df*Y2-Yg C];
+barA=[Gw null; Bf*Y1 A]
+barB=[null; B]
+barC=[Df*Y2-Yg C]
 
 Ql = eye(8);
 Rl = eye(2);
@@ -99,3 +99,5 @@ barL=-Pl*barC'*Rl^-1
 el=eig(barA+barL*barC)
 
 barK=[Kw K]
+
+barL'
